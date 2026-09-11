@@ -9,9 +9,9 @@ import { timeAgo } from "@/lib/format";
 export const Route = createFileRoute("/activity")({
   head: () => ({
     meta: [
-      { title: "Activity — Wishr" },
+      { title: "Activity - Wishr" },
       { name: "description", content: "Updates on the wishes you've made and supported." },
-      { property: "og:title", content: "Activity — Wishr" },
+      { property: "og:title", content: "Activity - Wishr" },
       { property: "og:description", content: "Updates on the wishes you've made and supported." },
     ],
   }),

@@ -88,7 +88,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
       <footer className="hidden border-t border-line md:block">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-6 text-xs text-mute">
-          <span>Wishr — make a wish, someone might make it happen.</span>
+          <span>Wishr - make a wish, someone might make it happen.</span>
           <Link to="/how-it-works" className="font-semibold hover:text-ink">
             How it works
           </Link>

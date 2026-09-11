@@ -9,12 +9,12 @@ import { categoriesQuery } from "@/lib/queries";
 export const Route = createFileRoute("/new")({
   head: () => ({
     meta: [
-      { title: "Make a wish — Wishr" },
+      { title: "Make a wish - Wishr" },
       {
         name: "description",
         content: "Say what you need, set a goal in Naira, and let people help you get there.",
       },
-      { property: "og:title", content: "Make a wish — Wishr" },
+      { property: "og:title", content: "Make a wish - Wishr" },
       {
         property: "og:description",
         content: "Say what you need, set a goal in Naira, and let people help you get there.",

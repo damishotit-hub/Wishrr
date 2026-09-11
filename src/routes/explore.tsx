@@ -9,12 +9,12 @@ import { categoriesQuery, publicWishesQuery, type ExploreFilters } from "@/lib/q
 export const Route = createFileRoute("/explore")({
   head: () => ({
     meta: [
-      { title: "Explore wishes — Wishr" },
+      { title: "Explore wishes - Wishr" },
       {
         name: "description",
         content: "Browse real wishes from real people and help fulfil the one that speaks to you.",
       },
-      { property: "og:title", content: "Explore wishes — Wishr" },
+      { property: "og:title", content: "Explore wishes - Wishr" },
       {
         property: "og:description",
         content: "Browse real wishes from real people and help fulfil the one that speaks to you.",
@@ -106,7 +106,7 @@ function Explore() {
           <div className="md:col-span-2 lg:col-span-3">
             <EmptyState
               title="Nothing matches yet"
-              description="Try a different search or category — or add a wish of your own."
+              description="Try a different search or category - or add a wish of your own."
               action={
                 <Link
                   to="/new"

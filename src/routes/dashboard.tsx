@@ -10,9 +10,9 @@ import { initials, naira, STATUS_LABELS, timeAgo } from "@/lib/format";
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
-      { title: "Your profile — Wishr" },
+      { title: "Your profile - Wishr" },
       { name: "description", content: "Track the wishes you've made and the ones you've supported." },
-      { property: "og:title", content: "Your profile — Wishr" },
+      { property: "og:title", content: "Your profile - Wishr" },
       {
         property: "og:description",
         content: "Track the wishes you've made and the ones you've supported.",

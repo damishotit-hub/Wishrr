@@ -9,13 +9,13 @@ import { naira } from "@/lib/format";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Wishr — Make a wish, someone might make it happen" },
+      { title: "Wishr - Make a wish, someone might make it happen" },
       {
         name: "description",
         content:
           "Share a real wish with a clear goal in Naira. Kind strangers chip in until it comes true.",
       },
-      { property: "og:title", content: "Wishr — Make a wish, someone might make it happen" },
+      { property: "og:title", content: "Wishr - Make a wish, someone might make it happen" },
       {
         property: "og:description",
         content: "Share a real wish with a clear goal. Kind strangers chip in until it comes true.",
@@ -42,8 +42,8 @@ function Home() {
           Someone might make it happen.
         </h1>
         <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-mute md:text-lg">
-          Wishr is a quiet, dignified place to say what you need — school fees, a sewing machine, a
-          bus ticket home — and let people who care help you get there.
+          Wishr is a quiet, dignified place to say what you need - school fees, a sewing machine, a
+          bus ticket home - and let people who care help you get there.
         </p>
 
         <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -114,7 +114,7 @@ function Home() {
         <ol className="mt-6 grid gap-6 md:grid-cols-3">
           {[
             ["Say the wish", "Write it plainly, set a goal in Naira, add a deadline if it matters."],
-            ["People chip in", "Anyone can give any amount — publicly or anonymously."],
+            ["People chip in", "Anyone can give any amount - publicly or anonymously."],
             ["Share the ending", "Post an update so the people who helped can see it landed."],
           ].map(([title, body], i) => (
             <li key={title}>

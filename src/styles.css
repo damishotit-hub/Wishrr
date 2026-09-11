@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Wishr design system — warm humanist.
+ * Wishr design system - warm humanist.
  * Soft neutral canvas, one accent (terracotta), Fraunces display + Manrope body.
  * All colours are oklch tokens. Never hardcode colours in components.
  */
