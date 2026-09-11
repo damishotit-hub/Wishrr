@@ -82,12 +82,8 @@ function WishDetail() {
           </Link>
 
           <div className="mt-4 flex flex-wrap items-center gap-2">
-            <span className="rounded-full bg-warm px-2.5 py-1 text-[11px] font-semibold">
-              {CATEGORY_LABELS[w.category] ?? w.category}
-            </span>
-            <span className="rounded-full px-2.5 py-1 text-[11px] font-semibold text-mute ring-1 ring-line">
-              {STATUS_LABELS[w.status] ?? w.status}
-            </span>
+            <span className="pill">{CATEGORY_LABELS[w.category] ?? w.category}</span>
+            <span className="pill-outline">{STATUS_LABELS[w.status] ?? w.status}</span>
             {left ? <span className="text-[11px] font-medium text-mute">{left}</span> : null}
           </div>
 
