@@ -33,40 +33,40 @@ function Home() {
   return (
     <AppShell>
       <section className="pt-8 md:pt-16">
-        <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">
+        <p className="reveal text-xs font-semibold tracking-[0.18em] text-primary uppercase">
           Wishes, not campaigns
         </p>
-        <h1 className="mt-3 font-display text-[34px] leading-[1.1] text-ink md:text-[56px]">
+        <h1 style={{ animationDelay: "80ms" }} className="reveal mt-3 font-display text-[34px] leading-[1.1] text-ink md:text-[56px]">
           Make a wish.
           <br />
           Someone might make it happen.
         </h1>
-        <p className="mt-4 max-w-[52ch] text-[15px] leading-relaxed text-mute md:text-lg">
+        <p style={{ animationDelay: "160ms" }} className="reveal mt-4 max-w-[52ch] text-[15px] leading-relaxed text-mute md:text-lg">
           Wishr is a quiet, dignified place to say what you need - school fees, a sewing machine, a
           bus ticket home - and let people who care help you get there.
         </p>
 
-        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+        <div style={{ animationDelay: "240ms" }} className="reveal mt-7 flex flex-col gap-3 sm:flex-row">
           <Link
             to="/new"
-            className="rounded-xl bg-primary px-5 py-3.5 text-center text-sm font-semibold text-primary-foreground"
+            className="press rounded-xl bg-primary px-5 py-3.5 text-center text-sm font-semibold text-primary-foreground"
           >
             Make a wish
           </Link>
           <Link
             to="/explore"
-            className="rounded-xl bg-card px-5 py-3.5 text-center text-sm font-semibold text-ink ring-1 ring-line"
+            className="press rounded-xl bg-card px-5 py-3.5 text-center text-sm font-semibold text-ink ring-1 ring-line"
           >
             Grant someone's wish
           </Link>
         </div>
 
-        <dl className="mt-8 grid grid-cols-2 gap-3 md:max-w-lg">
-          <div className="rounded-[20px] bg-card p-4 ring-1 ring-line">
+        <dl style={{ animationDelay: "320ms" }} className="reveal mt-8 grid grid-cols-2 gap-3 md:max-w-lg">
+          <div className="card-frame lift p-4">
             <dt className="text-xs font-medium text-mute">Raised so far</dt>
             <dd className="mt-1 font-display text-2xl">{naira(totalRaised)}</dd>
           </div>
-          <div className="rounded-[20px] bg-card p-4 ring-1 ring-line">
+          <div className="card-frame lift p-4">
             <dt className="text-xs font-medium text-mute">Open wishes</dt>
             <dd className="mt-1 font-display text-2xl">{data?.length ?? 0}</dd>
           </div>
@@ -89,7 +89,7 @@ function Home() {
               <WishCardSkeleton />
             </>
           ) : wishes.length ? (
-            wishes.map((wish) => <WishCard key={wish.id} wish={wish} />)
+            wishes.map((wish, i) => <WishCard key={wish.id} wish={wish} index={i} />)
           ) : (
             <div className="md:col-span-2 lg:col-span-3">
               <EmptyState
@@ -109,7 +109,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="mt-14 rounded-[24px] bg-card p-6 ring-1 ring-line md:p-10">
+      <section className="reveal card-frame mt-14 p-6 md:p-10">
         <h2 className="font-display text-2xl">How Wishr works</h2>
         <ol className="mt-6 grid gap-6 md:grid-cols-3">
           {[
@@ -118,7 +118,10 @@ function Home() {
             ["Share the ending", "Post an update so the people who helped can see it landed."],
           ].map(([title, body], i) => (
             <li key={title}>
-              <span className="grid size-8 place-items-center rounded-full bg-warm font-display text-sm">
+              <span
+                className="pop-in grid size-8 place-items-center rounded-full bg-warm font-display text-sm"
+                style={{ animationDelay: `${i * 120}ms` }}
+              >
                 {i + 1}
               </span>
               <h3 className="mt-3 text-base font-semibold">{title}</h3>

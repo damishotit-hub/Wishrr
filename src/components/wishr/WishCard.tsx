@@ -73,7 +73,7 @@ export function WishCardSkeleton() {
       <div className="mt-4 h-5 w-3/4 shimmer rounded" />
       <div className="mt-2 h-4 w-full shimmer rounded" />
       <div className="mt-4 h-1.5 w-full shimmer rounded-full" />
-      <div className="mt-4 h-8 w-full shimmer rounded/50" />
+      <div className="mt-4 h-8 w-full shimmer rounded" />
     </div>
   );
 }

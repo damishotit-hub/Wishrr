@@ -40,7 +40,7 @@ function Explore() {
 
   return (
     <AppShell>
-      <section className="pt-8">
+      <section className="reveal pt-8">
         <h1 className="font-display text-3xl">Explore wishes</h1>
         <p className="mt-2 text-sm text-mute">
           Every wish here belongs to someone real. Give what you can.
@@ -74,7 +74,7 @@ function Explore() {
               key={c.slug}
               onClick={() => setCategory(c.slug)}
               className={[
-                "shrink-0 rounded-full px-3.5 py-2 text-xs font-semibold transition-colors",
+                "press shrink-0 rounded-full px-3.5 py-2 text-xs font-semibold transition-colors",
                 category === c.slug
                   ? "bg-primary text-primary-foreground"
                   : "bg-card text-mute ring-1 ring-line",
@@ -101,7 +101,7 @@ function Explore() {
             />
           </div>
         ) : wishes.data?.length ? (
-          wishes.data.map((wish) => <WishCard key={wish.id} wish={wish} />)
+          wishes.data.map((wish, i) => <WishCard key={wish.id} wish={wish} index={i} />)
         ) : (
           <div className="md:col-span-2 lg:col-span-3">
             <EmptyState
