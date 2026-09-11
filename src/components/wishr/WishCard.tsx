@@ -11,11 +11,9 @@ export function WishCard({ wish }: { wish: Wish }) {
   const fulfilled = remaining === 0;
 
   return (
-    <article className="rounded-[20px] bg-card p-5 ring-1 ring-line transition-transform active:scale-[0.99]">
+    <article className="card-frame p-5 transition-transform active:scale-[0.99]">
       <div className="flex items-center justify-between gap-3">
-        <span className="rounded-full bg-warm px-2.5 py-1 text-[11px] font-semibold text-ink">
-          {CATEGORY_LABELS[wish.category] ?? wish.category}
-        </span>
+        <span className="pill">{CATEGORY_LABELS[wish.category] ?? wish.category}</span>
         <span className="flex min-w-0 items-center gap-1 text-[11px] font-medium text-mute">
           {wish.is_anonymous ? (
             <span className="size-4 rounded-full bg-gradient-to-br from-primary to-ink" />

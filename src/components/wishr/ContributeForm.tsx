@@ -19,6 +19,7 @@ export function ContributeForm({ wish }: { wish: Wish }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const isOwner = !!user && wish.user_id === user.id;
 
