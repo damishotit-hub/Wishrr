@@ -20,9 +20,49 @@ export function ContributeForm({ wish }: { wish: Wish }) {
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
 
+  const isOwner = !!user && wish.user_id === user.id;
+
+  if (isOwner) {
+    return (
+      <div className="card-frame p-5">
+        <h3 className="font-display text-lg">This is your wish</h3>
+        <p className="mt-2 text-sm text-mute">
+          You can't give to your own wish. Share it so friends and strangers can help.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => {
+              const url = `${window.location.origin}/wish/${wish.id}`;
+              if (navigator.share) {
+                void navigator.share({ title: wish.title, url });
+              } else {
+                void navigator.clipboard.writeText(url);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+              }
+            }}
+            className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
+          >
+            {copied ? "Link copied" : "Share this wish"}
+          </button>
+          <Link
+            to="/dashboard"
+            className="rounded-xl px-4 py-2.5 text-sm font-semibold text-ink ring-1 ring-line"
+          >
+            Manage in profile
+          </Link>
+        </div>
+        <p className="mt-4 text-sm text-mute">
+          {remaining > 0 ? `${naira(remaining)} still needed` : "Fully funded — well done."}
+        </p>
+      </div>
+    );
+  }
+
   if (!user) {
     return (
-      <div className="rounded-[20px] bg-card p-5 ring-1 ring-line">
+      <div className="card-frame p-5">
         <h3 className="font-display text-lg">Help fulfil this wish</h3>
         <p className="mt-2 text-sm text-mute">
           Sign in to chip in. It takes a minute and you can stay anonymous.
