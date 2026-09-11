@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Wishr design system — warm humanist.
+ * Wishr design system - warm humanist.
  * Soft neutral canvas, one accent (terracotta), Fraunces display + Manrope body.
  * All colours are oklch tokens. Never hardcode colours in components.
  */
@@ -204,5 +204,115 @@
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+/* --- Premium motion layer --- */
+@keyframes wishr-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes wishr-slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes wishr-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes wishr-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  60% {
+    transform: scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Entrance: content settles into place */
+@utility reveal {
+  animation: wishr-rise 0.62s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@utility reveal-x {
+  animation: wishr-slide-left 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@utility pop-in {
+  animation: wishr-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Hover elevation for cards and tiles */
+@utility lift {
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 2px 4px oklch(0 0 0 / 0.04),
+      0 22px 40px -24px oklch(0 0 0 / 0.32);
+  }
+  &:active {
+    transform: translateY(0) scale(0.994);
+  }
+}
+
+/* Tactile buttons */
+@utility press {
+  transition:
+    transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.18s ease;
+  &:hover {
+    filter: brightness(1.04);
+  }
+  &:active {
+    transform: scale(0.965);
+  }
+}
+
+/* Loading placeholder with a moving sheen */
+@utility shimmer {
+  background-image: linear-gradient(
+    90deg,
+    var(--warm) 0%,
+    var(--card) 45%,
+    var(--warm) 90%
+  );
+  background-size: 200% 100%;
+  animation: wishr-shimmer 1.6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
 }

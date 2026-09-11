@@ -3,7 +3,7 @@ import { CATEGORY_LABELS, daysLeft, initials, naira, timeAgo } from "@/lib/forma
 import { ProgressMeter } from "./ProgressMeter";
 import type { Wish } from "@/lib/queries";
 
-export function WishCard({ wish }: { wish: Wish }) {
+export function WishCard({ wish, index = 0 }: { wish: Wish; index?: number }) {
   const raised = Number(wish.amount_raised);
   const goal = Number(wish.goal_amount);
   const remaining = Math.max(0, goal - raised);
@@ -11,7 +11,10 @@ export function WishCard({ wish }: { wish: Wish }) {
   const fulfilled = remaining === 0;
 
   return (
-    <article className="card-frame p-5 transition-transform active:scale-[0.99]">
+    <article
+      className="card-frame reveal lift p-5"
+      style={{ animationDelay: `${Math.min(index, 8) * 70}ms` }}
+    >
       <div className="flex items-center justify-between gap-3">
         <span className="pill">{CATEGORY_LABELS[wish.category] ?? wish.category}</span>
         <span className="flex min-w-0 items-center gap-1 text-[11px] font-medium text-mute">
@@ -29,7 +32,7 @@ export function WishCard({ wish }: { wish: Wish }) {
       </div>
 
       <h3 className="mt-3 font-display text-lg leading-snug">
-        <Link to="/wish/$id" params={{ id: wish.id }} className="hover:text-primary">
+        <Link to="/wish/$id" params={{ id: wish.id }} className="transition-colors hover:text-primary">
           {wish.title}
         </Link>
       </h3>
@@ -52,8 +55,8 @@ export function WishCard({ wish }: { wish: Wish }) {
           params={{ id: wish.id }}
           className={
             fulfilled
-              ? "shrink-0 rounded-lg px-4 py-2 text-xs font-semibold text-ink ring-1 ring-line transition-transform active:scale-[0.97]"
-              : "shrink-0 rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-transform active:scale-[0.97]"
+              ? "shrink-0 rounded-lg px-4 py-2 text-xs font-semibold text-ink ring-1 ring-line press"
+              : "shrink-0 rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground press"
           }
         >
           {fulfilled ? "View wish" : "Help fulfill"}
@@ -65,12 +68,12 @@ export function WishCard({ wish }: { wish: Wish }) {
 
 export function WishCardSkeleton() {
   return (
-    <div className="rounded-[20px] bg-card p-5 ring-1 ring-line">
-      <div className="h-5 w-24 animate-pulse rounded-full bg-warm" />
-      <div className="mt-4 h-5 w-3/4 animate-pulse rounded bg-warm" />
-      <div className="mt-2 h-4 w-full animate-pulse rounded bg-warm/70" />
-      <div className="mt-4 h-1.5 w-full animate-pulse rounded-full bg-warm" />
-      <div className="mt-4 h-8 w-full animate-pulse rounded bg-warm/50" />
+    <div className="card-frame reveal p-5">
+      <div className="h-5 w-24 shimmer rounded-full" />
+      <div className="mt-4 h-5 w-3/4 shimmer rounded" />
+      <div className="mt-2 h-4 w-full shimmer rounded" />
+      <div className="mt-4 h-1.5 w-full shimmer rounded-full" />
+      <div className="mt-4 h-8 w-full shimmer rounded" />
     </div>
   );
 }

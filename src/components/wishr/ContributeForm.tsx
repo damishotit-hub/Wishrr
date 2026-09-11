@@ -55,7 +55,7 @@ export function ContributeForm({ wish }: { wish: Wish }) {
           </Link>
         </div>
         <p className="mt-4 text-sm text-mute">
-          {remaining > 0 ? `${naira(remaining)} still needed` : "Fully funded — well done."}
+          {remaining > 0 ? `${naira(remaining)} still needed` : "Fully funded - well done."}
         </p>
       </div>
     );
@@ -199,7 +199,7 @@ export function ContributeForm({ wish }: { wish: Wish }) {
         {busy ? "Sending…" : `Give ${naira(Number(amount) || 0)}`}
       </button>
       <p className="mt-2 text-center text-[11px] text-mute">
-        Payments aren't live yet — this records your contribution without moving money.
+        Payments aren't live yet - this records your contribution without moving money.
       </p>
     </form>
   );

@@ -4,7 +4,7 @@ import { AppShell } from "@/components/wishr/AppShell";
 export const Route = createFileRoute("/how-it-works")({
   head: () => ({
     meta: [
-      { title: "How Wishr works — wishes, giving and safety" },
+      { title: "How Wishr works - wishes, giving and safety" },
       {
         name: "description",
         content:
@@ -24,7 +24,7 @@ const SECTIONS = [
   {
     title: "For wishers",
     items: [
-      "Write your wish plainly — what you need and why it matters.",
+      "Write your wish plainly - what you need and why it matters.",
       "Set a realistic goal in Naira and an optional deadline.",
       "You can stay anonymous; only your wish is shown.",
       "Post updates so the people who helped can see how it ended.",
