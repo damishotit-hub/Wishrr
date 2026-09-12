@@ -65,7 +65,7 @@ export function WishCard({ wish, index = 0 }: { wish: Wish; index?: number }) {
         <ProgressMeter raised={raised} goal={goal} />
       </div>
 
-      <div className="mt-4 flex items-center justify-between gap-3 border-t border-line pt-3">
+      <div className="mt-4 flex items-center justify-between gap-3 border-t-2 border-ink pt-3">
         <span className="text-xs font-medium text-mute">
           {fulfilled ? "Fulfilled" : `${naira(remaining)} to go`}
           {left ? ` · ${left}` : ` · ${timeAgo(wish.created_at)}`}
@@ -75,14 +75,16 @@ export function WishCard({ wish, index = 0 }: { wish: Wish; index?: number }) {
           params={{ id: wish.id }}
           className={
             fulfilled
-              ? "shrink-0 rounded-lg px-4 py-2 text-xs font-semibold text-ink ring-1 ring-line press"
+              ? "shrink-0 rounded-lg bg-card px-4 py-2 text-xs font-semibold text-ink press"
               : "shrink-0 rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground press"
           }
         >
           {fulfilled ? "View wish" : "Help fulfill"}
         </Link>
       </div>
+      </div>
     </article>
+
   );
 }
 
