@@ -60,10 +60,11 @@ export function AppShell({ children }: { children: ReactNode }) {
                 <Link
                   to="/dashboard"
                   aria-label="Your dashboard"
-                  className="grid size-8 place-items-center rounded-full bg-warm text-sm font-semibold text-ink"
+                  className="grid size-8 place-items-center rounded-lg border-2 border-ink bg-accent text-sm font-semibold text-ink"
                 >
                   {initials(name)}
                 </Link>
+
               </>
             ) : (
               <>
