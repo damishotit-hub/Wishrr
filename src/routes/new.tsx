@@ -89,6 +89,21 @@ function NewWish() {
         user!.email?.split("@")[0] ??
         "A wisher";
 
+      let imageUrl: string | null = null;
+      if (imageFile) {
+        const ext = imageFile.name.split(".").pop()?.toLowerCase() ?? "jpg";
+        const path = `${user!.id}/${crypto.randomUUID()}.${ext}`;
+        const { error: uploadError } = await supabase.storage
+          .from("wish-images")
+          .upload(path, imageFile, { contentType: imageFile.type, upsert: false });
+        if (uploadError) throw uploadError;
+        const { data: signed, error: signError } = await supabase.storage
+          .from("wish-images")
+          .createSignedUrl(path, 60 * 60 * 24 * 3650);
+        if (signError) throw signError;
+        imageUrl = signed.signedUrl;
+      }
+
       const { data, error: insertError } = await supabase
         .from("wishes")
         .insert({
@@ -101,11 +116,14 @@ function NewWish() {
           deadline: deadline || null,
           is_anonymous: anonymous,
           creator_display_name: anonymous ? "Anonymous" : displayName,
+          image_url: imageUrl,
+          image_caption: imageUrl && caption.trim() ? caption.trim() : null,
           status: "active",
         })
         .select("id")
         .single();
       if (insertError) throw insertError;
+
 
       await queryClient.invalidateQueries({ queryKey: ["wishes"] });
       await queryClient.invalidateQueries({ queryKey: ["my-wishes"] });
