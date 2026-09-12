@@ -246,6 +246,7 @@ export type Database = {
           description: string
           goal_amount: number
           id: string
+          image_caption: string | null
           image_url: string | null
           is_anonymous: boolean
           status: Database["public"]["Enums"]["wish_status"]
@@ -264,6 +265,7 @@ export type Database = {
           description: string
           goal_amount: number
           id?: string
+          image_caption?: string | null
           image_url?: string | null
           is_anonymous?: boolean
           status?: Database["public"]["Enums"]["wish_status"]
@@ -282,6 +284,7 @@ export type Database = {
           description?: string
           goal_amount?: number
           id?: string
+          image_caption?: string | null
           image_url?: string | null
           is_anonymous?: boolean
           status?: Database["public"]["Enums"]["wish_status"]

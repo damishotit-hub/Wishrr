@@ -1,0 +1,1 @@
+ALTER TABLE public.wishes ADD COLUMN IF NOT EXISTS image_caption TEXT;
