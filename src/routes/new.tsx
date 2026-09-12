@@ -180,6 +180,74 @@ function NewWish() {
             />
           </label>
 
+          <div className="card-flat p-4">
+            <span className="eyebrow">Photo</span>
+            <p className="mt-1 text-xs text-mute">
+              A clear picture of what you need. Max 10MB.
+            </p>
+
+            {imagePreview ? (
+              <figure className="mt-3 overflow-hidden rounded-lg border-2 border-ink">
+                <img src={imagePreview} alt="Selected wish" className="aspect-[16/10] w-full object-cover" />
+                {caption.trim() ? (
+                  <figcaption className="border-t-2 border-ink bg-accent px-3 py-2 text-xs font-semibold">
+                    {caption}
+                  </figcaption>
+                ) : null}
+              </figure>
+            ) : null}
+
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <label className="cursor-pointer rounded-lg bg-card px-4 py-2 text-xs font-semibold press">
+                {imageFile ? "Change photo" : "Choose photo"}
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0] ?? null;
+                    if (!file) return;
+                    if (file.size > 10 * 1024 * 1024) {
+                      setError("That image is larger than 10MB.");
+                      return;
+                    }
+                    setError(null);
+                    setImageFile(file);
+                    setImagePreview(URL.createObjectURL(file));
+                  }}
+                />
+              </label>
+              {imageFile ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setImageFile(null);
+                    setImagePreview(null);
+                    setCaption("");
+                  }}
+                  className="rounded-lg bg-card px-4 py-2 text-xs font-semibold press"
+                >
+                  Remove
+                </button>
+              ) : null}
+            </div>
+
+            {imageFile ? (
+              <label className="mt-3 block">
+                <span className="mb-1.5 block text-xs font-semibold text-mute">Photo caption</span>
+                <input
+                  maxLength={140}
+                  value={caption}
+                  onChange={(e) => setCaption(e.target.value)}
+                  placeholder="The machine I use for orders"
+                  className={inputClass}
+                />
+              </label>
+            ) : null}
+          </div>
+
+
+
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="block">
               <span className="mb-1.5 block text-xs font-semibold text-mute">Category</span>
