@@ -72,10 +72,11 @@ export function AppShell({ children }: { children: ReactNode }) {
                 </Link>
                 <Link
                   to="/new"
-                  className="hidden rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground md:inline-block"
+                  className="press hidden rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground md:inline-block"
                 >
                   Make a Wish
                 </Link>
+
               </>
             )}
           </div>
