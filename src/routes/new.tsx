@@ -25,7 +25,8 @@ export const Route = createFileRoute("/new")({
 });
 
 const inputClass =
-  "w-full rounded-xl bg-canvas px-4 py-3 text-sm text-ink ring-1 ring-line outline-none focus:ring-2 focus:ring-ring";
+  "w-full rounded-lg border-2 border-ink bg-canvas px-4 py-3 text-sm text-ink outline-none focus:ring-2 focus:ring-primary";
+
 
 function NewWish() {
   const { user, loading } = useAuth();
