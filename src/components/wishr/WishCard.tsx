@@ -12,14 +12,33 @@ export function WishCard({ wish, index = 0 }: { wish: Wish; index?: number }) {
 
   return (
     <article
-      className="card-frame reveal lift p-5"
+      className="card-frame reveal lift overflow-hidden"
       style={{ animationDelay: `${Math.min(index, 8) * 70}ms` }}
     >
+      {wish.image_url ? (
+        <figure className="border-b-2 border-ink">
+          <Link to="/wish/$id" params={{ id: wish.id }} className="block">
+            <img
+              src={wish.image_url}
+              alt={wish.image_caption ?? wish.title}
+              loading="lazy"
+              className="aspect-[16/10] w-full object-cover"
+            />
+          </Link>
+          {wish.image_caption ? (
+            <figcaption className="border-t-2 border-ink bg-accent px-4 py-2 text-[12px] font-semibold text-ink">
+              {wish.image_caption}
+            </figcaption>
+          ) : null}
+        </figure>
+      ) : null}
+
+      <div className="p-5">
       <div className="flex items-center justify-between gap-3">
         <span className="pill">{CATEGORY_LABELS[wish.category] ?? wish.category}</span>
         <span className="flex min-w-0 items-center gap-1 text-[11px] font-medium text-mute">
           {wish.is_anonymous ? (
-            <span className="size-4 rounded-full bg-gradient-to-br from-primary to-ink" />
+            <span className="size-4 rounded-full bg-primary" />
           ) : (
             <span className="grid size-4 place-items-center rounded-full bg-ink text-[8px] font-semibold text-card">
               {initials(wish.creator_display_name)}
@@ -40,6 +59,7 @@ export function WishCard({ wish, index = 0 }: { wish: Wish; index?: number }) {
       {wish.summary ? (
         <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-mute">{wish.summary}</p>
       ) : null}
+
 
       <div className="mt-4">
         <ProgressMeter raised={raised} goal={goal} />
