@@ -144,7 +144,8 @@ function WishDetail() {
               Supporters {contributions.data?.length ? `(${contributions.data.length})` : ""}
             </h2>
             {contributions.data?.length ? (
-              <ul className="mt-4 divide-y divide-line rounded-[20px] bg-card ring-1 ring-line">
+              <ul className="mt-4 divide-y-2 divide-ink card-frame">
+
                 {contributions.data.map((c) => (
                   <li key={c.id} className="flex items-start justify-between gap-4 p-4">
                     <div className="min-w-0">
