@@ -52,7 +52,7 @@ function Explore() {
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search wishes"
             aria-label="Search wishes"
-            className="w-full rounded-xl bg-card px-4 py-3 text-sm text-ink border-2 border-ink outline-none placeholder:text-mute focus:ring-2 focus:ring-ring"
+            className="w-full rounded-xl bg-card px-4 py-3 text-sm text-ink border-2 border-ink outline-none placeholder:text-mute focus:ring-2 focus:ring-primary"
           />
           <select
             value={sort}
@@ -110,7 +110,7 @@ function Explore() {
               action={
                 <Link
                   to="/new"
-                  className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
+                  className="press rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
                 >
                   Make a wish
                 </Link>

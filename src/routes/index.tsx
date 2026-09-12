@@ -49,7 +49,7 @@ function Home() {
         <div style={{ animationDelay: "240ms" }} className="reveal mt-7 flex flex-col gap-3 sm:flex-row">
           <Link
             to="/new"
-            className="press rounded-xl bg-primary px-5 py-3.5 text-center text-sm font-semibold text-primary-foreground"
+            className="press press rounded-lg bg-primary px-5 py-3.5 text-center text-sm font-semibold text-primary-foreground"
           >
             Make a wish
           </Link>
@@ -98,7 +98,7 @@ function Home() {
                 action={
                   <Link
                     to="/new"
-                    className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
+                    className="press rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
                   >
                     Make a wish
                   </Link>

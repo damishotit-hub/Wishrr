@@ -59,7 +59,7 @@ function WishDetail() {
             action={
               <Link
                 to="/explore"
-                className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
+                className="press rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
               >
                 Explore wishes
               </Link>

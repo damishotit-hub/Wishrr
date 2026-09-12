@@ -66,7 +66,7 @@ function NewWish() {
           </p>
           <Link
             to="/auth"
-            className="mt-6 inline-block rounded-xl bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground"
+            className="mt-6 inline-block press rounded-lg bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground"
           >
             Sign in or create account
           </Link>
@@ -305,7 +305,7 @@ function NewWish() {
           <button
             type="submit"
             disabled={busy}
-            className="w-full rounded-xl bg-primary px-4 py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+            className="w-full press rounded-lg bg-primary px-4 py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
           >
             {busy ? "Publishing…" : "Publish wish"}
           </button>

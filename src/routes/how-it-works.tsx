@@ -81,7 +81,7 @@ function HowItWorks() {
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link
             to="/new"
-            className="rounded-xl bg-primary px-5 py-3.5 text-center text-sm font-semibold text-primary-foreground"
+            className="press rounded-lg bg-primary px-5 py-3.5 text-center text-sm font-semibold text-primary-foreground"
           >
             Make a wish
           </Link>

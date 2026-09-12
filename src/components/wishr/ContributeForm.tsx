@@ -43,7 +43,7 @@ export function ContributeForm({ wish }: { wish: Wish }) {
                 setTimeout(() => setCopied(false), 2000);
               }
             }}
-            className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
+            className="press rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
           >
             {copied ? "Link copied" : "Share this wish"}
           </button>
@@ -70,7 +70,7 @@ export function ContributeForm({ wish }: { wish: Wish }) {
         </p>
         <Link
           to="/auth"
-          className="mt-4 inline-block rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
+          className="mt-4 inline-block press rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
         >
           Sign in to give
         </Link>
@@ -163,7 +163,7 @@ export function ContributeForm({ wish }: { wish: Wish }) {
           inputMode="numeric"
           value={amount}
           onChange={(e) => setAmount(e.target.value.replace(/[^0-9]/g, ""))}
-          className="w-full rounded-xl bg-canvas px-4 py-3 text-sm border-2 border-ink outline-none focus:ring-2 focus:ring-ring"
+          className="w-full rounded-xl bg-canvas px-4 py-3 text-sm border-2 border-ink outline-none focus:ring-2 focus:ring-primary"
         />
       </label>
 
@@ -175,7 +175,7 @@ export function ContributeForm({ wish }: { wish: Wish }) {
           maxLength={200}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Wishing you well."
-          className="w-full resize-none rounded-xl bg-canvas px-4 py-3 text-sm border-2 border-ink outline-none focus:ring-2 focus:ring-ring"
+          className="w-full resize-none rounded-xl bg-canvas px-4 py-3 text-sm border-2 border-ink outline-none focus:ring-2 focus:ring-primary"
         />
       </label>
 
@@ -194,7 +194,7 @@ export function ContributeForm({ wish }: { wish: Wish }) {
       <button
         type="submit"
         disabled={busy}
-        className="mt-4 w-full rounded-xl bg-primary px-4 py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+        className="mt-4 w-full press rounded-lg bg-primary px-4 py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
       >
         {busy ? "Sending…" : `Give ${naira(Number(amount) || 0)}`}
       </button>
