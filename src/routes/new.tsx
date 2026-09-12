@@ -40,8 +40,12 @@ function NewWish() {
   const [goal, setGoal] = useState("");
   const [deadline, setDeadline] = useState("");
   const [anonymous, setAnonymous] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [caption, setCaption] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
 
   if (loading) {
     return (
