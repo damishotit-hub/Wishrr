@@ -99,17 +99,25 @@ function WishDetail() {
           </div>
 
           {w.image_url ? (
-            <img
-              src={w.image_url}
-              alt={w.title}
-              loading="lazy"
-              className="mt-5 aspect-[16/10] w-full rounded-[20px] object-cover"
-            />
+            <figure className="mt-5 overflow-hidden rounded-[14px] border-2 border-ink hard-shadow">
+              <img
+                src={w.image_url}
+                alt={w.image_caption ?? w.title}
+                loading="lazy"
+                className="aspect-[16/10] w-full object-cover"
+              />
+              {w.image_caption ? (
+                <figcaption className="border-t-2 border-ink bg-accent px-4 py-3 text-sm font-semibold text-ink">
+                  {w.image_caption}
+                </figcaption>
+              ) : null}
+            </figure>
           ) : null}
 
-          <div className="mt-6 rounded-[20px] bg-card p-5 ring-1 ring-line md:hidden">
+          <div className="mt-6 card-frame p-5 md:hidden">
             <ProgressMeter raised={Number(w.amount_raised)} goal={Number(w.goal_amount)} />
           </div>
+
 
           <p className="mt-6 text-[15px] leading-relaxed whitespace-pre-line text-ink/90">
             {w.description}
