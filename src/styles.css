@@ -310,31 +310,35 @@
 /* Hover elevation for cards and tiles */
 @utility lift {
   transition:
-    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.16s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.16s cubic-bezier(0.22, 1, 0.36, 1);
   &:hover {
-    transform: translateY(-3px);
-    box-shadow:
-      0 2px 4px oklch(0 0 0 / 0.04),
-      0 22px 40px -24px oklch(0 0 0 / 0.32);
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 0 var(--hard);
   }
   &:active {
-    transform: translateY(0) scale(0.994);
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 0 var(--hard);
   }
 }
 
-/* Tactile buttons */
+/* Tactile buttons: hard offset that collapses on press */
 @utility press {
+  border: 2px solid var(--hard);
+  box-shadow: 3px 3px 0 0 var(--hard);
   transition:
-    transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.18s ease;
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
   &:hover {
-    filter: brightness(1.04);
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 0 var(--hard);
   }
   &:active {
-    transform: scale(0.965);
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 0 var(--hard);
   }
 }
+
 
 /* Loading placeholder with a moving sheen */
 @utility shimmer {
