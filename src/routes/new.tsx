@@ -25,7 +25,8 @@ export const Route = createFileRoute("/new")({
 });
 
 const inputClass =
-  "w-full rounded-xl bg-canvas px-4 py-3 text-sm text-ink ring-1 ring-line outline-none focus:ring-2 focus:ring-ring";
+  "w-full rounded-lg border-2 border-ink bg-canvas px-4 py-3 text-sm text-ink outline-none focus:ring-2 focus:ring-primary";
+
 
 function NewWish() {
   const { user, loading } = useAuth();
@@ -40,8 +41,12 @@ function NewWish() {
   const [goal, setGoal] = useState("");
   const [deadline, setDeadline] = useState("");
   const [anonymous, setAnonymous] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [caption, setCaption] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
 
   if (loading) {
     return (
@@ -61,7 +66,7 @@ function NewWish() {
           </p>
           <Link
             to="/auth"
-            className="mt-6 inline-block rounded-xl bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground"
+            className="mt-6 inline-block press rounded-lg bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground"
           >
             Sign in or create account
           </Link>
@@ -85,6 +90,21 @@ function NewWish() {
         user!.email?.split("@")[0] ??
         "A wisher";
 
+      let imageUrl: string | null = null;
+      if (imageFile) {
+        const ext = imageFile.name.split(".").pop()?.toLowerCase() ?? "jpg";
+        const path = `${user!.id}/${crypto.randomUUID()}.${ext}`;
+        const { error: uploadError } = await supabase.storage
+          .from("wish-images")
+          .upload(path, imageFile, { contentType: imageFile.type, upsert: false });
+        if (uploadError) throw uploadError;
+        const { data: signed, error: signError } = await supabase.storage
+          .from("wish-images")
+          .createSignedUrl(path, 60 * 60 * 24 * 3650);
+        if (signError) throw signError;
+        imageUrl = signed.signedUrl;
+      }
+
       const { data, error: insertError } = await supabase
         .from("wishes")
         .insert({
@@ -97,11 +117,14 @@ function NewWish() {
           deadline: deadline || null,
           is_anonymous: anonymous,
           creator_display_name: anonymous ? "Anonymous" : displayName,
+          image_url: imageUrl,
+          image_caption: imageUrl && caption.trim() ? caption.trim() : null,
           status: "active",
         })
         .select("id")
         .single();
       if (insertError) throw insertError;
+
 
       await queryClient.invalidateQueries({ queryKey: ["wishes"] });
       await queryClient.invalidateQueries({ queryKey: ["my-wishes"] });
@@ -121,7 +144,7 @@ function NewWish() {
           Be specific and honest. People give to wishes they can picture.
         </p>
 
-        <form onSubmit={submit} className="mt-6 space-y-4 rounded-[20px] bg-card p-5 ring-1 ring-line">
+        <form onSubmit={submit} className="mt-6 space-y-4 card-frame p-5 border-2 border-ink">
           <label className="block">
             <span className="mb-1.5 block text-xs font-semibold text-mute">Wish title</span>
             <input
@@ -157,6 +180,74 @@ function NewWish() {
               className={`${inputClass} resize-y`}
             />
           </label>
+
+          <div className="card-flat p-4">
+            <span className="eyebrow">Photo</span>
+            <p className="mt-1 text-xs text-mute">
+              A clear picture of what you need. Max 10MB.
+            </p>
+
+            {imagePreview ? (
+              <figure className="mt-3 overflow-hidden rounded-lg border-2 border-ink">
+                <img src={imagePreview} alt="Selected wish" className="aspect-[16/10] w-full object-cover" />
+                {caption.trim() ? (
+                  <figcaption className="border-t-2 border-ink bg-accent px-3 py-2 text-xs font-semibold">
+                    {caption}
+                  </figcaption>
+                ) : null}
+              </figure>
+            ) : null}
+
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <label className="cursor-pointer rounded-lg bg-card px-4 py-2 text-xs font-semibold press">
+                {imageFile ? "Change photo" : "Choose photo"}
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0] ?? null;
+                    if (!file) return;
+                    if (file.size > 10 * 1024 * 1024) {
+                      setError("That image is larger than 10MB.");
+                      return;
+                    }
+                    setError(null);
+                    setImageFile(file);
+                    setImagePreview(URL.createObjectURL(file));
+                  }}
+                />
+              </label>
+              {imageFile ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setImageFile(null);
+                    setImagePreview(null);
+                    setCaption("");
+                  }}
+                  className="rounded-lg bg-card px-4 py-2 text-xs font-semibold press"
+                >
+                  Remove
+                </button>
+              ) : null}
+            </div>
+
+            {imageFile ? (
+              <label className="mt-3 block">
+                <span className="mb-1.5 block text-xs font-semibold text-mute">Photo caption</span>
+                <input
+                  maxLength={140}
+                  value={caption}
+                  onChange={(e) => setCaption(e.target.value)}
+                  placeholder="The machine I use for orders"
+                  className={inputClass}
+                />
+              </label>
+            ) : null}
+          </div>
+
+
 
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="block">
@@ -214,7 +305,7 @@ function NewWish() {
           <button
             type="submit"
             disabled={busy}
-            className="w-full rounded-xl bg-primary px-4 py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+            className="w-full press rounded-lg bg-primary px-4 py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
           >
             {busy ? "Publishing…" : "Publish wish"}
           </button>

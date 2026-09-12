@@ -47,7 +47,7 @@ function Dashboard() {
           </p>
           <Link
             to="/auth"
-            className="mt-6 inline-block rounded-xl bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground"
+            className="mt-6 inline-block press rounded-lg bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground"
           >
             Sign in
           </Link>
@@ -73,11 +73,11 @@ function Dashboard() {
         </div>
 
         <dl className="mt-6 grid grid-cols-2 gap-3">
-          <div className="rounded-[20px] bg-card p-4 ring-1 ring-line">
+          <div className="card-frame p-4 border-2 border-ink">
             <dt className="text-xs font-medium text-mute">You've given</dt>
             <dd className="mt-1 font-display text-2xl">{naira(given)}</dd>
           </div>
-          <div className="rounded-[20px] bg-card p-4 ring-1 ring-line">
+          <div className="card-frame p-4 border-2 border-ink">
             <dt className="text-xs font-medium text-mute">Your wishes</dt>
             <dd className="mt-1 font-display text-2xl">{wishes.data?.length ?? 0}</dd>
           </div>
@@ -95,7 +95,7 @@ function Dashboard() {
         {wishes.data?.length ? (
           <ul className="mt-4 space-y-3">
             {wishes.data.map((w) => (
-              <li key={w.id} className="rounded-[20px] bg-card p-5 ring-1 ring-line">
+              <li key={w.id} className="card-frame p-5 border-2 border-ink">
                 <div className="flex items-start justify-between gap-3">
                   <Link
                     to="/wish/$id"
@@ -126,7 +126,7 @@ function Dashboard() {
               action={
                 <Link
                   to="/new"
-                  className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
+                  className="press rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
                 >
                   Make a wish
                 </Link>
@@ -139,7 +139,7 @@ function Dashboard() {
       <section className="mt-10">
         <h2 className="font-display text-xl">Wishes you've supported</h2>
         {contributions.data?.length ? (
-          <ul className="mt-4 divide-y divide-line rounded-[20px] bg-card ring-1 ring-line">
+          <ul className="mt-4 divide-y-2 divide-ink card-frame border-2 border-ink">
             {contributions.data.map((c) => {
               const wish = (c as { wishes?: { id: string; title: string } | null }).wishes;
               return (
@@ -173,7 +173,7 @@ function Dashboard() {
               action={
                 <Link
                   to="/explore"
-                  className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
+                  className="press rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
                 >
                   Explore wishes
                 </Link>
@@ -186,7 +186,7 @@ function Dashboard() {
       <div className="mt-10">
         <button
           onClick={() => void signOut()}
-          className="rounded-xl px-4 py-2.5 text-sm font-semibold text-ink ring-1 ring-line"
+          className="rounded-xl px-4 py-2.5 text-sm font-semibold text-ink border-2 border-ink"
         >
           Sign out
         </button>

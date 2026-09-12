@@ -60,10 +60,11 @@ export function AppShell({ children }: { children: ReactNode }) {
                 <Link
                   to="/dashboard"
                   aria-label="Your dashboard"
-                  className="grid size-8 place-items-center rounded-full bg-warm text-sm font-semibold text-ink"
+                  className="grid size-8 place-items-center rounded-lg border-2 border-ink bg-accent text-sm font-semibold text-ink"
                 >
                   {initials(name)}
                 </Link>
+
               </>
             ) : (
               <>
@@ -72,10 +73,11 @@ export function AppShell({ children }: { children: ReactNode }) {
                 </Link>
                 <Link
                   to="/new"
-                  className="hidden rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground md:inline-block"
+                  className="press hidden rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground md:inline-block"
                 >
                   Make a Wish
                 </Link>
+
               </>
             )}
           </div>
@@ -97,7 +99,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
       <nav
         aria-label="Main"
-        className="fixed bottom-0 left-1/2 w-full max-w-[430px] -translate-x-1/2 border-t border-line bg-card/95 px-2 py-2 backdrop-blur md:hidden"
+        className="fixed bottom-0 left-1/2 w-full max-w-[430px] -translate-x-1/2 border-t-2 border-ink bg-card px-2 py-2 md:hidden"
       >
         <div className="flex items-center justify-between">
           {NAV.map((item) => {
@@ -106,13 +108,14 @@ export function AppShell({ children }: { children: ReactNode }) {
             if (item.to === "/new") {
               return (
                 <Link key={item.to} to="/new" className="-mt-6 flex flex-col items-center gap-1">
-                  <span className="grid size-12 place-items-center rounded-full bg-primary text-primary-foreground shadow-sm ring-4 ring-canvas">
+                  <span className="grid size-12 place-items-center rounded-xl border-2 border-ink bg-primary text-primary-foreground hard-shadow-sm">
                     <span className="font-display text-2xl leading-none">+</span>
                   </span>
                   <span className="text-[11px] font-semibold text-ink">Make a wish</span>
                 </Link>
               );
             }
+
             return (
               <Link
                 key={item.to}

@@ -1,0 +1,4 @@
+CREATE POLICY "Wish images readable" ON storage.objects FOR SELECT TO anon, authenticated USING (bucket_id = 'wish-images');
+CREATE POLICY "Users upload own wish images" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'wish-images' AND (storage.foldername(name))[1] = auth.uid()::text);
+CREATE POLICY "Users update own wish images" ON storage.objects FOR UPDATE TO authenticated USING (bucket_id = 'wish-images' AND (storage.foldername(name))[1] = auth.uid()::text);
+CREATE POLICY "Users delete own wish images" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'wish-images' AND (storage.foldername(name))[1] = auth.uid()::text);

@@ -71,7 +71,7 @@ function AuthPage() {
             : "It takes a minute. Your name is only shown if you want it to be."}
         </p>
 
-        <form onSubmit={submit} className="mt-6 space-y-4 rounded-[20px] bg-card p-5 ring-1 ring-line">
+        <form onSubmit={submit} className="mt-6 space-y-4 card-frame p-5 border-2 border-ink">
           {mode === "signup" ? (
             <Field label="Display name">
               <input
@@ -110,7 +110,7 @@ function AuthPage() {
           <button
             type="submit"
             disabled={busy}
-            className="w-full rounded-xl bg-primary px-4 py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+            className="w-full press rounded-lg bg-primary px-4 py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
           >
             {busy ? "Please wait…" : mode === "signin" ? "Sign in" : "Create account"}
           </button>
@@ -140,7 +140,7 @@ function AuthPage() {
 }
 
 const inputClass =
-  "w-full rounded-xl bg-canvas px-4 py-3 text-sm text-ink ring-1 ring-line outline-none focus:ring-2 focus:ring-ring";
+  "w-full rounded-xl bg-canvas px-4 py-3 text-sm text-ink border-2 border-ink outline-none focus:ring-2 focus:ring-primary";
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (

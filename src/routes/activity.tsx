@@ -57,7 +57,7 @@ function Activity() {
         {notifications.data?.length ? (
           <ul className="mt-5 space-y-3">
             {notifications.data.map((n) => (
-              <li key={n.id} className="rounded-[20px] bg-card p-4 ring-1 ring-line">
+              <li key={n.id} className="card-frame p-4 border-2 border-ink">
                 <p className="text-sm font-semibold">{n.title}</p>
                 {n.body ? <p className="mt-1 text-sm text-mute">{n.body}</p> : null}
                 <p className="mt-2 text-[11px] text-mute">{timeAgo(n.created_at)}</p>

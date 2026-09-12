@@ -43,13 +43,13 @@ export function ContributeForm({ wish }: { wish: Wish }) {
                 setTimeout(() => setCopied(false), 2000);
               }
             }}
-            className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
+            className="press rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
           >
             {copied ? "Link copied" : "Share this wish"}
           </button>
           <Link
             to="/dashboard"
-            className="rounded-xl px-4 py-2.5 text-sm font-semibold text-ink ring-1 ring-line"
+            className="rounded-xl px-4 py-2.5 text-sm font-semibold text-ink border-2 border-ink"
           >
             Manage in profile
           </Link>
@@ -70,7 +70,7 @@ export function ContributeForm({ wish }: { wish: Wish }) {
         </p>
         <Link
           to="/auth"
-          className="mt-4 inline-block rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
+          className="mt-4 inline-block press rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
         >
           Sign in to give
         </Link>
@@ -80,14 +80,14 @@ export function ContributeForm({ wish }: { wish: Wish }) {
 
   if (done) {
     return (
-      <div className="rounded-[20px] bg-card p-5 ring-1 ring-line">
+      <div className="card-frame p-5 border-2 border-ink">
         <h3 className="font-display text-lg">Thank you</h3>
         <p className="mt-2 text-sm text-mute">
           Your {naira(Number(amount))} is recorded on this wish. You'll see it in your activity.
         </p>
         <button
           onClick={() => setDone(false)}
-          className="mt-4 rounded-xl px-4 py-2.5 text-sm font-semibold text-ink ring-1 ring-line"
+          className="mt-4 rounded-xl px-4 py-2.5 text-sm font-semibold text-ink border-2 border-ink"
         >
           Give again
         </button>
@@ -135,7 +135,7 @@ export function ContributeForm({ wish }: { wish: Wish }) {
   }
 
   return (
-    <form onSubmit={submit} className="rounded-[20px] bg-card p-5 ring-1 ring-line">
+    <form onSubmit={submit} className="card-frame p-5 border-2 border-ink">
       <h3 className="font-display text-lg">Help fulfil this wish</h3>
       <p className="mt-1 text-sm text-mute">{naira(remaining)} still needed</p>
 
@@ -149,7 +149,7 @@ export function ContributeForm({ wish }: { wish: Wish }) {
               "rounded-xl py-2.5 text-xs font-semibold",
               Number(amount) === preset
                 ? "bg-primary text-primary-foreground"
-                : "bg-canvas text-ink ring-1 ring-line",
+                : "bg-canvas text-ink border-2 border-ink",
             ].join(" ")}
           >
             {naira(preset)}
@@ -163,7 +163,7 @@ export function ContributeForm({ wish }: { wish: Wish }) {
           inputMode="numeric"
           value={amount}
           onChange={(e) => setAmount(e.target.value.replace(/[^0-9]/g, ""))}
-          className="w-full rounded-xl bg-canvas px-4 py-3 text-sm ring-1 ring-line outline-none focus:ring-2 focus:ring-ring"
+          className="w-full rounded-xl bg-canvas px-4 py-3 text-sm border-2 border-ink outline-none focus:ring-2 focus:ring-primary"
         />
       </label>
 
@@ -175,7 +175,7 @@ export function ContributeForm({ wish }: { wish: Wish }) {
           maxLength={200}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Wishing you well."
-          className="w-full resize-none rounded-xl bg-canvas px-4 py-3 text-sm ring-1 ring-line outline-none focus:ring-2 focus:ring-ring"
+          className="w-full resize-none rounded-xl bg-canvas px-4 py-3 text-sm border-2 border-ink outline-none focus:ring-2 focus:ring-primary"
         />
       </label>
 
@@ -194,7 +194,7 @@ export function ContributeForm({ wish }: { wish: Wish }) {
       <button
         type="submit"
         disabled={busy}
-        className="mt-4 w-full rounded-xl bg-primary px-4 py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+        className="mt-4 w-full press rounded-lg bg-primary px-4 py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
       >
         {busy ? "Sending…" : `Give ${naira(Number(amount) || 0)}`}
       </button>

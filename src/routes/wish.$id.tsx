@@ -59,7 +59,7 @@ function WishDetail() {
             action={
               <Link
                 to="/explore"
-                className="rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
+                className="press rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
               >
                 Explore wishes
               </Link>
@@ -99,17 +99,25 @@ function WishDetail() {
           </div>
 
           {w.image_url ? (
-            <img
-              src={w.image_url}
-              alt={w.title}
-              loading="lazy"
-              className="mt-5 aspect-[16/10] w-full rounded-[20px] object-cover"
-            />
+            <figure className="mt-5 overflow-hidden rounded-[14px] border-2 border-ink hard-shadow">
+              <img
+                src={w.image_url}
+                alt={w.image_caption ?? w.title}
+                loading="lazy"
+                className="aspect-[16/10] w-full object-cover"
+              />
+              {w.image_caption ? (
+                <figcaption className="border-t-2 border-ink bg-accent px-4 py-3 text-sm font-semibold text-ink">
+                  {w.image_caption}
+                </figcaption>
+              ) : null}
+            </figure>
           ) : null}
 
-          <div className="mt-6 rounded-[20px] bg-card p-5 ring-1 ring-line md:hidden">
+          <div className="mt-6 card-frame p-5 md:hidden">
             <ProgressMeter raised={Number(w.amount_raised)} goal={Number(w.goal_amount)} />
           </div>
+
 
           <p className="mt-6 text-[15px] leading-relaxed whitespace-pre-line text-ink/90">
             {w.description}
@@ -120,7 +128,7 @@ function WishDetail() {
             {updates.data?.length ? (
               <ul className="mt-4 space-y-3">
                 {updates.data.map((u) => (
-                  <li key={u.id} className="rounded-[20px] bg-card p-4 ring-1 ring-line">
+                  <li key={u.id} className="card-frame p-4 border-2 border-ink">
                     <p className="text-sm leading-relaxed whitespace-pre-line">{u.body}</p>
                     <p className="mt-2 text-[11px] text-mute">{timeAgo(u.created_at)}</p>
                   </li>
@@ -136,7 +144,8 @@ function WishDetail() {
               Supporters {contributions.data?.length ? `(${contributions.data.length})` : ""}
             </h2>
             {contributions.data?.length ? (
-              <ul className="mt-4 divide-y divide-line rounded-[20px] bg-card ring-1 ring-line">
+              <ul className="mt-4 divide-y-2 divide-ink card-frame">
+
                 {contributions.data.map((c) => (
                   <li key={c.id} className="flex items-start justify-between gap-4 p-4">
                     <div className="min-w-0">
@@ -161,7 +170,7 @@ function WishDetail() {
         </div>
 
         <aside className="mt-8 md:sticky md:top-8 md:mt-14 md:self-start">
-          <div className="mb-4 hidden rounded-[20px] bg-card p-5 ring-1 ring-line md:block">
+          <div className="mb-4 hidden card-frame p-5 border-2 border-ink md:block">
             <ProgressMeter raised={Number(w.amount_raised)} goal={Number(w.goal_amount)} />
           </div>
           <ContributeForm wish={w} />
