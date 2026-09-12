@@ -19,7 +19,7 @@ export function ProgressMeter({
         <span className="text-mute">of {naira(goal)}</span>
       </div>
       <div
-        className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-warm"
+        className="mt-2 h-3 w-full overflow-hidden rounded-full border-2 border-ink bg-warm"
         role="progressbar"
         aria-valuenow={percent}
         aria-valuemin={0}
@@ -29,12 +29,13 @@ export function ProgressMeter({
         <div
           className={
             animate
-              ? "fillbar h-full rounded-full bg-primary"
-              : "h-full rounded-full bg-primary transition-[width] duration-500"
+              ? "fillbar h-full bg-primary"
+              : "h-full bg-primary transition-[width] duration-500"
           }
           style={{ width: `${percent}%` }}
         />
       </div>
+
     </div>
   );
 }
