@@ -144,7 +144,7 @@ function NewWish() {
           Be specific and honest. People give to wishes they can picture.
         </p>
 
-        <form onSubmit={submit} className="mt-6 space-y-4 rounded-[20px] bg-card p-5 ring-1 ring-line">
+        <form onSubmit={submit} className="mt-6 space-y-4 card-frame p-5 border-2 border-ink">
           <label className="block">
             <span className="mb-1.5 block text-xs font-semibold text-mute">Wish title</span>
             <input

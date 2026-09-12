@@ -52,13 +52,13 @@ function Explore() {
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search wishes"
             aria-label="Search wishes"
-            className="w-full rounded-xl bg-card px-4 py-3 text-sm text-ink ring-1 ring-line outline-none placeholder:text-mute focus:ring-2 focus:ring-ring"
+            className="w-full rounded-xl bg-card px-4 py-3 text-sm text-ink border-2 border-ink outline-none placeholder:text-mute focus:ring-2 focus:ring-ring"
           />
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as NonNullable<ExploreFilters["sort"]>)}
             aria-label="Sort wishes"
-            className="rounded-xl bg-card px-4 py-3 text-sm font-medium text-ink ring-1 ring-line outline-none"
+            className="rounded-xl bg-card px-4 py-3 text-sm font-medium text-ink border-2 border-ink outline-none"
           >
             {SORTS.map((s) => (
               <option key={s.value} value={s.value}>
@@ -77,7 +77,7 @@ function Explore() {
                 "press shrink-0 rounded-full px-3.5 py-2 text-xs font-semibold transition-colors",
                 category === c.slug
                   ? "bg-primary text-primary-foreground"
-                  : "bg-card text-mute ring-1 ring-line",
+                  : "bg-card text-mute border-2 border-ink",
               ].join(" ")}
             >
               {c.name}

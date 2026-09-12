@@ -128,7 +128,7 @@ function WishDetail() {
             {updates.data?.length ? (
               <ul className="mt-4 space-y-3">
                 {updates.data.map((u) => (
-                  <li key={u.id} className="rounded-[20px] bg-card p-4 ring-1 ring-line">
+                  <li key={u.id} className="card-frame p-4 border-2 border-ink">
                     <p className="text-sm leading-relaxed whitespace-pre-line">{u.body}</p>
                     <p className="mt-2 text-[11px] text-mute">{timeAgo(u.created_at)}</p>
                   </li>
@@ -170,7 +170,7 @@ function WishDetail() {
         </div>
 
         <aside className="mt-8 md:sticky md:top-8 md:mt-14 md:self-start">
-          <div className="mb-4 hidden rounded-[20px] bg-card p-5 ring-1 ring-line md:block">
+          <div className="mb-4 hidden card-frame p-5 border-2 border-ink md:block">
             <ProgressMeter raised={Number(w.amount_raised)} goal={Number(w.goal_amount)} />
           </div>
           <ContributeForm wish={w} />

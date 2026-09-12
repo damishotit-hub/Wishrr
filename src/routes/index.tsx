@@ -55,7 +55,7 @@ function Home() {
           </Link>
           <Link
             to="/explore"
-            className="press rounded-xl bg-card px-5 py-3.5 text-center text-sm font-semibold text-ink ring-1 ring-line"
+            className="press rounded-xl bg-card px-5 py-3.5 text-center text-sm font-semibold text-ink border-2 border-ink"
           >
             Grant someone's wish
           </Link>

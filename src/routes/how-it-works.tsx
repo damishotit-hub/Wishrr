@@ -59,7 +59,7 @@ function HowItWorks() {
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {SECTIONS.map((section) => (
-            <div key={section.title} className="rounded-[20px] bg-card p-5 ring-1 ring-line">
+            <div key={section.title} className="card-frame p-5 border-2 border-ink">
               <h2 className="font-display text-xl">{section.title}</h2>
               <ul className="mt-3 space-y-2.5">
                 {section.items.map((item) => (
@@ -73,7 +73,7 @@ function HowItWorks() {
           ))}
         </div>
 
-        <div className="mt-8 rounded-[20px] border border-dashed border-line p-5 text-sm text-mute">
+        <div className="mt-8 rounded-[20px] border-2 border-dashed border-ink p-5 text-sm text-mute">
           Payments are not connected yet. Contributions you make today are recorded so you can see
           the full flow, but no money moves.
         </div>
@@ -87,7 +87,7 @@ function HowItWorks() {
           </Link>
           <Link
             to="/explore"
-            className="rounded-xl bg-card px-5 py-3.5 text-center text-sm font-semibold text-ink ring-1 ring-line"
+            className="rounded-xl bg-card px-5 py-3.5 text-center text-sm font-semibold text-ink border-2 border-ink"
           >
             Explore wishes
           </Link>
