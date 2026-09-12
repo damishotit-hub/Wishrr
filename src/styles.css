@@ -142,56 +142,94 @@
   }
 }
 
-/* Small uppercase eyebrow label, reference-style */
+/* Small uppercase eyebrow label */
 @utility eyebrow {
   font-family: var(--font-display-family);
   font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--muted-foreground);
+  color: var(--foreground);
 }
 
-/* Sleek card framing */
+/* Neo-brutalist card: hard outline plus offset shadow */
 @utility card-frame {
-  border-radius: 1.25rem;
+  border-radius: 0.875rem;
   background-color: var(--card);
-  box-shadow:
-    0 1px 2px oklch(0 0 0 / 0.04),
-    0 8px 24px -16px oklch(0 0 0 / 0.18);
-  outline: 1px solid var(--border);
-  outline-offset: -1px;
+  border: 2px solid var(--hard);
+  box-shadow: 5px 5px 0 0 var(--hard);
 }
 
-/* Refined pill badge */
+@utility card-flat {
+  border-radius: 0.875rem;
+  background-color: var(--card);
+  border: 2px solid var(--hard);
+}
+
+@utility hard-shadow {
+  box-shadow: 5px 5px 0 0 var(--hard);
+}
+
+@utility hard-shadow-sm {
+  box-shadow: 3px 3px 0 0 var(--hard);
+}
+
+@utility hard-shadow-accent {
+  box-shadow: 5px 5px 0 0 var(--primary);
+}
+
+/* Sharp badge */
 @utility pill {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-  border-radius: 999px;
-  padding: 0.3125rem 0.75rem;
+  border-radius: 0.375rem;
+  padding: 0.3125rem 0.625rem;
+  font-family: var(--font-display-family);
   font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   line-height: 1;
-  background-color: var(--warm);
+  background-color: var(--accent);
   color: var(--foreground);
+  border: 1.5px solid var(--hard);
+}
+
+@utility pill-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 0.375rem;
+  padding: 0.3125rem 0.625rem;
+  font-family: var(--font-display-family);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border: 1.5px solid var(--hard);
 }
 
 @utility pill-outline {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-  border-radius: 999px;
-  padding: 0.3125rem 0.75rem;
+  border-radius: 0.375rem;
+  padding: 0.3125rem 0.625rem;
+  font-family: var(--font-display-family);
   font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   line-height: 1;
-  color: var(--muted-foreground);
-  outline: 1px solid var(--border);
-  outline-offset: -1px;
+  background-color: transparent;
+  color: var(--foreground);
+  border: 1.5px solid var(--hard);
 }
+
 
 @keyframes wishr-fill {
   from {
