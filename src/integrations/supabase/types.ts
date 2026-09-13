@@ -99,6 +99,7 @@ export type Database = {
           display_name: string
           email: string | null
           id: string
+          intent: string | null
           is_verified: boolean
           phone: string | null
           updated_at: string
@@ -110,6 +111,7 @@ export type Database = {
           display_name?: string
           email?: string | null
           id: string
+          intent?: string | null
           is_verified?: boolean
           phone?: string | null
           updated_at?: string
@@ -121,6 +123,7 @@ export type Database = {
           display_name?: string
           email?: string | null
           id?: string
+          intent?: string | null
           is_verified?: boolean
           phone?: string | null
           updated_at?: string

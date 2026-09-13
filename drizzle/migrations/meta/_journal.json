@@ -15,6 +15,13 @@
       "when": 1789172627419,
       "tag": "0001_wish_images_storage_policies",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789277848528,
+      "tag": "0002_add_profile_intent",
+      "breakpoints": true
     }
   ]
 }
