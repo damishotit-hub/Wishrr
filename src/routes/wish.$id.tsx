@@ -4,6 +4,9 @@ import { AppShell } from "@/components/wishr/AppShell";
 import { ProgressMeter } from "@/components/wishr/ProgressMeter";
 import { EmptyState, ErrorState } from "@/components/wishr/EmptyState";
 import { ContributeForm } from "@/components/wishr/ContributeForm";
+import { FundingBreakdown } from "@/components/wishr/FundingBreakdown";
+import { WishOwnerControls } from "@/components/wishr/WishOwnerControls";
+import { useAuth } from "@/lib/auth";
 import { wishQuery, wishContributionsQuery, wishUpdatesQuery } from "@/lib/queries";
 import { CATEGORY_LABELS, daysLeft, initials, naira, STATUS_LABELS, timeAgo } from "@/lib/format";
 
@@ -21,6 +24,7 @@ export const Route = createFileRoute("/wish/$id")({
 
 function WishDetail() {
   const { id } = Route.useParams();
+  const { user } = useAuth();
   const wish = useQuery(wishQuery(id));
   const contributions = useQuery(wishContributionsQuery(id));
   const updates = useQuery(wishUpdatesQuery(id));
@@ -72,6 +76,7 @@ function WishDetail() {
 
   const w = wish.data;
   const left = daysLeft(w.deadline);
+  const isOwner = !!user && w.user_id === user.id;
 
   return (
     <AppShell>
@@ -116,6 +121,9 @@ function WishDetail() {
 
           <div className="mt-6 card-frame p-5 md:hidden">
             <ProgressMeter raised={Number(w.amount_raised)} goal={Number(w.goal_amount)} />
+            <div className="mt-4">
+              <FundingBreakdown raised={Number(w.amount_raised)} goal={Number(w.goal_amount)} />
+            </div>
           </div>
 
 
@@ -169,11 +177,15 @@ function WishDetail() {
           </section>
         </div>
 
-        <aside className="mt-8 md:sticky md:top-8 md:mt-14 md:self-start">
-          <div className="mb-4 hidden card-frame p-5 border-2 border-ink md:block">
+        <aside className="mt-8 space-y-4 md:sticky md:top-8 md:mt-14 md:self-start">
+          <div className="hidden card-frame p-5 border-2 border-ink md:block">
             <ProgressMeter raised={Number(w.amount_raised)} goal={Number(w.goal_amount)} />
+            <div className="mt-4">
+              <FundingBreakdown raised={Number(w.amount_raised)} goal={Number(w.goal_amount)} />
+            </div>
           </div>
           <ContributeForm wish={w} />
+          {isOwner ? <WishOwnerControls wish={w} /> : null}
         </aside>
       </article>
     </AppShell>
