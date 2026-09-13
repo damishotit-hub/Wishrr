@@ -24,6 +24,7 @@ export const Route = createFileRoute("/wish/$id")({
 
 function WishDetail() {
   const { id } = Route.useParams();
+  const { user } = useAuth();
   const wish = useQuery(wishQuery(id));
   const contributions = useQuery(wishContributionsQuery(id));
   const updates = useQuery(wishUpdatesQuery(id));
@@ -75,6 +76,7 @@ function WishDetail() {
 
   const w = wish.data;
   const left = daysLeft(w.deadline);
+  const isOwner = !!user && w.user_id === user.id;
 
   return (
     <AppShell>
