@@ -2,6 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { Logo } from "./Logo";
 import { useAuth } from "@/lib/auth";
+import { OnboardingPrompt } from "@/components/wishr/OnboardingPrompt";
 import { initials } from "@/lib/format";
 
 const NAV = [
