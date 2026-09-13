@@ -136,8 +136,8 @@ export function ContributeForm({ wish }: { wish: Wish }) {
 
   return (
     <form onSubmit={submit} className="card-frame p-5 border-2 border-ink">
-      <h3 className="font-display text-lg">Help fulfil this wish</h3>
-      <p className="mt-1 text-sm text-mute">{naira(remaining)} still needed</p>
+      <h3 className="font-display text-lg">Make This Wish Happen</h3>
+      <p className="mt-1 text-sm text-mute">{naira(remaining)} remaining of {naira(Number(wish.goal_amount))}</p>
 
       <div className="mt-4 grid grid-cols-4 gap-2">
         {PRESETS.map((preset) => (
@@ -196,8 +196,19 @@ export function ContributeForm({ wish }: { wish: Wish }) {
         disabled={busy}
         className="mt-4 w-full press rounded-lg bg-primary px-4 py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
       >
-        {busy ? "Sending…" : `Give ${naira(Number(amount) || 0)}`}
+        {busy ? "Sending…" : `Contribute ${naira(Number(amount) || 0)}`}
       </button>
+
+      {remaining > 0 ? (
+        <button
+          type="button"
+          disabled={busy}
+          onClick={() => setAmount(String(Math.round(remaining)))}
+          className="mt-2 w-full press rounded-lg border-2 border-ink bg-accent px-4 py-3.5 text-sm font-semibold text-ink disabled:opacity-60"
+        >
+          Fulfill Entire Wish ({naira(remaining)})
+        </button>
+      ) : null}
       <p className="mt-2 text-center text-[11px] text-mute">
         Payments aren't live yet - this records your contribution without moving money.
       </p>
