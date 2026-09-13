@@ -32,6 +32,22 @@ function AuthPage() {
     if (user) void navigate({ to: "/dashboard" });
   }, [user, navigate]);
 
+  async function googleSignIn() {
+    setBusy(true);
+    setError(null);
+    try {
+      const result = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri: window.location.origin,
+      });
+      if (result.error) throw result.error;
+      if (result.redirected) return;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Google sign-in failed.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true);
@@ -114,6 +130,22 @@ function AuthPage() {
             className="w-full press rounded-lg bg-primary px-4 py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
           >
             {busy ? "Please wait…" : mode === "signin" ? "Sign in" : "Create account"}
+          </button>
+
+          <div className="flex items-center gap-3 text-xs font-semibold text-mute">
+            <span className="h-0.5 flex-1 bg-line" />
+            or
+            <span className="h-0.5 flex-1 bg-line" />
+          </div>
+
+          <button
+            type="button"
+            onClick={googleSignIn}
+            disabled={busy}
+            className="press flex w-full items-center justify-center gap-2 rounded-lg border-2 border-ink bg-canvas px-4 py-3.5 text-sm font-semibold text-ink disabled:opacity-60"
+          >
+            <GoogleMark />
+            Continue with Google
           </button>
 
           <button
