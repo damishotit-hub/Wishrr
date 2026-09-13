@@ -2,6 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { Logo } from "./Logo";
 import { useAuth } from "@/lib/auth";
+import { OnboardingPrompt } from "@/components/wishr/OnboardingPrompt";
 import { initials } from "@/lib/format";
 
 const NAV = [
@@ -87,6 +88,8 @@ export function AppShell({ children }: { children: ReactNode }) {
       <main className="mx-auto w-full max-w-[430px] px-5 pb-32 md:max-w-5xl md:pb-20">
         {children}
       </main>
+
+      <OnboardingPrompt />
 
       <footer className="hidden border-t border-line md:block">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-6 text-xs text-mute">

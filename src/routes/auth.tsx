@@ -2,6 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AppShell } from "@/components/wishr/AppShell";
 import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable";
 import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/auth")({
@@ -30,6 +31,22 @@ function AuthPage() {
   useEffect(() => {
     if (user) void navigate({ to: "/dashboard" });
   }, [user, navigate]);
+
+  async function googleSignIn() {
+    setBusy(true);
+    setError(null);
+    try {
+      const result = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri: window.location.origin,
+      });
+      if (result.error) throw result.error;
+      if (result.redirected) return;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Google sign-in failed.");
+    } finally {
+      setBusy(false);
+    }
+  }
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -115,6 +132,22 @@ function AuthPage() {
             {busy ? "Please wait…" : mode === "signin" ? "Sign in" : "Create account"}
           </button>
 
+          <div className="flex items-center gap-3 text-xs font-semibold text-mute">
+            <span className="h-0.5 flex-1 bg-line" />
+            or
+            <span className="h-0.5 flex-1 bg-line" />
+          </div>
+
+          <button
+            type="button"
+            onClick={googleSignIn}
+            disabled={busy}
+            className="press flex w-full items-center justify-center gap-2 rounded-lg border-2 border-ink bg-canvas px-4 py-3.5 text-sm font-semibold text-ink disabled:opacity-60"
+          >
+            <GoogleMark />
+            Continue with Google
+          </button>
+
           <button
             type="button"
             onClick={() => {
@@ -136,6 +169,29 @@ function AuthPage() {
         </p>
       </section>
     </AppShell>
+  );
+}
+
+function GoogleMark() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="#4285F4"
+        d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.3-2.1 3.7-5.1 3.7-8.6z"
+      />
+      <path
+        fill="#34A853"
+        d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.2 0-5.9-2.1-6.8-5.1L1.3 17.2C3.3 21.2 7.3 24 12 24z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M5.2 14.3c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.3 6.8C.5 8.4 0 10.1 0 12s.5 3.6 1.3 5.2l3.9-2.9z"
+      />
+      <path
+        fill="#EA4335"
+        d="M12 4.7c1.8 0 3 .8 3.7 1.4l3.3-3.2C17.9 1.1 15.2 0 12 0 7.3 0 3.3 2.8 1.3 6.8l3.9 2.9c.9-3 3.6-5 6.8-5z"
+      />
+    </svg>
   );
 }
 
