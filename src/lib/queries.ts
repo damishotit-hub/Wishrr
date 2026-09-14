@@ -7,6 +7,39 @@ export type Contribution = Database["public"]["Tables"]["contributions"]["Row"];
 export type WishUpdate = Database["public"]["Tables"]["wish_updates"]["Row"];
 export type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 export type WishStatus = Database["public"]["Enums"]["wish_status"];
+export type Giveaway = Database["public"]["Tables"]["giveaways"]["Row"];
+
+export type GiveawayFilters = {
+  search?: string;
+  category?: string;
+  limit?: number;
+};
+
+export function publicGiveawaysQuery(filters: GiveawayFilters = {}) {
+  return queryOptions({
+    queryKey: ["giveaways", "public", filters],
+    queryFn: async () => {
+      let query = supabase
+        .from("giveaways")
+        .select("*")
+        .in("status", ["active", "closed", "recipient_selected", "fulfilled"]);
+
+      if (filters.category && filters.category !== "all") {
+        query = query.eq("category", filters.category);
+      }
+      if (filters.search?.trim()) {
+        const term = `%${filters.search.trim()}%`;
+        query = query.or(`title.ilike.${term},description.ilike.${term},location.ilike.${term}`);
+      }
+
+      const { data, error } = await query
+        .order("created_at", { ascending: false })
+        .limit(filters.limit ?? 60);
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+}
 
 export type ExploreFilters = {
   search?: string;
