@@ -9,7 +9,7 @@ const NAV = [
   { to: "/", label: "Home" },
   { to: "/explore", label: "Explore" },
   { to: "/new", label: "Make a wish" },
-  { to: "/activity", label: "Activity" },
+  { to: "/giveaways", label: "Giveaways" },
   { to: "/dashboard", label: "Profile" },
 ] as const;
 
@@ -41,6 +41,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           <nav className="hidden items-center gap-6 text-sm font-semibold md:flex">
             <Link to="/explore" className="text-mute hover:text-ink">
               Explore
+            </Link>
+            <Link to="/giveaways" className="text-mute hover:text-ink">
+              Giveaways
             </Link>
             <Link to="/new" className="text-mute hover:text-ink">
               Make a Wish
@@ -94,9 +97,17 @@ export function AppShell({ children }: { children: ReactNode }) {
       <footer className="hidden border-t border-line md:block">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-6 text-xs text-mute">
           <span>Wishr - make a wish, someone might make it happen.</span>
-          <Link to="/how-it-works" className="font-semibold hover:text-ink">
-            How it works
-          </Link>
+          <nav aria-label="Footer" className="flex items-center gap-5">
+            <Link to="/explore" className="font-semibold hover:text-ink">
+              Explore
+            </Link>
+            <Link to="/giveaways" className="font-semibold hover:text-ink">
+              Giveaways
+            </Link>
+            <Link to="/how-it-works" className="font-semibold hover:text-ink">
+              How it works
+            </Link>
+          </nav>
         </div>
       </footer>
 
@@ -125,7 +136,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 to={item.to}
                 className="flex flex-1 flex-col items-center gap-1 py-1"
               >
-                <Dot active={active} square={item.label === "Home" || item.label === "Activity"} />
+                <Dot active={active} square={item.label === "Home" || item.label === "Giveaways"} />
                 <span
                   className={
                     active
