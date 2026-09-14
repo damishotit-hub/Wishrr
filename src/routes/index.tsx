@@ -28,6 +28,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const { data, isPending } = useQuery(publicWishesQuery({ sort: "almost" }));
+  const giveaways = useQuery(publicGiveawaysQuery({ limit: 3 }));
   const wishes = (data ?? []).slice(0, 6);
   const totalRaised = (data ?? []).reduce((sum, w) => sum + Number(w.amount_raised), 0);
 
