@@ -97,9 +97,17 @@ export function AppShell({ children }: { children: ReactNode }) {
       <footer className="hidden border-t border-line md:block">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-6 text-xs text-mute">
           <span>Wishr - make a wish, someone might make it happen.</span>
-          <Link to="/how-it-works" className="font-semibold hover:text-ink">
-            How it works
-          </Link>
+          <nav aria-label="Footer" className="flex items-center gap-5">
+            <Link to="/explore" className="font-semibold hover:text-ink">
+              Explore
+            </Link>
+            <Link to="/giveaways" className="font-semibold hover:text-ink">
+              Giveaways
+            </Link>
+            <Link to="/how-it-works" className="font-semibold hover:text-ink">
+              How it works
+            </Link>
+          </nav>
         </div>
       </footer>
 
