@@ -61,6 +61,141 @@ export type Database = {
           },
         ]
       }
+      giveaway_entries: {
+        Row: {
+          created_at: string
+          entrant_display_name: string
+          giveaway_id: string
+          id: string
+          message: string | null
+          status: Database["public"]["Enums"]["giveaway_entry_status"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          entrant_display_name?: string
+          giveaway_id: string
+          id?: string
+          message?: string | null
+          status?: Database["public"]["Enums"]["giveaway_entry_status"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          entrant_display_name?: string
+          giveaway_id?: string
+          id?: string
+          message?: string | null
+          status?: Database["public"]["Enums"]["giveaway_entry_status"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "giveaway_entries_giveaway_id_fkey"
+            columns: ["giveaway_id"]
+            isOneToOne: false
+            referencedRelation: "giveaways"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      giveaway_recipients: {
+        Row: {
+          created_at: string
+          giveaway_id: string
+          id: string
+          status: Database["public"]["Enums"]["giveaway_recipient_status"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          giveaway_id: string
+          id?: string
+          status?: Database["public"]["Enums"]["giveaway_recipient_status"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          giveaway_id?: string
+          id?: string
+          status?: Database["public"]["Enums"]["giveaway_recipient_status"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "giveaway_recipients_giveaway_id_fkey"
+            columns: ["giveaway_id"]
+            isOneToOne: false
+            referencedRelation: "giveaways"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      giveaways: {
+        Row: {
+          category: string
+          created_at: string
+          deadline: string | null
+          description: string
+          entry_count: number
+          giveaway_type: Database["public"]["Enums"]["giveaway_type"]
+          giver_display_name: string
+          giver_id: string | null
+          id: string
+          image_caption: string | null
+          image_url: string | null
+          location: string | null
+          recipient_count: number
+          status: Database["public"]["Enums"]["giveaway_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          deadline?: string | null
+          description: string
+          entry_count?: number
+          giveaway_type?: Database["public"]["Enums"]["giveaway_type"]
+          giver_display_name?: string
+          giver_id?: string | null
+          id?: string
+          image_caption?: string | null
+          image_url?: string | null
+          location?: string | null
+          recipient_count?: number
+          status?: Database["public"]["Enums"]["giveaway_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          deadline?: string | null
+          description?: string
+          entry_count?: number
+          giveaway_type?: Database["public"]["Enums"]["giveaway_type"]
+          giver_display_name?: string
+          giver_id?: string | null
+          id?: string
+          image_caption?: string | null
+          image_url?: string | null
+          location?: string | null
+          recipient_count?: number
+          status?: Database["public"]["Enums"]["giveaway_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "giveaways_category_fkey"
+            columns: ["category"]
+            isOneToOne: false
+            referencedRelation: "wish_categories"
+            referencedColumns: ["slug"]
+          },
+        ]
+      }
       notifications: {
         Row: {
           body: string | null
@@ -322,6 +457,26 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      giveaway_entry_status:
+        | "pending"
+        | "shortlisted"
+        | "selected"
+        | "declined"
+        | "withdrawn"
+      giveaway_recipient_status:
+        | "selected"
+        | "confirmed"
+        | "delivered"
+        | "cancelled"
+      giveaway_status:
+        | "draft"
+        | "pending_review"
+        | "active"
+        | "closed"
+        | "recipient_selected"
+        | "fulfilled"
+        | "cancelled"
+      giveaway_type: "item" | "service" | "space" | "skill" | "other"
       payment_status: "pending" | "succeeded" | "failed" | "refunded"
       report_reason:
         | "fraud"
@@ -466,6 +621,29 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      giveaway_entry_status: [
+        "pending",
+        "shortlisted",
+        "selected",
+        "declined",
+        "withdrawn",
+      ],
+      giveaway_recipient_status: [
+        "selected",
+        "confirmed",
+        "delivered",
+        "cancelled",
+      ],
+      giveaway_status: [
+        "draft",
+        "pending_review",
+        "active",
+        "closed",
+        "recipient_selected",
+        "fulfilled",
+        "cancelled",
+      ],
+      giveaway_type: ["item", "service", "space", "skill", "other"],
       payment_status: ["pending", "succeeded", "failed", "refunded"],
       report_reason: ["fraud", "misleading", "offensive", "duplicate", "other"],
       report_status: ["open", "reviewing", "resolved", "dismissed"],

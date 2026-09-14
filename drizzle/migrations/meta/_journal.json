@@ -22,6 +22,13 @@
       "when": 1789277848528,
       "tag": "0002_add_profile_intent",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1789345010753,
+      "tag": "0003_create_giveaways",
+      "breakpoints": true
     }
   ]
 }
