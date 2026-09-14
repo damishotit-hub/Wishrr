@@ -3,7 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { AppShell } from "@/components/wishr/AppShell";
 import { WishCard, WishCardSkeleton } from "@/components/wishr/WishCard";
 import { EmptyState } from "@/components/wishr/EmptyState";
-import { publicWishesQuery } from "@/lib/queries";
+import { GiveawayCard, GiveawayCardSkeleton } from "@/components/wishr/GiveawayCard";
+import { publicGiveawaysQuery, publicWishesQuery } from "@/lib/queries";
 import { naira } from "@/lib/format";
 
 export const Route = createFileRoute("/")({
@@ -106,6 +107,66 @@ function Home() {
               />
             </div>
           )}
+        </div>
+      </section>
+
+      <section className="mt-14">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow">Giveaways</p>
+            <h2 className="mt-2 font-display text-2xl">People are giving too</h2>
+            <p className="mt-1.5 text-sm text-mute">
+              Sometimes you have something someone else needs.
+            </p>
+          </div>
+          <Link to="/giveaways" className="hidden text-sm font-semibold text-primary md:block">
+            See all
+          </Link>
+        </div>
+
+        <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {giveaways.isPending ? (
+            <>
+              <GiveawayCardSkeleton />
+              <GiveawayCardSkeleton />
+              <GiveawayCardSkeleton />
+            </>
+          ) : giveaways.data?.length ? (
+            giveaways.data.map((g, i) => <GiveawayCard key={g.id} giveaway={g} index={i} />)
+          ) : (
+            <div className="md:col-span-2 lg:col-span-3">
+              <EmptyState
+                title="No giveaways yet"
+                description="Have something you no longer need? Offer it to someone who does."
+                action={
+                  <Link
+                    to="/giveaways/new"
+                    className="press rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground"
+                  >
+                    Create a Giveaway
+                  </Link>
+                }
+              />
+            </div>
+          )}
+        </div>
+
+        <div className="card-frame mt-6 flex flex-col gap-4 p-5 md:flex-row md:items-center md:justify-between">
+          <Link
+            to="/giveaways"
+            className="press rounded-lg bg-card px-5 py-3 text-center text-sm font-semibold text-ink border-2 border-ink"
+          >
+            Explore Giveaways
+          </Link>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <span className="text-sm text-mute">Have something you want to give?</span>
+            <Link
+              to="/giveaways/new"
+              className="press rounded-lg bg-primary px-5 py-3 text-center text-sm font-semibold text-primary-foreground"
+            >
+              Create a Giveaway
+            </Link>
+          </div>
         </div>
       </section>
 
