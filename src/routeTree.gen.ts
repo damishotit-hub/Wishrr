@@ -16,6 +16,8 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as NewRouteImport } from './routes/new'
+import { Route as GiveawaysIndexRouteImport } from './routes/giveaways.index'
+import { Route as GiveawaysNewRouteImport } from './routes/giveaways.new'
 import { Route as WishIdRouteImport } from './routes/wish.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -53,6 +55,16 @@ const NewRoute = NewRouteImport.update({
   path: '/new',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GiveawaysIndexRoute = GiveawaysIndexRouteImport.update({
+  id: '/giveaways/',
+  path: '/giveaways/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GiveawaysNewRoute = GiveawaysNewRouteImport.update({
+  id: '/giveaways/new',
+  path: '/giveaways/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WishIdRoute = WishIdRouteImport.update({
   id: '/wish/$id',
   path: '/wish/$id',
@@ -67,7 +79,9 @@ export interface FileRoutesByFullPath {
   '/explore': typeof ExploreRoute
   '/how-it-works': typeof HowItWorksRoute
   '/new': typeof NewRoute
+  '/giveaways/new': typeof GiveawaysNewRoute
   '/wish/$id': typeof WishIdRoute
+  '/giveaways/': typeof GiveawaysIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -77,7 +91,9 @@ export interface FileRoutesByTo {
   '/explore': typeof ExploreRoute
   '/how-it-works': typeof HowItWorksRoute
   '/new': typeof NewRoute
+  '/giveaways/new': typeof GiveawaysNewRoute
   '/wish/$id': typeof WishIdRoute
+  '/giveaways': typeof GiveawaysIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -88,7 +104,9 @@ export interface FileRoutesById {
   '/explore': typeof ExploreRoute
   '/how-it-works': typeof HowItWorksRoute
   '/new': typeof NewRoute
+  '/giveaways/new': typeof GiveawaysNewRoute
   '/wish/$id': typeof WishIdRoute
+  '/giveaways/': typeof GiveawaysIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -100,7 +118,9 @@ export interface FileRouteTypes {
     | '/explore'
     | '/how-it-works'
     | '/new'
+    | '/giveaways/new'
     | '/wish/$id'
+    | '/giveaways/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -110,7 +130,9 @@ export interface FileRouteTypes {
     | '/explore'
     | '/how-it-works'
     | '/new'
+    | '/giveaways/new'
     | '/wish/$id'
+    | '/giveaways'
   id:
     | '__root__'
     | '/'
@@ -120,7 +142,9 @@ export interface FileRouteTypes {
     | '/explore'
     | '/how-it-works'
     | '/new'
+    | '/giveaways/new'
     | '/wish/$id'
+    | '/giveaways/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -131,7 +155,9 @@ export interface RootRouteChildren {
   ExploreRoute: typeof ExploreRoute
   HowItWorksRoute: typeof HowItWorksRoute
   NewRoute: typeof NewRoute
+  GiveawaysNewRoute: typeof GiveawaysNewRoute
   WishIdRoute: typeof WishIdRoute
+  GiveawaysIndexRoute: typeof GiveawaysIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -185,6 +211,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/giveaways/': {
+      id: '/giveaways/'
+      path: '/giveaways'
+      fullPath: '/giveaways/'
+      preLoaderRoute: typeof GiveawaysIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/giveaways/new': {
+      id: '/giveaways/new'
+      path: '/giveaways/new'
+      fullPath: '/giveaways/new'
+      preLoaderRoute: typeof GiveawaysNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/wish/$id': {
       id: '/wish/$id'
       path: '/wish/$id'
@@ -203,7 +243,9 @@ const rootRouteChildren: RootRouteChildren = {
   ExploreRoute: ExploreRoute,
   HowItWorksRoute: HowItWorksRoute,
   NewRoute: NewRoute,
+  GiveawaysNewRoute: GiveawaysNewRoute,
   WishIdRoute: WishIdRoute,
+  GiveawaysIndexRoute: GiveawaysIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

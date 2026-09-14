@@ -9,7 +9,7 @@ const NAV = [
   { to: "/", label: "Home" },
   { to: "/explore", label: "Explore" },
   { to: "/new", label: "Make a wish" },
-  { to: "/activity", label: "Activity" },
+  { to: "/giveaways", label: "Giveaways" },
   { to: "/dashboard", label: "Profile" },
 ] as const;
 
@@ -41,6 +41,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           <nav className="hidden items-center gap-6 text-sm font-semibold md:flex">
             <Link to="/explore" className="text-mute hover:text-ink">
               Explore
+            </Link>
+            <Link to="/giveaways" className="text-mute hover:text-ink">
+              Giveaways
             </Link>
             <Link to="/new" className="text-mute hover:text-ink">
               Make a Wish
