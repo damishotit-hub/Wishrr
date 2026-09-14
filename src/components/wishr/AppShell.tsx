@@ -136,7 +136,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 to={item.to}
                 className="flex flex-1 flex-col items-center gap-1 py-1"
               >
-                <Dot active={active} square={item.label === "Home" || item.label === "Activity"} />
+                <Dot active={active} square={item.label === "Home" || item.label === "Giveaways"} />
                 <span
                   className={
                     active
