@@ -12,8 +12,8 @@ Replace the current coral neo-brutalist treatment with Wishr’s new teal, mint,
   - Light mint `#E8F5F2` for the page background, quiet panels, and loading states.
   - White `#FFFFFF` for clean cards, forms, modals, and primary content areas.
 - Keep Space Grotesk headings and Inter body copy for a clean, youthful, highly legible hierarchy.
-- Replace hard offset shadows and heavy neo-brutalist framing with softer shadows, lighter borders, and consistent rounded corners.
-- Retain the existing motion system, but tune elevated and pressed states to feel smoother and less rigid.
+- Preserve the existing heavy neo-brutalist borders, hard offset shadows, geometric framing, corner shapes, and tactile interaction styling unchanged.
+- Retain the existing motion system and current elevated and pressed states unchanged.
 - Update light and dark theme values so both remain readable and brand-consistent, with accessible foreground and focus contrast.
 
 ## Shared components
@@ -25,7 +25,7 @@ Replace the current coral neo-brutalist treatment with Wishr’s new teal, mint,
 ## Full-site application
 - Apply the refreshed system to Home, Explore, Giveaways, wish details, wish creation, giveaway creation, authentication, onboarding, dashboard, activity, and How It Works.
 - Update wish and giveaway cards, contribution panels, owner controls, funding breakdowns, upload areas, filters, fields, confirmation dialogs, and all call-to-action areas.
-- Remove remaining heavy two-pixel outlines or angular styling where they conflict with the softer brand, without changing layout structure or content.
+- Keep all heavy two-pixel outlines, angular styling, hard shadows, layout structure, and content exactly as they are.
 - Preserve all empty states and image/caption presentation while bringing them into the new palette.
 
 ## Validation
