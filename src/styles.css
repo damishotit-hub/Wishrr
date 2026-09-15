@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Wishr design system - warm humanist.
- * Soft neutral canvas, one accent (terracotta), Fraunces display + Manrope body.
+ * Wishr design system - playful neo-brutalist.
+ * Light mint canvas, white content, teal interactions, mint support, lime highlights.
  * All colours are oklch tokens. Never hardcode colours in components.
  */
 
@@ -63,53 +63,53 @@
   --font-display-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-body-family: "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  --background: oklch(0.973 0.014 84);
-  --foreground: oklch(0.18 0.012 60);
-  --card: oklch(0.995 0.004 90);
-  --card-foreground: oklch(0.18 0.012 60);
-  --popover: oklch(0.995 0.004 90);
-  --popover-foreground: oklch(0.18 0.012 60);
-  --primary: oklch(0.66 0.212 32);
-  --primary-foreground: oklch(0.99 0.005 84.6);
-  --secondary: oklch(0.93 0.032 82);
-  --secondary-foreground: oklch(0.18 0.012 60);
-  --muted: oklch(0.93 0.032 82);
-  --muted-foreground: oklch(0.5 0.026 62);
-  --accent: oklch(0.83 0.15 78);
-  --accent-foreground: oklch(0.18 0.012 60);
-  --warm: oklch(0.9 0.05 80);
-  --success: oklch(0.6 0.15 152);
+  --background: oklch(0.95962 0.01428 180.71);
+  --foreground: oklch(0.33635 0.05741 194.77);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.33635 0.05741 194.77);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.33635 0.05741 194.77);
+  --primary: oklch(0.65409 0.12127 177.03);
+  --primary-foreground: oklch(0.33635 0.05741 194.77);
+  --secondary: oklch(0.81222 0.10022 182.5);
+  --secondary-foreground: oklch(0.33635 0.05741 194.77);
+  --muted: oklch(0.95962 0.01428 180.71);
+  --muted-foreground: oklch(0.413 0.055 194.77);
+  --accent: oklch(0.84203 0.20396 127.05);
+  --accent-foreground: oklch(0.33635 0.05741 194.77);
+  --warm: oklch(0.81222 0.10022 182.5);
+  --success: oklch(0.65409 0.12127 177.03);
   --destructive: oklch(0.52 0.2 27);
-  --destructive-foreground: oklch(0.99 0.005 84.6);
-  --border: oklch(0.18 0.012 60);
-  --input: oklch(0.18 0.012 60);
-  --ring: oklch(0.66 0.212 32);
-  --hard: oklch(0.18 0.012 60);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.33635 0.05741 194.77);
+  --input: oklch(0.33635 0.05741 194.77);
+  --ring: oklch(0.65409 0.12127 177.03);
+  --hard: oklch(0.33635 0.05741 194.77);
 }
 
 .dark {
-  --background: oklch(0.21 0.012 60);
-  --foreground: oklch(0.965 0.013 86.8);
-  --card: oklch(0.27 0.014 60);
-  --card-foreground: oklch(0.965 0.013 86.8);
-  --popover: oklch(0.27 0.014 60);
-  --popover-foreground: oklch(0.965 0.013 86.8);
-  --primary: oklch(0.72 0.19 40);
-  --primary-foreground: oklch(0.16 0.01 60);
-  --secondary: oklch(0.34 0.016 60);
-  --secondary-foreground: oklch(0.965 0.013 86.8);
-  --muted: oklch(0.34 0.016 60);
-  --muted-foreground: oklch(0.75 0.02 70);
-  --accent: oklch(0.78 0.15 80);
-  --accent-foreground: oklch(0.16 0.01 60);
-  --warm: oklch(0.34 0.016 60);
-  --success: oklch(0.68 0.13 155);
+  --background: oklch(0.33635 0.05741 194.77);
+  --foreground: oklch(1 0 0);
+  --card: oklch(0.95962 0.01428 180.71);
+  --card-foreground: oklch(0.33635 0.05741 194.77);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.33635 0.05741 194.77);
+  --primary: oklch(0.65409 0.12127 177.03);
+  --primary-foreground: oklch(0.33635 0.05741 194.77);
+  --secondary: oklch(0.81222 0.10022 182.5);
+  --secondary-foreground: oklch(0.33635 0.05741 194.77);
+  --muted: oklch(0.65409 0.12127 177.03);
+  --muted-foreground: oklch(0.95962 0.01428 180.71);
+  --accent: oklch(0.84203 0.20396 127.05);
+  --accent-foreground: oklch(0.33635 0.05741 194.77);
+  --warm: oklch(0.81222 0.10022 182.5);
+  --success: oklch(0.65409 0.12127 177.03);
   --destructive: oklch(0.62 0.18 28);
-  --destructive-foreground: oklch(0.99 0.005 84.6);
-  --border: oklch(0.965 0.013 86.8);
-  --input: oklch(0.965 0.013 86.8);
-  --ring: oklch(0.72 0.19 40);
-  --hard: oklch(0.08 0.01 60);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.33635 0.05741 194.77);
+  --input: oklch(0.33635 0.05741 194.77);
+  --ring: oklch(0.81222 0.10022 182.5);
+  --hard: oklch(0.33635 0.05741 194.77);
 }
 
 
