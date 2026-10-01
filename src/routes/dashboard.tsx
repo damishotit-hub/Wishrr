@@ -104,7 +104,7 @@ function Dashboard() {
   }
 
   const name = profile.data?.display_name ?? user.email ?? "You";
-  const given = (contributions.data ?? []).reduce((sum, c) => sum + Number(c.amount), 0);
+  const given = (contributions.data ?? []).filter((c) => c.payment_status === "succeeded").reduce((sum, c) => sum + Number(c.amount), 0);
 
   return (
     <AppShell>
@@ -212,7 +212,7 @@ function Dashboard() {
                     ) : (
                       <span className="text-sm font-semibold">A wish</span>
                     )}
-                    <p className="mt-1 text-[11px] text-mute">{timeAgo(c.created_at)}</p>
+                     <p className="mt-1 text-[11px] text-mute">{timeAgo(c.created_at)} · {c.payment_status === "pending" ? "Awaiting wisher confirmation" : c.payment_status === "succeeded" ? "Confirmed" : c.payment_status}</p>
                   </div>
                   <span className="shrink-0 text-sm font-semibold text-primary">
                     {naira(c.amount)}
