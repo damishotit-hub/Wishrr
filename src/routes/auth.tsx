@@ -12,6 +12,8 @@ export const Route = createFileRoute("/auth")({
       { name: "description", content: "Sign in or create a Wishr account to make and grant wishes." },
       { property: "og:title", content: "Sign in to Wishr" },
       { property: "og:description", content: "Sign in or create an account to make and grant wishes." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: AuthPage,

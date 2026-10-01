@@ -96,7 +96,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
       <footer className="hidden border-t border-line md:block">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-6 text-xs text-mute">
-          <span>Wishr - make a wish, someone might make it happen.</span>
+          <div className="flex items-center gap-4"><Logo size="sm" /><span>Make a wish, someone might make it happen.</span></div>
           <nav aria-label="Footer" className="flex items-center gap-5">
             <Link to="/explore" className="font-semibold hover:text-ink">
               Explore

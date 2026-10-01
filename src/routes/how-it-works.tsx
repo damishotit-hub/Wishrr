@@ -15,6 +15,8 @@ export const Route = createFileRoute("/how-it-works")({
         property: "og:description",
         content: "How wishes are shared, how giving works, and how Wishr keeps things honest.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: HowItWorks,
@@ -35,7 +37,7 @@ const SECTIONS = [
     items: [
       "Give any amount, from ₦500 upward.",
       "Choose to be named or anonymous, and leave a short note.",
-      "You'll see the wish progress every time someone chips in.",
+      "Transfer directly to the wisher's bank account. Your report notifies them; funding counts only after they confirm receipt.",
     ],
   },
   {
@@ -74,8 +76,7 @@ function HowItWorks() {
         </div>
 
         <div className="mt-8 rounded-[20px] border-2 border-dashed border-ink p-5 text-sm text-mute">
-          Payments are not connected yet. Contributions you make today are recorded so you can see
-          the full flow, but no money moves.
+          Wishr does not process or verify bank payments. Transfer directly using the details shown when you choose to give. The wisher must confirm receipt before your contribution counts toward the goal.
         </div>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
