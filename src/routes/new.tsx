@@ -1,10 +1,12 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AppShell } from "@/components/wishr/AppShell";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 import { categoriesQuery } from "@/lib/queries";
+import { bankDetailsSchema } from "@/lib/bank-details";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/new")({
   head: () => ({
@@ -44,8 +46,45 @@ function NewWish() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [caption, setCaption] = useState("");
+  const [bankName, setBankName] = useState("");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [accountName, setAccountName] = useState("");
+  const [draftReady, setDraftReady] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const draftKey = user ? `wishr-draft-${user.id}` : null;
+  useEffect(() => {
+    if (!draftKey) return;
+    try {
+      const raw = localStorage.getItem(draftKey);
+      if (raw) {
+        const saved = JSON.parse(raw) as Record<string, unknown>;
+        if (typeof saved.title === "string") setTitle(saved.title);
+        if (typeof saved.summary === "string") setSummary(saved.summary);
+        if (typeof saved.description === "string") setDescription(saved.description);
+        if (typeof saved.category === "string") setCategory(saved.category);
+        if (typeof saved.goal === "string") setGoal(saved.goal);
+        if (typeof saved.deadline === "string") setDeadline(saved.deadline);
+        if (typeof saved.anonymous === "boolean") setAnonymous(saved.anonymous);
+        if (typeof saved.caption === "string") setCaption(saved.caption);
+        if (typeof saved.bankName === "string") setBankName(saved.bankName);
+        if (typeof saved.accountNumber === "string") setAccountNumber(saved.accountNumber);
+        if (typeof saved.accountName === "string") setAccountName(saved.accountName);
+      }
+    } catch { /* Ignore a corrupt local draft. */ }
+    setDraftReady(true);
+  }, [draftKey]);
+
+  useEffect(() => {
+    if (!draftKey || !draftReady) return;
+    const timer = window.setTimeout(() => {
+      try {
+        localStorage.setItem(draftKey, JSON.stringify({ title, summary, description, category, goal, deadline, anonymous, caption, bankName, accountNumber, accountName }));
+      } catch { /* Browsers may disable local storage. */ }
+    }, 450);
+    return () => window.clearTimeout(timer);
+  }, [draftKey, draftReady, title, summary, description, category, goal, deadline, anonymous, caption, bankName, accountNumber, accountName]);
 
 
   if (loading) {
@@ -82,18 +121,22 @@ function NewWish() {
       setError("Set a goal of at least ₦1,000.");
       return;
     }
+    const bank = bankDetailsSchema.safeParse({ bank_name: bankName, account_number: accountNumber, account_name: accountName });
+    if (!bank.success) { setError(bank.error.issues[0]?.message ?? "Check your bank details."); return; }
+    if (!title.trim() || !description.trim()) { setError("Add a title and your story."); return; }
     setBusy(true);
     setError(null);
     try {
+      if (!user) return;
       const displayName =
-        (user!.user_metadata?.["display_name"] as string | undefined) ??
-        user!.email?.split("@")[0] ??
+        (user.user_metadata?.["display_name"] as string | undefined) ??
+        user.email?.split("@")[0] ??
         "A wisher";
 
       let imageUrl: string | null = null;
       if (imageFile) {
         const ext = imageFile.name.split(".").pop()?.toLowerCase() ?? "jpg";
-        const path = `${user!.id}/${crypto.randomUUID()}.${ext}`;
+        const path = `${user.id}/${crypto.randomUUID()}.${ext}`;
         const { error: uploadError } = await supabase.storage
           .from("wish-images")
           .upload(path, imageFile, { contentType: imageFile.type, upsert: false });
@@ -108,7 +151,7 @@ function NewWish() {
       const { data, error: insertError } = await supabase
         .from("wishes")
         .insert({
-          user_id: user!.id,
+          user_id: user.id,
           title: title.trim(),
           summary: summary.trim() || null,
           description: description.trim(),
@@ -124,6 +167,13 @@ function NewWish() {
         .select("id")
         .single();
       if (insertError) throw insertError;
+
+      const { error: bankError } = await supabase.from("wish_bank_details").insert({ wish_id: data.id, owner_id: user.id, ...bank.data });
+      if (bankError) {
+        await supabase.from("wishes").update({ status: "draft" }).eq("id", data.id).eq("user_id", user.id);
+        throw new Error("Your wish was saved privately, but the bank details did not save. Open it from your profile to finish setting them up.");
+      }
+      if (draftKey) localStorage.removeItem(draftKey);
 
 
       await queryClient.invalidateQueries({ queryKey: ["wishes"] });
@@ -182,7 +232,7 @@ function NewWish() {
           </label>
 
           <div className="card-flat p-4">
-            <span className="eyebrow">Photo</span>
+            <span className="eyebrow">Photo (optional)</span>
             <p className="mt-1 text-xs text-mute">
               A clear picture of what you need. Max 10MB.
             </p>
@@ -247,6 +297,14 @@ function NewWish() {
             ) : null}
           </div>
 
+          <fieldset className="space-y-3 border-t-2 border-ink pt-4">
+            <legend className="font-display text-lg font-bold">Where should givers transfer funds?</legend>
+            <p className="text-xs text-mute">Only signed-in givers see these details when they choose to give. Wishr does not collect the money.</p>
+            <label className="block"><span className="mb-1 block text-xs font-semibold">Bank name</span><input required maxLength={100} autoComplete="organization" value={bankName} onChange={(e) => setBankName(e.target.value)} className={inputClass} /></label>
+            <label className="block"><span className="mb-1 block text-xs font-semibold">Account number</span><input required inputMode="numeric" pattern="[0-9]{10}" maxLength={10} value={accountNumber} onChange={(e) => setAccountNumber(e.target.value.replace(/\D/g, ""))} className={inputClass} /></label>
+            <label className="block"><span className="mb-1 block text-xs font-semibold">Account name</span><input required maxLength={120} value={accountName} onChange={(e) => setAccountName(e.target.value)} className={inputClass} /></label>
+          </fieldset>
+
 
 
           <div className="grid gap-4 sm:grid-cols-2">
@@ -302,13 +360,13 @@ function NewWish() {
 
           {error ? <p className="text-sm text-destructive">{error}</p> : null}
 
-          <button
+          <Button
             type="submit"
             disabled={busy}
             className="w-full press rounded-lg bg-primary px-4 py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
           >
             {busy ? "Publishing…" : "Publish wish"}
-          </button>
+          </Button>
         </form>
       </section>
     </AppShell>
