@@ -60,17 +60,14 @@ function NewWish() {
       const raw = localStorage.getItem(draftKey);
       if (raw) {
         const saved = JSON.parse(raw) as Record<string, unknown>;
-        if (typeof saved.title === "string") setTitle(saved.title);
-        if (typeof saved.summary === "string") setSummary(saved.summary);
-        if (typeof saved.description === "string") setDescription(saved.description);
-        if (typeof saved.category === "string") setCategory(saved.category);
-        if (typeof saved.goal === "string") setGoal(saved.goal);
-        if (typeof saved.deadline === "string") setDeadline(saved.deadline);
-        if (typeof saved.anonymous === "boolean") setAnonymous(saved.anonymous);
-        if (typeof saved.caption === "string") setCaption(saved.caption);
-        if (typeof saved.bankName === "string") setBankName(saved.bankName);
-        if (typeof saved.accountNumber === "string") setAccountNumber(saved.accountNumber);
-        if (typeof saved.accountName === "string") setAccountName(saved.accountName);
+        if (typeof saved["title"] === "string") setTitle(saved["title"]);
+        if (typeof saved["summary"] === "string") setSummary(saved["summary"]);
+        if (typeof saved["description"] === "string") setDescription(saved["description"]);
+        if (typeof saved["category"] === "string") setCategory(saved["category"]);
+        if (typeof saved["goal"] === "string") setGoal(saved["goal"]);
+        if (typeof saved["deadline"] === "string") setDeadline(saved["deadline"]);
+        if (typeof saved["anonymous"] === "boolean") setAnonymous(saved["anonymous"]);
+        if (typeof saved["caption"] === "string") setCaption(saved["caption"]);
       }
     } catch { /* Ignore a corrupt local draft. */ }
     setDraftReady(true);
@@ -80,11 +77,11 @@ function NewWish() {
     if (!draftKey || !draftReady) return;
     const timer = window.setTimeout(() => {
       try {
-        localStorage.setItem(draftKey, JSON.stringify({ title, summary, description, category, goal, deadline, anonymous, caption, bankName, accountNumber, accountName }));
+        localStorage.setItem(draftKey, JSON.stringify({ title, summary, description, category, goal, deadline, anonymous, caption }));
       } catch { /* Browsers may disable local storage. */ }
     }, 450);
     return () => window.clearTimeout(timer);
-  }, [draftKey, draftReady, title, summary, description, category, goal, deadline, anonymous, caption, bankName, accountNumber, accountName]);
+  }, [draftKey, draftReady, title, summary, description, category, goal, deadline, anonymous, caption]);
 
 
   if (loading) {
