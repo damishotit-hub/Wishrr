@@ -36,6 +36,13 @@
       "when": 1790841491884,
       "tag": "0004_private_wish_bank_transfer_reporting",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1790841512778,
+      "tag": "0005_private_avatars_and_signed_in_wish_discovery",
+      "breakpoints": true
     }
   ]
 }
