@@ -65,7 +65,7 @@ function Home() {
           </Link>
         </div>
 
-        <dl style={{ animationDelay: "320ms" }} className="reveal mt-8 grid grid-cols-2 gap-3 md:max-w-lg">
+        {user ? <dl style={{ animationDelay: "320ms" }} className="reveal mt-8 grid grid-cols-2 gap-3 md:max-w-lg">
           <div className="card-frame lift p-4">
             <dt className="text-xs font-medium text-mute">Raised so far</dt>
             <dd className="mt-1 font-display text-2xl">{naira(totalRaised)}</dd>
@@ -74,7 +74,7 @@ function Home() {
             <dt className="text-xs font-medium text-mute">Open wishes</dt>
             <dd className="mt-1 font-display text-2xl">{data?.length ?? 0}</dd>
           </div>
-        </dl>
+        </dl> : null}
       </section>
 
        {!loading && !user ? <section className="mt-12 border-t-2 border-ink pt-8"><p className="eyebrow">Wishes</p><h2 className="mt-2 font-display text-2xl">A little help can change everything.</h2><p className="mt-2 max-w-lg text-sm text-mute">Sign in to browse active wishes and see how you can help.</p><Link to="/auth" className="press mt-5 inline-block rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">Sign in or register</Link></section> : null}
@@ -179,7 +179,7 @@ function Home() {
         <ol className="mt-6 grid gap-6 md:grid-cols-3">
           {[
             ["Say the wish", "Write it plainly, set a goal in Naira, add a deadline if it matters."],
-            ["People chip in", "Anyone can give any amount - publicly or anonymously."],
+            ["People chip in", "Givers transfer directly, then wishers confirm the money arrived."],
             ["Share the ending", "Post an update so the people who helped can see it landed."],
           ].map(([title, body], i) => (
             <li key={title}>
