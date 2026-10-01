@@ -161,7 +161,7 @@ function NewWish() {
           creator_display_name: anonymous ? "Anonymous" : displayName,
           image_url: imageUrl,
           image_caption: imageUrl && caption.trim() ? caption.trim() : null,
-          status: "active",
+          status: "draft",
         })
         .select("id")
         .single();
@@ -169,9 +169,10 @@ function NewWish() {
 
       const { error: bankError } = await supabase.from("wish_bank_details").insert({ wish_id: data.id, owner_id: user.id, ...bank.data });
       if (bankError) {
-        await supabase.from("wishes").update({ status: "draft" }).eq("id", data.id).eq("user_id", user.id);
         throw new Error("Your wish was saved privately, but the bank details did not save. Open it from your profile to finish setting them up.");
       }
+      const { error: publishError } = await supabase.from("wishes").update({ status: "active" }).eq("id", data.id).eq("user_id", user.id);
+      if (publishError) throw new Error("Your wish is saved privately. Open it from your profile to publish it.");
       if (draftKey) localStorage.removeItem(draftKey);
 
 
