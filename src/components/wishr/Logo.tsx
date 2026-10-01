@@ -1,18 +1,10 @@
 import { Link } from "@tanstack/react-router";
+import logo from "@/assets/wishr-logo.png.asset.json";
 
 export function Logo({ size = "md" }: { size?: "sm" | "md" }) {
   return (
-    <Link to="/" className="flex items-center gap-2">
-      <span
-        className={
-          size === "sm"
-            ? "grid size-7 place-items-center rounded-lg bg-ink font-display text-base leading-none text-card"
-            : "grid size-8 place-items-center rounded-lg bg-ink font-display text-lg leading-none text-card"
-        }
-      >
-        W
-      </span>
-      <span className={size === "sm" ? "font-display text-lg" : "font-display text-xl"}>Wishr</span>
+    <Link to="/" aria-label="Wishr home" className="inline-flex shrink-0 items-center">
+      <img src={logo.url} alt="Wishr" className={size === "sm" ? "h-8 w-auto" : "h-10 w-auto md:h-11"} />
     </Link>
   );
 }
