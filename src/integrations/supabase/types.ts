@@ -324,6 +324,41 @@ export type Database = {
         }
         Relationships: []
       }
+      wish_bank_details: {
+        Row: {
+          account_name: string
+          account_number: string
+          bank_name: string
+          owner_id: string
+          updated_at: string
+          wish_id: string
+        }
+        Insert: {
+          account_name: string
+          account_number: string
+          bank_name: string
+          owner_id: string
+          updated_at?: string
+          wish_id: string
+        }
+        Update: {
+          account_name?: string
+          account_number?: string
+          bank_name?: string
+          owner_id?: string
+          updated_at?: string
+          wish_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wish_bank_details_wish_id_fkey"
+            columns: ["wish_id"]
+            isOneToOne: true
+            referencedRelation: "wishes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       wish_categories: {
         Row: {
           name: string
@@ -447,6 +482,18 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      confirm_wish_transfer: {
+        Args: { _contribution_id: string }
+        Returns: boolean
+      }
+      get_wish_bank_details: {
+        Args: { _wish_id: string }
+        Returns: {
+          account_name: string
+          account_number: string
+          bank_name: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

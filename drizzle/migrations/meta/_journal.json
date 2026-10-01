@@ -29,6 +29,13 @@
       "when": 1789345010753,
       "tag": "0003_create_giveaways",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1790841491884,
+      "tag": "0004_private_wish_bank_transfer_reporting",
+      "breakpoints": true
     }
   ]
 }
