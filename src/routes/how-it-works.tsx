@@ -15,6 +15,8 @@ export const Route = createFileRoute("/how-it-works")({
         property: "og:description",
         content: "How wishes are shared, how giving works, and how Wishr keeps things honest.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: HowItWorks,

@@ -22,6 +22,8 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Share a real wish with a clear goal. Kind strangers chip in until it comes true.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Home,

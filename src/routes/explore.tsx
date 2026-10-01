@@ -20,6 +20,8 @@ export const Route = createFileRoute("/explore")({
         property: "og:description",
         content: "Browse real wishes from real people and help fulfil the one that speaks to you.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Explore,

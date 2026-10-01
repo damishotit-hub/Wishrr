@@ -15,6 +15,8 @@ export const Route = createFileRoute("/activity")({
       { name: "description", content: "Updates on the wishes you've made and supported." },
       { property: "og:title", content: "Activity - Wishr" },
       { property: "og:description", content: "Updates on the wishes you've made and supported." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Activity,

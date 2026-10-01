@@ -21,6 +21,8 @@ export const Route = createFileRoute("/new")({
         property: "og:description",
         content: "Say what you need, set a goal in Naira, and let people help you get there.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: NewWish,

@@ -20,6 +20,8 @@ export const Route = createFileRoute("/dashboard")({
         property: "og:description",
         content: "Track the wishes you've made and the ones you've supported.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Dashboard,

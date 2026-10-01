@@ -18,6 +18,8 @@ export const Route = createFileRoute("/wish/$id")({
       { name: "description", content: "Read this wish and help make it happen." },
       { property: "og:title", content: "A wish on Wishr" },
       { property: "og:description", content: "Read this wish and help make it happen." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: WishDetail,
