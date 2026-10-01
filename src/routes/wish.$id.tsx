@@ -25,10 +25,12 @@ export const Route = createFileRoute("/wish/$id")({
 
 function WishDetail() {
   const { id } = Route.useParams();
-  const { user } = useAuth();
-  const wish = useQuery(wishQuery(id));
-  const contributions = useQuery(wishContributionsQuery(id));
-  const updates = useQuery(wishUpdatesQuery(id));
+  const { user, loading } = useAuth();
+  const wish = useQuery({ ...wishQuery(id), enabled: !!user });
+  const contributions = useQuery({ ...wishContributionsQuery(id), enabled: !!user });
+  const updates = useQuery({ ...wishUpdatesQuery(id), enabled: !!user });
+
+  if (!loading && !user) return <AppShell><section className="mx-auto max-w-xl py-16 text-center"><p className="eyebrow">Wishr</p><h1 className="mt-3 font-display text-3xl">Make a wish happen.</h1><p className="mt-3 text-sm text-mute">Sign in or register to see this wish and the ways you can help.</p><Link to="/auth" className="press mt-6 inline-block rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">Sign in or register</Link></section></AppShell>;
 
   if (wish.isPending) {
     return (
