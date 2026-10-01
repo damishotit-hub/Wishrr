@@ -6,6 +6,7 @@ import { EmptyState } from "@/components/wishr/EmptyState";
 import { GiveawayCard, GiveawayCardSkeleton } from "@/components/wishr/GiveawayCard";
 import { publicGiveawaysQuery, publicWishesQuery } from "@/lib/queries";
 import { naira } from "@/lib/format";
+import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,7 +28,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const { data, isPending } = useQuery(publicWishesQuery({ sort: "almost" }));
+  const { user, loading } = useAuth();
+  const { data, isPending } = useQuery({ ...publicWishesQuery({ sort: "almost" }), enabled: !!user });
   const giveaways = useQuery(publicGiveawaysQuery({ limit: 3 }));
   const wishes = (data ?? []).slice(0, 6);
   const totalRaised = (data ?? []).reduce((sum, w) => sum + Number(w.amount_raised), 0);
@@ -75,7 +77,8 @@ function Home() {
         </dl>
       </section>
 
-      <section className="mt-12">
+       {!loading && !user ? <section className="mt-12 border-t-2 border-ink pt-8"><p className="eyebrow">Wishes</p><h2 className="mt-2 font-display text-2xl">A little help can change everything.</h2><p className="mt-2 max-w-lg text-sm text-mute">Sign in to browse active wishes and see how you can help.</p><Link to="/auth" className="press mt-5 inline-block rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">Sign in or register</Link></section> : null}
+       {user ? <section className="mt-12">
         <div className="flex items-end justify-between gap-4">
           <h2 className="font-display text-2xl">Almost there</h2>
           <Link to="/explore" className="text-sm font-semibold text-primary">
@@ -109,7 +112,7 @@ function Home() {
             </div>
           )}
         </div>
-      </section>
+       </section> : null}
 
       <section className="mt-14">
         <div className="flex items-end justify-between gap-4">

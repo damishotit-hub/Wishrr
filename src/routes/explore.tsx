@@ -5,6 +5,7 @@ import { AppShell } from "@/components/wishr/AppShell";
 import { WishCard, WishCardSkeleton } from "@/components/wishr/WishCard";
 import { EmptyState, ErrorState } from "@/components/wishr/EmptyState";
 import { categoriesQuery, publicWishesQuery, type ExploreFilters } from "@/lib/queries";
+import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/explore")({
   head: () => ({
@@ -31,12 +32,16 @@ const SORTS: { value: NonNullable<ExploreFilters["sort"]>; label: string }[] = [
 ];
 
 function Explore() {
+  const { user, loading } = useAuth();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const [sort, setSort] = useState<NonNullable<ExploreFilters["sort"]>>("recent");
 
   const categories = useQuery(categoriesQuery);
-  const wishes = useQuery(publicWishesQuery({ search, category, sort }));
+  const wishes = useQuery({ ...publicWishesQuery({ search, category, sort }), enabled: !!user });
+
+  if (loading) return <AppShell><div className="mt-8 h-40 animate-pulse bg-warm" /></AppShell>;
+  if (!user) return <AppShell><section className="mx-auto max-w-xl py-16 text-center"><span className="eyebrow">Explore wishes</span><h1 className="mt-3 font-display text-3xl">Real wishes. Real ways to help.</h1><p className="mx-auto mt-3 max-w-md text-sm text-mute">Sign in to discover the wishes people have shared and help make one happen.</p><div className="mt-6 flex justify-center gap-3"><Link to="/auth" className="press rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">Sign in or register</Link></div></section></AppShell>;
 
   return (
     <AppShell>

@@ -6,6 +6,7 @@ import { EmptyState, ErrorState } from "@/components/wishr/EmptyState";
 import { ContributeForm } from "@/components/wishr/ContributeForm";
 import { FundingBreakdown } from "@/components/wishr/FundingBreakdown";
 import { WishOwnerControls } from "@/components/wishr/WishOwnerControls";
+import { WishBankSettings } from "@/components/wishr/WishBankSettings";
 import { useAuth } from "@/lib/auth";
 import { wishQuery, wishContributionsQuery, wishUpdatesQuery } from "@/lib/queries";
 import { CATEGORY_LABELS, daysLeft, initials, naira, STATUS_LABELS, timeAgo } from "@/lib/format";
@@ -185,7 +186,7 @@ function WishDetail() {
             </div>
           </div>
           <ContributeForm wish={w} />
-          {isOwner ? <WishOwnerControls wish={w} /> : null}
+          {isOwner ? <><WishBankSettings wish={w} /><WishOwnerControls wish={w} /></> : null}
         </aside>
       </article>
     </AppShell>
