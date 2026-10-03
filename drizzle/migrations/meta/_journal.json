@@ -43,6 +43,13 @@
       "when": 1790841512778,
       "tag": "0005_private_avatars_and_signed_in_wish_discovery",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1790989425710,
+      "tag": "0006_wish_appreciations",
+      "breakpoints": true
     }
   ]
 }
