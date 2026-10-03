@@ -28,7 +28,7 @@ function wrap(ctx: CanvasRenderingContext2D, text: string, max: number, lines: n
     } else line = test;
   }
   if (out.length < lines && line) out.push(line);
-  if (out.length === lines && words.join(" ") !== out.join(" ")) out[lines - 1] = out[lines - 1].replace(/\s*\S*$/, "...");
+  if (out.length === lines && words.join(" ") !== out.join(" ")) out[lines - 1] = (out[lines - 1] ?? "").replace(/\s*\S*$/, "...");
   return out;
 }
 
