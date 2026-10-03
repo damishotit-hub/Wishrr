@@ -324,6 +324,44 @@ export type Database = {
         }
         Relationships: []
       }
+      wish_appreciations: {
+        Row: {
+          author_id: string
+          body: string
+          created_at: string
+          id: string
+          image_url: string | null
+          updated_at: string
+          wish_id: string
+        }
+        Insert: {
+          author_id: string
+          body: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          updated_at?: string
+          wish_id: string
+        }
+        Update: {
+          author_id?: string
+          body?: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          updated_at?: string
+          wish_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wish_appreciations_wish_id_fkey"
+            columns: ["wish_id"]
+            isOneToOne: true
+            referencedRelation: "wishes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       wish_bank_details: {
         Row: {
           account_name: string

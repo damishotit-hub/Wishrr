@@ -211,3 +211,37 @@ export function notificationsQuery(userId: string) {
     },
   });
 }
+
+export type Appreciation = Database["public"]["Tables"]["wish_appreciations"]["Row"];
+export type ImpactWish = Wish & { wish_appreciations: Appreciation[] | null };
+
+export function impactQuery(limit = 60) {
+  return queryOptions({
+    queryKey: ["impact", limit],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("wishes")
+        .select("*, wish_appreciations(*)")
+        .eq("status", "fulfilled")
+        .order("updated_at", { ascending: false })
+        .limit(limit);
+      if (error) throw error;
+      return (data ?? []) as unknown as ImpactWish[];
+    },
+  });
+}
+
+export function appreciationQuery(wishId: string) {
+  return queryOptions({
+    queryKey: ["wish", wishId, "appreciation"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("wish_appreciations")
+        .select("*")
+        .eq("wish_id", wishId)
+        .maybeSingle();
+      if (error) throw error;
+      return data;
+    },
+  });
+}

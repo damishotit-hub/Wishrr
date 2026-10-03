@@ -48,7 +48,10 @@ function Explore() {
   return (
     <AppShell>
       <section className="reveal pt-8">
-        <h1 className="font-display text-3xl">Explore wishes</h1>
+        <div className="flex items-end justify-between gap-4">
+          <h1 className="font-display text-3xl">Explore wishes</h1>
+          <Link to="/impact" className="pill-accent">Granted wishes</Link>
+        </div>
         <p className="mt-2 text-sm text-mute">
           Every wish here belongs to someone real. Give what you can.
         </p>
