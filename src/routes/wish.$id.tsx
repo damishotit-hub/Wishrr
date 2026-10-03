@@ -7,6 +7,8 @@ import { ContributeForm } from "@/components/wishr/ContributeForm";
 import { FundingBreakdown } from "@/components/wishr/FundingBreakdown";
 import { WishOwnerControls } from "@/components/wishr/WishOwnerControls";
 import { WishBankSettings } from "@/components/wishr/WishBankSettings";
+import { ShareSection } from "@/components/wishr/ShareSection";
+import { Appreciation } from "@/components/wishr/Appreciation";
 import { useAuth } from "@/lib/auth";
 import { wishQuery, wishContributionsQuery, wishUpdatesQuery } from "@/lib/queries";
 import { CATEGORY_LABELS, daysLeft, initials, naira, STATUS_LABELS, timeAgo } from "@/lib/format";
@@ -136,6 +138,8 @@ function WishDetail() {
             {w.description}
           </p>
 
+          <Appreciation wish={w} />
+
           <section className="mt-10">
             <h2 className="font-display text-xl">Updates</h2>
             {updates.data?.length ? (
@@ -190,6 +194,7 @@ function WishDetail() {
             </div>
           </div>
           <ContributeForm wish={w} />
+          <ShareSection wish={w} />
           {isOwner ? <><WishBankSettings wish={w} /><WishOwnerControls wish={w} /></> : null}
         </aside>
       </article>

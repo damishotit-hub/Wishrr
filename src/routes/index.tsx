@@ -4,7 +4,8 @@ import { AppShell } from "@/components/wishr/AppShell";
 import { WishCard, WishCardSkeleton } from "@/components/wishr/WishCard";
 import { EmptyState } from "@/components/wishr/EmptyState";
 import { GiveawayCard, GiveawayCardSkeleton } from "@/components/wishr/GiveawayCard";
-import { publicGiveawaysQuery, publicWishesQuery } from "@/lib/queries";
+import { impactQuery, publicGiveawaysQuery, publicWishesQuery } from "@/lib/queries";
+import { ImpactCard } from "@/components/wishr/ImpactCard";
 import { naira } from "@/lib/format";
 import { useAuth } from "@/lib/auth";
 
@@ -32,6 +33,7 @@ export const Route = createFileRoute("/")({
 function Home() {
   const { user, loading } = useAuth();
   const { data, isPending } = useQuery({ ...publicWishesQuery({ sort: "almost" }), enabled: !!user });
+  const impact = useQuery({ ...impactQuery(3), enabled: !!user });
   const giveaways = useQuery(publicGiveawaysQuery({ limit: 3 }));
   const wishes = (data ?? []).slice(0, 6);
   const totalRaised = (data ?? []).reduce((sum, w) => sum + Number(w.amount_raised), 0);
@@ -115,6 +117,22 @@ function Home() {
           )}
         </div>
        </section> : null}
+
+      {user ? <section className="mt-14">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow">Impact Wall</p>
+            <h2 className="mt-2 font-display text-2xl">Wishes granted</h2>
+            <p className="mt-1.5 text-sm text-mute">Proof that kindness lands.</p>
+          </div>
+          <Link to="/impact" className="text-sm font-semibold text-primary">See all</Link>
+        </div>
+        <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {impact.isPending ? <><WishCardSkeleton /><WishCardSkeleton /><WishCardSkeleton /></> : impact.data?.length ? impact.data.map((w) => <ImpactCard key={w.id} wish={w} />) : (
+            <div className="md:col-span-2 lg:col-span-3"><EmptyState title="No granted wishes yet" description="When a wish comes true, its thank-you story appears here." /></div>
+          )}
+        </div>
+      </section> : null}
 
       <section className="mt-14">
         <div className="flex items-end justify-between gap-4">

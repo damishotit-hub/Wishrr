@@ -45,6 +45,9 @@ export function AppShell({ children }: { children: ReactNode }) {
             <Link to="/giveaways" className="text-mute hover:text-ink">
               Giveaways
             </Link>
+            <Link to="/impact" className="text-mute hover:text-ink">
+              Impact
+            </Link>
             <Link to="/new" className="text-mute hover:text-ink">
               Make a Wish
             </Link>

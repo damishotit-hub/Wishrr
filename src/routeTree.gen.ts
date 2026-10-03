@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as ImpactRouteImport } from './routes/impact'
 import { Route as NewRouteImport } from './routes/new'
 import { Route as GiveawaysIndexRouteImport } from './routes/giveaways.index'
 import { Route as GiveawaysNewRouteImport } from './routes/giveaways.new'
@@ -50,6 +51,11 @@ const HowItWorksRoute = HowItWorksRouteImport.update({
   path: '/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ImpactRoute = ImpactRouteImport.update({
+  id: '/impact',
+  path: '/impact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NewRoute = NewRouteImport.update({
   id: '/new',
   path: '/new',
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/explore': typeof ExploreRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/impact': typeof ImpactRoute
   '/new': typeof NewRoute
   '/giveaways/new': typeof GiveawaysNewRoute
   '/wish/$id': typeof WishIdRoute
@@ -90,6 +97,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/explore': typeof ExploreRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/impact': typeof ImpactRoute
   '/new': typeof NewRoute
   '/giveaways/new': typeof GiveawaysNewRoute
   '/wish/$id': typeof WishIdRoute
@@ -103,6 +111,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/explore': typeof ExploreRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/impact': typeof ImpactRoute
   '/new': typeof NewRoute
   '/giveaways/new': typeof GiveawaysNewRoute
   '/wish/$id': typeof WishIdRoute
@@ -117,6 +126,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/explore'
     | '/how-it-works'
+    | '/impact'
     | '/new'
     | '/giveaways/new'
     | '/wish/$id'
@@ -129,6 +139,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/explore'
     | '/how-it-works'
+    | '/impact'
     | '/new'
     | '/giveaways/new'
     | '/wish/$id'
@@ -141,6 +152,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/explore'
     | '/how-it-works'
+    | '/impact'
     | '/new'
     | '/giveaways/new'
     | '/wish/$id'
@@ -154,6 +166,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   ExploreRoute: typeof ExploreRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  ImpactRoute: typeof ImpactRoute
   NewRoute: typeof NewRoute
   GiveawaysNewRoute: typeof GiveawaysNewRoute
   WishIdRoute: typeof WishIdRoute
@@ -204,6 +217,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HowItWorksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/impact': {
+      id: '/impact'
+      path: '/impact'
+      fullPath: '/impact'
+      preLoaderRoute: typeof ImpactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/new': {
       id: '/new'
       path: '/new'
@@ -242,6 +262,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   ExploreRoute: ExploreRoute,
   HowItWorksRoute: HowItWorksRoute,
+  ImpactRoute: ImpactRoute,
   NewRoute: NewRoute,
   GiveawaysNewRoute: GiveawaysNewRoute,
   WishIdRoute: WishIdRoute,
