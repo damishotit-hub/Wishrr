@@ -3,7 +3,6 @@ import logo from "@/assets/wishr-logo.png.asset.json";
 import { naira, progressPercent } from "@/lib/format";
 import type { Wish } from "@/lib/queries";
 
-const SITE = "https://wishrr.lovable.app";
 
 function loadImage(src: string): Promise<HTMLImageElement | null> {
   return new Promise((resolve) => {
@@ -102,7 +101,8 @@ async function renderCard(wish: Wish, url: string): Promise<Blob | null> {
 }
 
 export function ShareSection({ wish }: { wish: Wish }) {
-  const url = `${SITE}/wish/${wish.id}`;
+  const site = typeof window !== "undefined" ? window.location.origin : "https://wishrr.lovable.app";
+  const url = `${site}/wish/${wish.id}`;
   const [preview, setPreview] = useState<string | null>(null);
   const [blob, setBlob] = useState<Blob | null>(null);
   const [busy, setBusy] = useState(false);

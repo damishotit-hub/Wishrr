@@ -50,6 +50,13 @@
       "when": 1790989425710,
       "tag": "0006_wish_appreciations",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1791077354642,
+      "tag": "0007_giveaways_phase2",
+      "breakpoints": true
     }
   ]
 }

@@ -4,7 +4,8 @@ import { useState } from "react";
 import { AppShell } from "@/components/wishr/AppShell";
 import { GiveawayCard, GiveawayCardSkeleton } from "@/components/wishr/GiveawayCard";
 import { EmptyState, ErrorState } from "@/components/wishr/EmptyState";
-import { categoriesQuery, publicGiveawaysQuery } from "@/lib/queries";
+import { publicGiveawaysQuery } from "@/lib/queries";
+import { GIVEAWAY_CATEGORIES } from "@/lib/giveaways";
 
 export const Route = createFileRoute("/giveaways/")({
   head: () => ({
@@ -31,7 +32,6 @@ function Giveaways() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
 
-  const categories = useQuery(categoriesQuery);
   const giveaways = useQuery(publicGiveawaysQuery({ search, category }));
 
   return (
@@ -59,7 +59,7 @@ function Giveaways() {
         </div>
 
         <div className="no-scrollbar -mx-5 mt-4 flex gap-2 overflow-x-auto px-5 pb-1">
-          {[{ slug: "all", name: "All" }, ...(categories.data ?? [])].map((c) => (
+          {[{ slug: "all", name: "All" }, ...GIVEAWAY_CATEGORIES].map((c) => (
             <button
               key={c.slug}
               onClick={() => setCategory(c.slug)}

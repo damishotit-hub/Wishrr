@@ -99,6 +99,38 @@ export type Database = {
           },
         ]
       }
+      giveaway_messages: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          recipient_id: string
+          sender_id: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          recipient_id: string
+          sender_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          recipient_id?: string
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "giveaway_messages_recipient_id_fkey"
+            columns: ["recipient_id"]
+            isOneToOne: false
+            referencedRelation: "giveaway_recipients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       giveaway_recipients: {
         Row: {
           created_at: string
@@ -137,7 +169,9 @@ export type Database = {
           created_at: string
           deadline: string | null
           description: string
+          eligibility: string | null
           entry_count: number
+          extra_images: string[]
           giveaway_type: Database["public"]["Enums"]["giveaway_type"]
           giver_display_name: string
           giver_id: string | null
@@ -146,6 +180,7 @@ export type Database = {
           image_url: string | null
           location: string | null
           recipient_count: number
+          selection_mode: string
           status: Database["public"]["Enums"]["giveaway_status"]
           title: string
           updated_at: string
@@ -155,7 +190,9 @@ export type Database = {
           created_at?: string
           deadline?: string | null
           description: string
+          eligibility?: string | null
           entry_count?: number
+          extra_images?: string[]
           giveaway_type?: Database["public"]["Enums"]["giveaway_type"]
           giver_display_name?: string
           giver_id?: string | null
@@ -164,6 +201,7 @@ export type Database = {
           image_url?: string | null
           location?: string | null
           recipient_count?: number
+          selection_mode?: string
           status?: Database["public"]["Enums"]["giveaway_status"]
           title: string
           updated_at?: string
@@ -173,7 +211,9 @@ export type Database = {
           created_at?: string
           deadline?: string | null
           description?: string
+          eligibility?: string | null
           entry_count?: number
+          extra_images?: string[]
           giveaway_type?: Database["public"]["Enums"]["giveaway_type"]
           giver_display_name?: string
           giver_id?: string | null
@@ -182,19 +222,12 @@ export type Database = {
           image_url?: string | null
           location?: string | null
           recipient_count?: number
+          selection_mode?: string
           status?: Database["public"]["Enums"]["giveaway_status"]
           title?: string
           updated_at?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "giveaways_category_fkey"
-            columns: ["category"]
-            isOneToOne: false
-            referencedRelation: "wish_categories"
-            referencedColumns: ["slug"]
-          },
-        ]
+        Relationships: []
       }
       notifications: {
         Row: {
@@ -537,6 +570,10 @@ export type Database = {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      is_giveaway_party: {
+        Args: { _recipient_id: string; _uid: string }
         Returns: boolean
       }
     }
