@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { CATEGORY_LABELS, daysLeft, initials, timeAgo } from "@/lib/format";
+import { daysLeft, initials, timeAgo } from "@/lib/format";
+import { GIVEAWAY_CATEGORY_LABELS } from "@/lib/giveaways";
 import type { Giveaway } from "@/lib/queries";
 
 const GIVEAWAY_STATUS_LABELS: Record<string, string> = {
@@ -21,7 +22,7 @@ export function GiveawayCard({ giveaway, index = 0 }: { giveaway: Giveaway; inde
       className="card-frame reveal lift overflow-hidden"
       style={{ animationDelay: `${Math.min(index, 8) * 70}ms` }}
     >
-      <Link to="/giveaways" className="block border-b-2 border-ink">
+      <Link to="/giveaways/$id" params={{ id: giveaway.id }} className="block border-b-2 border-ink">
         {giveaway.image_url ? (
           <img
             src={giveaway.image_url}
@@ -44,13 +45,13 @@ export function GiveawayCard({ giveaway, index = 0 }: { giveaway: Giveaway; inde
 
       <div className="p-5">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="pill">{CATEGORY_LABELS[giveaway.category] ?? giveaway.category}</span>
+          <span className="pill">{GIVEAWAY_CATEGORY_LABELS[giveaway.category] ?? giveaway.category}</span>
           <span className={open ? "pill-accent" : "pill-outline"}>
             {GIVEAWAY_STATUS_LABELS[giveaway.status] ?? giveaway.status}
           </span>
         </div>
 
-        <h3 className="mt-3 font-display text-lg leading-snug">{giveaway.title}</h3>
+        <Link to="/giveaways/$id" params={{ id: giveaway.id }}><h3 className="mt-3 font-display text-lg leading-snug">{giveaway.title}</h3></Link>
         <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-mute">
           {giveaway.description}
         </p>

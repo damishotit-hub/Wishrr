@@ -9,6 +9,7 @@ import { myContributionsQuery, myWishesQuery, profileQuery } from "@/lib/queries
 import { initials, naira, STATUS_LABELS, timeAgo } from "@/lib/format";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { MyGiveaways } from "@/components/wishr/MyGiveaways";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -191,6 +192,8 @@ function Dashboard() {
           </div>
         )}
       </section>
+
+      <MyGiveaways userId={user.id} />
 
       <section className="mt-10">
         <h2 className="font-display text-xl">Wishes you've supported</h2>
