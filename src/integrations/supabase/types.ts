@@ -684,6 +684,14 @@ export type Database = {
           last_sign_in_at: string
         }[]
       }
+      admin_set_role: {
+        Args: {
+          _grant: boolean
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       confirm_wish_transfer: {
         Args: { _contribution_id: string }
         Returns: boolean

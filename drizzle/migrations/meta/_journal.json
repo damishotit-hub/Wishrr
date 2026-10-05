@@ -64,6 +64,13 @@
       "when": 1791158500036,
       "tag": "0008_admin_reports_offers",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1791158599329,
+      "tag": "0009_admin_set_role",
+      "breakpoints": true
     }
   ]
 }
