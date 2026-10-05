@@ -10,13 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as ActivityRouteImport } from './routes/activity'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as GuidelinesRouteImport } from './routes/guidelines'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as ImpactRouteImport } from './routes/impact'
 import { Route as NewRouteImport } from './routes/new'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as SafetyRouteImport } from './routes/safety'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as GiveawaysIndexRouteImport } from './routes/giveaways.index'
 import { Route as GiveawaysIdRouteImport } from './routes/giveaways.$id'
 import { Route as GiveawaysNewRouteImport } from './routes/giveaways.new'
@@ -27,14 +34,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ActivityRoute = ActivityRouteImport.update({
   id: '/activity',
   path: '/activity',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -45,6 +67,11 @@ const DashboardRoute = DashboardRouteImport.update({
 const ExploreRoute = ExploreRouteImport.update({
   id: '/explore',
   path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidelinesRoute = GuidelinesRouteImport.update({
+  id: '/guidelines',
+  path: '/guidelines',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HowItWorksRoute = HowItWorksRouteImport.update({
@@ -60,6 +87,21 @@ const ImpactRoute = ImpactRouteImport.update({
 const NewRoute = NewRouteImport.update({
   id: '/new',
   path: '/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SafetyRoute = SafetyRouteImport.update({
+  id: '/safety',
+  path: '/safety',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GiveawaysIndexRoute = GiveawaysIndexRouteImport.update({
@@ -85,13 +127,20 @@ const WishIdRoute = WishIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/activity': typeof ActivityRoute
+  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/explore': typeof ExploreRoute
+  '/guidelines': typeof GuidelinesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/impact': typeof ImpactRoute
   '/new': typeof NewRoute
+  '/privacy': typeof PrivacyRoute
+  '/safety': typeof SafetyRoute
+  '/terms': typeof TermsRoute
   '/giveaways/$id': typeof GiveawaysIdRoute
   '/giveaways/new': typeof GiveawaysNewRoute
   '/wish/$id': typeof WishIdRoute
@@ -99,13 +148,20 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/activity': typeof ActivityRoute
+  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/explore': typeof ExploreRoute
+  '/guidelines': typeof GuidelinesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/impact': typeof ImpactRoute
   '/new': typeof NewRoute
+  '/privacy': typeof PrivacyRoute
+  '/safety': typeof SafetyRoute
+  '/terms': typeof TermsRoute
   '/giveaways/$id': typeof GiveawaysIdRoute
   '/giveaways/new': typeof GiveawaysNewRoute
   '/wish/$id': typeof WishIdRoute
@@ -114,13 +170,20 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/activity': typeof ActivityRoute
+  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/explore': typeof ExploreRoute
+  '/guidelines': typeof GuidelinesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/impact': typeof ImpactRoute
   '/new': typeof NewRoute
+  '/privacy': typeof PrivacyRoute
+  '/safety': typeof SafetyRoute
+  '/terms': typeof TermsRoute
   '/giveaways/$id': typeof GiveawaysIdRoute
   '/giveaways/new': typeof GiveawaysNewRoute
   '/wish/$id': typeof WishIdRoute
@@ -130,13 +193,20 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/activity'
+    | '/admin'
     | '/auth'
+    | '/contact'
     | '/dashboard'
     | '/explore'
+    | '/guidelines'
     | '/how-it-works'
     | '/impact'
     | '/new'
+    | '/privacy'
+    | '/safety'
+    | '/terms'
     | '/giveaways/$id'
     | '/giveaways/new'
     | '/wish/$id'
@@ -144,13 +214,20 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/activity'
+    | '/admin'
     | '/auth'
+    | '/contact'
     | '/dashboard'
     | '/explore'
+    | '/guidelines'
     | '/how-it-works'
     | '/impact'
     | '/new'
+    | '/privacy'
+    | '/safety'
+    | '/terms'
     | '/giveaways/$id'
     | '/giveaways/new'
     | '/wish/$id'
@@ -158,13 +235,20 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/activity'
+    | '/admin'
     | '/auth'
+    | '/contact'
     | '/dashboard'
     | '/explore'
+    | '/guidelines'
     | '/how-it-works'
     | '/impact'
     | '/new'
+    | '/privacy'
+    | '/safety'
+    | '/terms'
     | '/giveaways/$id'
     | '/giveaways/new'
     | '/wish/$id'
@@ -173,13 +257,20 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   ActivityRoute: typeof ActivityRoute
+  AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
+  ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
   ExploreRoute: typeof ExploreRoute
+  GuidelinesRoute: typeof GuidelinesRoute
   HowItWorksRoute: typeof HowItWorksRoute
   ImpactRoute: typeof ImpactRoute
   NewRoute: typeof NewRoute
+  PrivacyRoute: typeof PrivacyRoute
+  SafetyRoute: typeof SafetyRoute
+  TermsRoute: typeof TermsRoute
   GiveawaysIdRoute: typeof GiveawaysIdRoute
   GiveawaysNewRoute: typeof GiveawaysNewRoute
   WishIdRoute: typeof WishIdRoute
@@ -195,6 +286,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/activity': {
       id: '/activity'
       path: '/activity'
@@ -202,11 +300,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ActivityRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -221,6 +333,13 @@ declare module '@tanstack/react-router' {
       path: '/explore'
       fullPath: '/explore'
       preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guidelines': {
+      id: '/guidelines'
+      path: '/guidelines'
+      fullPath: '/guidelines'
+      preLoaderRoute: typeof GuidelinesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/how-it-works': {
@@ -242,6 +361,27 @@ declare module '@tanstack/react-router' {
       path: '/new'
       fullPath: '/new'
       preLoaderRoute: typeof NewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/safety': {
+      id: '/safety'
+      path: '/safety'
+      fullPath: '/safety'
+      preLoaderRoute: typeof SafetyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/giveaways/': {
@@ -277,13 +417,20 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   ActivityRoute: ActivityRoute,
+  AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
+  ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
   ExploreRoute: ExploreRoute,
+  GuidelinesRoute: GuidelinesRoute,
   HowItWorksRoute: HowItWorksRoute,
   ImpactRoute: ImpactRoute,
   NewRoute: NewRoute,
+  PrivacyRoute: PrivacyRoute,
+  SafetyRoute: SafetyRoute,
+  TermsRoute: TermsRoute,
   GiveawaysIdRoute: GiveawaysIdRoute,
   GiveawaysNewRoute: GiveawaysNewRoute,
   WishIdRoute: WishIdRoute,

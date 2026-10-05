@@ -13,6 +13,16 @@ const NAV = [
   { to: "/dashboard", label: "Profile" },
 ] as const;
 
+const FOOTER = [
+  { title: "Explore", links: [
+    { to: "/explore", label: "Wishes" }, { to: "/giveaways", label: "Giveaways" },
+    { to: "/impact", label: "Impact Wall" }, { to: "/how-it-works", label: "How Wishr Works" },
+  ] },
+  { title: "Community & Trust", links: [{ to: "/guidelines", label: "Community Guidelines" }, { to: "/safety", label: "Safety" }] },
+  { title: "Company", links: [{ to: "/about", label: "About Us" }, { to: "/contact", label: "Contact" }] },
+  { title: "Legal", links: [{ to: "/privacy", label: "Privacy Policy" }, { to: "/terms", label: "Terms of Service" }] },
+] as const;
+
 function Dot({ active, square }: { active: boolean; square?: boolean }) {
   return (
     <span className="grid size-6 place-items-center">
@@ -97,21 +107,24 @@ export function AppShell({ children }: { children: ReactNode }) {
 
       <OnboardingPrompt />
 
-      <footer className="hidden border-t border-line md:block">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-6 text-xs text-mute">
-          <div className="flex items-center gap-4"><Logo size="sm" /><span>Make a wish, someone might make it happen.</span></div>
-          <nav aria-label="Footer" className="flex items-center gap-5">
-            <Link to="/explore" className="font-semibold hover:text-ink">
-              Explore
-            </Link>
-            <Link to="/giveaways" className="font-semibold hover:text-ink">
-              Giveaways
-            </Link>
-            <Link to="/how-it-works" className="font-semibold hover:text-ink">
-              How it works
-            </Link>
-          </nav>
+      <footer className="border-t-2 border-ink bg-card pb-28 md:pb-0">
+        <div className="mx-auto grid max-w-[430px] gap-8 px-5 py-10 md:max-w-5xl md:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
+          <div>
+            <Logo size="sm" />
+            <p className="mt-3 text-sm text-mute">Make a wish, someone might make it happen.</p>
+          </div>
+          {FOOTER.map((col) => (
+            <nav key={col.title} aria-label={col.title}>
+              <p className="eyebrow">{col.title}</p>
+              <ul className="mt-3 space-y-2 text-sm">
+                {col.links.map((l) => (
+                  <li key={l.to}><Link to={l.to} className="font-semibold text-mute hover:text-ink">{l.label}</Link></li>
+                ))}
+              </ul>
+            </nav>
+          ))}
         </div>
+        <p className="border-t border-line py-4 text-center text-xs text-mute">© {new Date().getFullYear()} Wishr</p>
       </footer>
 
       <nav

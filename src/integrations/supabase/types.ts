@@ -14,6 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
+      content_reports: {
+        Row: {
+          created_at: string
+          details: string | null
+          giveaway_id: string | null
+          id: string
+          reason: string
+          reporter_id: string
+          status: Database["public"]["Enums"]["report_status"]
+          target_type: string
+          wish_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          details?: string | null
+          giveaway_id?: string | null
+          id?: string
+          reason: string
+          reporter_id: string
+          status?: Database["public"]["Enums"]["report_status"]
+          target_type: string
+          wish_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          details?: string | null
+          giveaway_id?: string | null
+          id?: string
+          reason?: string
+          reporter_id?: string
+          status?: Database["public"]["Enums"]["report_status"]
+          target_type?: string
+          wish_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "content_reports_giveaway_id_fkey"
+            columns: ["giveaway_id"]
+            isOneToOne: false
+            referencedRelation: "giveaways"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "content_reports_wish_id_fkey"
+            columns: ["wish_id"]
+            isOneToOne: false
+            referencedRelation: "wishes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contributions: {
         Row: {
           amount: number
@@ -448,6 +499,76 @@ export type Database = {
         }
         Relationships: []
       }
+      wish_offer_messages: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          offer_id: string
+          sender_id: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          offer_id: string
+          sender_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          offer_id?: string
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wish_offer_messages_offer_id_fkey"
+            columns: ["offer_id"]
+            isOneToOne: false
+            referencedRelation: "wish_offers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      wish_offers: {
+        Row: {
+          created_at: string
+          description: string
+          giver_display_name: string
+          giver_id: string
+          id: string
+          status: string
+          wish_id: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          giver_display_name?: string
+          giver_id: string
+          id?: string
+          status?: string
+          wish_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          giver_display_name?: string
+          giver_id?: string
+          id?: string
+          status?: string
+          wish_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wish_offers_wish_id_fkey"
+            columns: ["wish_id"]
+            isOneToOne: false
+            referencedRelation: "wishes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       wish_updates: {
         Row: {
           author_id: string | null
@@ -553,6 +674,24 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_recent_users: {
+        Args: { _limit?: number }
+        Returns: {
+          created_at: string
+          display_name: string
+          email: string
+          id: string
+          last_sign_in_at: string
+        }[]
+      }
+      admin_set_role: {
+        Args: {
+          _grant: boolean
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       confirm_wish_transfer: {
         Args: { _contribution_id: string }
         Returns: boolean
@@ -574,6 +713,14 @@ export type Database = {
       }
       is_giveaway_party: {
         Args: { _recipient_id: string; _uid: string }
+        Returns: boolean
+      }
+      is_offer_party: {
+        Args: { _offer_id: string; _uid: string }
+        Returns: boolean
+      }
+      is_wish_owner: {
+        Args: { _uid: string; _wish_id: string }
         Returns: boolean
       }
     }
