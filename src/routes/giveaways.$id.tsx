@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { AppShell } from "@/components/wishr/AppShell";
+import { ReportButton } from "@/components/wishr/ReportButton";
 import { EmptyState, ErrorState } from "@/components/wishr/EmptyState";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
@@ -90,6 +91,7 @@ function GiveawayDetail() {
           <div className="mt-3 flex items-center gap-2 text-sm text-mute">
             <span className="grid size-7 place-items-center rounded-full bg-warm text-[11px] font-semibold text-ink">{initials(x.giver_display_name)}</span>
             <span>{x.giver_display_name}</span><span aria-hidden>·</span><span>{timeAgo(x.created_at)}</span>
+            {!isGiver ? <span className="ml-auto"><ReportButton target="giveaway" id={x.id} /></span> : null}
           </div>
           <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
             <div className="card-flat p-3"><dt className="text-xs text-mute">Location</dt><dd className="font-semibold">{x.location ?? "Not specified"}</dd></div>
