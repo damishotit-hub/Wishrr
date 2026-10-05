@@ -9,6 +9,8 @@ import { WishOwnerControls } from "@/components/wishr/WishOwnerControls";
 import { WishBankSettings } from "@/components/wishr/WishBankSettings";
 import { ShareSection } from "@/components/wishr/ShareSection";
 import { Appreciation } from "@/components/wishr/Appreciation";
+import { OfferPanel } from "@/components/wishr/OfferPanel";
+import { ReportButton } from "@/components/wishr/ReportButton";
 import { useAuth } from "@/lib/auth";
 import { wishQuery, wishContributionsQuery, wishUpdatesQuery } from "@/lib/queries";
 import { CATEGORY_LABELS, daysLeft, initials, naira, STATUS_LABELS, timeAgo } from "@/lib/format";
@@ -194,8 +196,9 @@ function WishDetail() {
             </div>
           </div>
           <ContributeForm wish={w} />
+          <OfferPanel wish={w} />
           <ShareSection wish={w} />
-          {isOwner ? <><WishBankSettings wish={w} /><WishOwnerControls wish={w} /></> : null}
+          {isOwner ? <><WishBankSettings wish={w} /><WishOwnerControls wish={w} /></> : <div className="text-center"><ReportButton target="wish" id={w.id} /></div>}
         </aside>
       </article>
     </AppShell>
