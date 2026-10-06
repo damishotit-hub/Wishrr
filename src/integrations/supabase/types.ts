@@ -699,6 +699,22 @@ export type Database = {
         Args: { _contribution_id: string }
         Returns: boolean
       }
+      get_active_wishers: {
+        Args: { _limit?: number }
+        Returns: {
+          amount_raised: number
+          avatar_url: string
+          display_name: string
+          goal_amount: number
+          is_verified: boolean
+          profile_id: string
+          username: string
+          wish_id: string
+          wish_summary: string
+          wish_title: string
+          wish_updated_at: string
+        }[]
+      }
       get_public_profile: {
         Args: { _username: string }
         Returns: {
