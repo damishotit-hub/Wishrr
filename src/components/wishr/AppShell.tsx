@@ -4,6 +4,7 @@ import { Logo } from "./Logo";
 import { useAuth } from "@/lib/auth";
 import { OnboardingPrompt } from "@/components/wishr/OnboardingPrompt";
 import { initials } from "@/lib/format";
+import { MemberSearch } from "./MemberSearch";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -67,6 +68,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </nav>
 
           <div className="flex items-center gap-3">
+            {user ? <MemberSearch compact /> : null}
             {loading ? (
               <span className="size-8 animate-pulse rounded-full bg-warm" />
             ) : user ? (
@@ -107,11 +109,12 @@ export function AppShell({ children }: { children: ReactNode }) {
 
       <OnboardingPrompt />
 
-      <footer className="border-t-2 border-ink bg-card pb-28 md:pb-0">
+      <footer className="border-t border-line bg-card/95 pb-28 md:pb-0">
         <div className="mx-auto grid max-w-[430px] gap-8 px-5 py-10 md:max-w-5xl md:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
           <div>
             <Logo size="sm" />
             <p className="mt-3 text-sm text-mute">Make a wish, someone might make it happen.</p>
+            <a href="mailto:idowudaviddamilola@gmail.com" className="mt-3 block break-all text-xs font-semibold text-primary">idowudaviddamilola@gmail.com</a>
           </div>
           {FOOTER.map((col) => (
             <nav key={col.title} aria-label={col.title}>
@@ -129,7 +132,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
       <nav
         aria-label="Main"
-        className="fixed bottom-0 left-1/2 w-full max-w-[430px] -translate-x-1/2 border-t-2 border-ink bg-card px-2 py-2 md:hidden"
+        className="fixed bottom-0 left-1/2 z-50 w-full max-w-[430px] -translate-x-1/2 border-t border-line bg-card/95 px-2 py-2 backdrop-blur md:hidden"
       >
         <div className="flex items-center justify-between">
           {NAV.map((item) => {

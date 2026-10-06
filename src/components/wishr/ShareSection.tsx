@@ -63,14 +63,14 @@ async function renderCard(wish: Wish, url: string): Promise<Blob | null> {
     ctx.drawImage(img, (img.width - sw) / 2, (img.height - sh) / 2, sw, sh, x, y, cw, imgH);
   } else {
     ctx.fillStyle = teal; ctx.fillRect(x, y, cw, imgH);
-    ctx.fillStyle = "#FFFFFF"; ctx.font = "700 80px 'Space Grotesk', sans-serif";
+    ctx.fillStyle = "#FFFFFF"; ctx.font = "700 80px 'Plus Jakarta Sans', sans-serif";
     ctx.textAlign = "center"; ctx.fillText("Make a wish.", x + cw / 2, y + imgH / 2 + 28);
   }
   ctx.textAlign = "left";
   ctx.beginPath(); ctx.moveTo(x, y + imgH); ctx.lineTo(x + cw, y + imgH); ctx.stroke();
 
   ctx.fillStyle = deep;
-  ctx.font = "700 72px 'Space Grotesk', sans-serif";
+  ctx.font = "700 72px 'Plus Jakarta Sans', sans-serif";
   const lines = wrap(ctx, wish.title, cw - 100, 3);
   lines.forEach((l, i) => ctx.fillText(l, x + 50, y + imgH + 120 + i * 86));
 
@@ -92,7 +92,7 @@ async function renderCard(wish: Wish, url: string): Promise<Blob | null> {
   ctx.fillStyle = lime; ctx.fillRect(140, 1720, W - 280, 110);
   ctx.lineWidth = 6; ctx.strokeRect(140, 1720, W - 280, 110);
   ctx.fillStyle = deep; ctx.textAlign = "center";
-  ctx.font = "700 40px 'Space Grotesk', sans-serif";
+  ctx.font = "700 40px 'Plus Jakarta Sans', sans-serif";
   ctx.fillText("Help make it happen", W / 2, 1768);
   ctx.font = "500 30px Inter, sans-serif";
   ctx.fillText(url.replace(/^https?:\/\//, ""), W / 2, 1810);

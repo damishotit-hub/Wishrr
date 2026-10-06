@@ -6,6 +6,7 @@ import { WishCard, WishCardSkeleton } from "@/components/wishr/WishCard";
 import { EmptyState, ErrorState } from "@/components/wishr/EmptyState";
 import { categoriesQuery, publicWishesQuery, type ExploreFilters } from "@/lib/queries";
 import { useAuth } from "@/lib/auth";
+import { MemberSearch } from "@/components/wishr/MemberSearch";
 
 export const Route = createFileRoute("/explore")({
   head: () => ({
@@ -50,7 +51,7 @@ function Explore() {
       <section className="reveal pt-8">
         <div className="flex items-end justify-between gap-4">
           <h1 className="font-display text-3xl">Explore wishes</h1>
-          <Link to="/impact" className="pill-accent">Granted wishes</Link>
+          <div className="flex items-center gap-2"><MemberSearch /><Link to="/impact" className="pill-accent">Granted wishes</Link></div>
         </div>
         <p className="mt-2 text-sm text-mute">
           Every wish here belongs to someone real. Give what you can.

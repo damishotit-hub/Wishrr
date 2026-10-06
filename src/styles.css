@@ -6,7 +6,7 @@
 
 /*
  * Wishr design system - playful neo-brutalist.
- * Light mint canvas, white content, teal interactions, mint support, lime highlights.
+ * White canvas, teal interactions, mint support, lime highlights, and subtle ambient depth.
  * All colours are oklch tokens. Never hardcode colours in components.
  */
 
@@ -60,10 +60,10 @@
 
 :root {
   --radius: 0.75rem;
-  --font-display-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-body-family: "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  --background: oklch(0.95962 0.01428 180.71);
+  --background: oklch(0.995 0.002 180);
   --foreground: oklch(0.33635 0.05741 194.77);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.33635 0.05741 194.77);
@@ -124,6 +124,13 @@
 
   body {
     background-color: var(--color-background);
+    background-image:
+      radial-gradient(circle at 8% 4%, color-mix(in oklch, var(--secondary) 24%, transparent) 0, transparent 30rem),
+      radial-gradient(circle at 94% 18%, color-mix(in oklch, var(--accent) 10%, transparent) 0, transparent 24rem),
+      linear-gradient(color-mix(in oklch, var(--foreground) 2.5%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in oklch, var(--foreground) 2.5%, transparent) 1px, transparent 1px);
+    background-size: auto, auto, 28px 28px, 28px 28px;
+    background-attachment: fixed;
     color: var(--color-foreground);
     font-family: var(--font-body-family);
     -webkit-font-smoothing: antialiased;
@@ -134,7 +141,7 @@
   h3 {
     font-family: var(--font-display-family);
     font-weight: 700;
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
   }
 
   h1 {
@@ -154,16 +161,20 @@
 
 /* Neo-brutalist card: hard outline plus offset shadow */
 @utility card-frame {
-  border-radius: 0.875rem;
+  border-radius: 0.75rem;
   background-color: var(--card);
-  border: 2px solid var(--hard);
-  box-shadow: 5px 5px 0 0 var(--hard);
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 34px color-mix(in oklch, var(--foreground) 10%, transparent);
 }
 
 @utility card-flat {
-  border-radius: 0.875rem;
+  border-radius: 0.75rem;
   background-color: var(--card);
-  border: 2px solid var(--hard);
+  border: 1px solid var(--border);
+}
+
+@utility soft-shadow {
+  box-shadow: 0 16px 40px color-mix(in oklch, var(--foreground) 12%, transparent);
 }
 
 @utility hard-shadow {

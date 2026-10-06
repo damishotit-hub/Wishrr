@@ -8,6 +8,64 @@ export type WishUpdate = Database["public"]["Tables"]["wish_updates"]["Row"];
 export type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 export type WishStatus = Database["public"]["Enums"]["wish_status"];
 export type Giveaway = Database["public"]["Tables"]["giveaways"]["Row"];
+export type PublicProfile = Database["public"]["Functions"]["get_public_profile"]["Returns"][number];
+export type ActiveWisher = Database["public"]["Functions"]["get_active_wishers"]["Returns"][number];
+
+export function memberSearchQuery(search: string) {
+  return queryOptions({
+    queryKey: ["members", "search", search],
+    queryFn: async () => {
+      const { data, error } = await supabase.rpc("search_public_profiles", { _query: search, _limit: 8 });
+      if (error) throw error;
+      return data ?? [];
+    },
+    staleTime: 30_000,
+  });
+}
+
+export function publicProfileQuery(username: string) {
+  return queryOptions({
+    queryKey: ["public-profile", username.toLowerCase()],
+    queryFn: async () => {
+      const { data, error } = await supabase.rpc("get_public_profile", { _username: username });
+      if (error) throw error;
+      return data?.[0] ?? null;
+    },
+  });
+}
+
+export function activeWishersQuery(limit = 8) {
+  return queryOptions({
+    queryKey: ["active-wishers", limit],
+    queryFn: async () => {
+      const { data, error } = await supabase.rpc("get_active_wishers", { _limit: limit });
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+}
+
+export function profileWishesQuery(userId: string) {
+  return queryOptions({
+    queryKey: ["public-profile", userId, "wishes"],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("wishes").select("*").eq("user_id", userId).eq("is_anonymous", false).in("status", ["active", "partially_funded", "fulfilled"]).order("updated_at", { ascending: false });
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+}
+
+export function profileGiveawaysQuery(userId: string) {
+  return queryOptions({
+    queryKey: ["public-profile", userId, "giveaways"],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("giveaways").select("*").eq("giver_id", userId).in("status", ["active", "closed", "recipient_selected", "fulfilled"]).order("updated_at", { ascending: false });
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+}
 
 export type GiveawayFilters = {
   search?: string;
