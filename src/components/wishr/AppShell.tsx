@@ -4,6 +4,7 @@ import { Logo } from "./Logo";
 import { useAuth } from "@/lib/auth";
 import { OnboardingPrompt } from "@/components/wishr/OnboardingPrompt";
 import { initials } from "@/lib/format";
+import { MemberSearch } from "./MemberSearch";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -67,6 +68,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </nav>
 
           <div className="flex items-center gap-3">
+            {user ? <MemberSearch compact /> : null}
             {loading ? (
               <span className="size-8 animate-pulse rounded-full bg-warm" />
             ) : user ? (
@@ -112,6 +114,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <div>
             <Logo size="sm" />
             <p className="mt-3 text-sm text-mute">Make a wish, someone might make it happen.</p>
+            <a href="mailto:idowudaviddamilola@gmail.com" className="mt-3 block break-all text-xs font-semibold text-primary">idowudaviddamilola@gmail.com</a>
           </div>
           {FOOTER.map((col) => (
             <nav key={col.title} aria-label={col.title}>
