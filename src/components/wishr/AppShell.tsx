@@ -109,7 +109,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
       <OnboardingPrompt />
 
-      <footer className="border-t-2 border-ink bg-card pb-28 md:pb-0">
+      <footer className="border-t border-line bg-card/95 pb-28 md:pb-0">
         <div className="mx-auto grid max-w-[430px] gap-8 px-5 py-10 md:max-w-5xl md:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
           <div>
             <Logo size="sm" />
@@ -132,7 +132,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
       <nav
         aria-label="Main"
-        className="fixed bottom-0 left-1/2 w-full max-w-[430px] -translate-x-1/2 border-t-2 border-ink bg-card px-2 py-2 md:hidden"
+        className="fixed bottom-0 left-1/2 z-50 w-full max-w-[430px] -translate-x-1/2 border-t border-line bg-card/95 px-2 py-2 backdrop-blur md:hidden"
       >
         <div className="flex items-center justify-between">
           {NAV.map((item) => {
