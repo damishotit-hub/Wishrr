@@ -71,6 +71,13 @@
       "when": 1791158599329,
       "tag": "0009_admin_set_role",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1791251364345,
+      "tag": "0010_public_usernames_and_safe_profile_directory",
+      "breakpoints": true
     }
   ]
 }

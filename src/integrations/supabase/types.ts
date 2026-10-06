@@ -322,6 +322,7 @@ export type Database = {
           is_verified: boolean
           phone: string | null
           updated_at: string
+          username: string | null
         }
         Insert: {
           avatar_url?: string | null
@@ -334,6 +335,7 @@ export type Database = {
           is_verified?: boolean
           phone?: string | null
           updated_at?: string
+          username?: string | null
         }
         Update: {
           avatar_url?: string | null
@@ -346,6 +348,7 @@ export type Database = {
           is_verified?: boolean
           phone?: string | null
           updated_at?: string
+          username?: string | null
         }
         Relationships: []
       }
@@ -696,6 +699,18 @@ export type Database = {
         Args: { _contribution_id: string }
         Returns: boolean
       }
+      get_public_profile: {
+        Args: { _username: string }
+        Returns: {
+          avatar_url: string
+          bio: string
+          created_at: string
+          display_name: string
+          id: string
+          is_verified: boolean
+          username: string
+        }[]
+      }
       get_wish_bank_details: {
         Args: { _wish_id: string }
         Returns: {
@@ -722,6 +737,17 @@ export type Database = {
       is_wish_owner: {
         Args: { _uid: string; _wish_id: string }
         Returns: boolean
+      }
+      search_public_profiles: {
+        Args: { _limit?: number; _query: string }
+        Returns: {
+          avatar_url: string
+          bio: string
+          display_name: string
+          id: string
+          is_verified: boolean
+          username: string
+        }[]
       }
     }
     Enums: {
