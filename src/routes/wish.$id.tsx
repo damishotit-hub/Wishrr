@@ -11,6 +11,7 @@ import { ShareSection } from "@/components/wishr/ShareSection";
 import { Appreciation } from "@/components/wishr/Appreciation";
 import { OfferPanel } from "@/components/wishr/OfferPanel";
 import { ReportButton } from "@/components/wishr/ReportButton";
+import { MessageButton } from "@/components/wishr/MessageButton";
 import { useAuth } from "@/lib/auth";
 import { wishQuery, wishContributionsQuery, wishUpdatesQuery } from "@/lib/queries";
 import { CATEGORY_LABELS, daysLeft, initials, naira, STATUS_LABELS, timeAgo } from "@/lib/format";
@@ -198,7 +199,7 @@ function WishDetail() {
           <ContributeForm wish={w} />
           <OfferPanel wish={w} />
           <ShareSection wish={w} />
-          {isOwner ? <><WishBankSettings wish={w} /><WishOwnerControls wish={w} /></> : <div className="text-center"><ReportButton target="wish" id={w.id} /></div>}
+          {isOwner ? <><WishBankSettings wish={w} /><WishOwnerControls wish={w} /></> : <div className="flex flex-col items-center gap-3">{!w.is_anonymous ? <MessageButton otherId={w.user_id} label="Message the wisher" /> : null}<ReportButton target="wish" id={w.id} /></div>}
         </aside>
       </article>
     </AppShell>
