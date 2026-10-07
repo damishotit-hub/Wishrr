@@ -112,6 +112,65 @@ export type Database = {
           },
         ]
       }
+      conversations: {
+        Row: {
+          created_at: string
+          id: string
+          last_message_at: string
+          user_a: string
+          user_b: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_message_at?: string
+          user_a: string
+          user_b: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_message_at?: string
+          user_a?: string
+          user_b?: string
+        }
+        Relationships: []
+      }
+      direct_messages: {
+        Row: {
+          body: string
+          conversation_id: string
+          created_at: string
+          id: string
+          read_at: string | null
+          sender_id: string
+        }
+        Insert: {
+          body: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          read_at?: string | null
+          sender_id: string
+        }
+        Update: {
+          body?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          read_at?: string | null
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "direct_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       giveaway_entries: {
         Row: {
           created_at: string
@@ -320,9 +379,11 @@ export type Database = {
           id: string
           intent: string | null
           is_verified: boolean
+          location: string | null
           phone: string | null
           updated_at: string
           username: string | null
+          username_confirmed: boolean
         }
         Insert: {
           avatar_url?: string | null
@@ -333,9 +394,11 @@ export type Database = {
           id: string
           intent?: string | null
           is_verified?: boolean
+          location?: string | null
           phone?: string | null
           updated_at?: string
           username?: string | null
+          username_confirmed?: boolean
         }
         Update: {
           avatar_url?: string | null
@@ -346,9 +409,11 @@ export type Database = {
           id?: string
           intent?: string | null
           is_verified?: boolean
+          location?: string | null
           phone?: string | null
           updated_at?: string
           username?: string | null
+          username_confirmed?: boolean
         }
         Relationships: []
       }
@@ -677,6 +742,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_find_user: { Args: { _email: string }; Returns: string }
       admin_recent_users: {
         Args: { _limit?: number }
         Returns: {
@@ -685,6 +751,8 @@ export type Database = {
           email: string
           id: string
           last_sign_in_at: string
+          location: string
+          username: string
         }[]
       }
       admin_set_role: {
@@ -694,6 +762,16 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      admin_team: {
+        Args: never
+        Returns: {
+          display_name: string
+          email: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+          username: string
+        }[]
       }
       confirm_wish_transfer: {
         Args: { _contribution_id: string }
@@ -715,6 +793,7 @@ export type Database = {
           wish_updated_at: string
         }[]
       }
+      get_member_count: { Args: never; Returns: number }
       get_public_profile: {
         Args: { _username: string }
         Returns: {
@@ -724,6 +803,7 @@ export type Database = {
           display_name: string
           id: string
           is_verified: boolean
+          location: string
           username: string
         }[]
       }
@@ -742,6 +822,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_conversation_party: {
+        Args: { _conversation_id: string; _uid: string }
+        Returns: boolean
+      }
       is_giveaway_party: {
         Args: { _recipient_id: string; _uid: string }
         Returns: boolean
@@ -754,6 +838,23 @@ export type Database = {
         Args: { _uid: string; _wish_id: string }
         Returns: boolean
       }
+      moderate_content: {
+        Args: { _action: string; _id: string; _kind: string }
+        Returns: boolean
+      }
+      my_conversations: {
+        Args: never
+        Returns: {
+          id: string
+          last_body: string
+          last_message_at: string
+          other_avatar_url: string
+          other_display_name: string
+          other_id: string
+          other_username: string
+          unread: number
+        }[]
+      }
       search_public_profiles: {
         Args: { _limit?: number; _query: string }
         Returns: {
@@ -765,6 +866,7 @@ export type Database = {
           username: string
         }[]
       }
+      start_conversation: { Args: { _other: string }; Returns: string }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
