@@ -34,6 +34,7 @@ function Dashboard() {
   const [editing, setEditing] = useState(false);
   const [displayName, setDisplayName] = useState("");
   const [username, setUsername] = useState("");
+  const [location, setLocation] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
@@ -61,6 +62,8 @@ function Dashboard() {
     const cleanUsername = username.trim().toLowerCase().replace(/^@/, "");
     if (cleanName.length < 2 || cleanName.length > 80) { setProfileError("Enter a name between 2 and 80 characters."); return; }
     if (!/^[a-z0-9_]{3,24}$/.test(cleanUsername)) { setProfileError("Username must be 3 to 24 characters using letters, numbers, or underscores."); return; }
+    const cleanLocation = location.trim();
+    if (cleanLocation && (cleanLocation.length < 2 || cleanLocation.length > 80)) { setProfileError("Location should be 2 to 80 characters."); return; }
     setSaving(true); setProfileError(null); setProfileNotice(null);
     try {
       let avatar = profile.data?.avatar_url ?? null;
@@ -72,7 +75,7 @@ function Dashboard() {
         if (uploadError) throw uploadError;
         avatar = path;
       }
-      const { error: updateError } = await supabase.from("profiles").update({ display_name: cleanName, username: cleanUsername, avatar_url: avatar }).eq("id", user.id);
+      const { error: updateError } = await supabase.from("profiles").update({ display_name: cleanName, username: cleanUsername, username_confirmed: true, location: cleanLocation || null, avatar_url: avatar }).eq("id", user.id);
       if (updateError) throw updateError;
       await queryClient.invalidateQueries({ queryKey: ["profile", user.id] });
       await queryClient.invalidateQueries({ queryKey: ["members"] });
@@ -121,13 +124,14 @@ function Dashboard() {
           <div className="min-w-0">
             <h1 className="truncate font-display text-2xl">{name}</h1>
             {profile.data?.username ? <Link to="/u/$username" params={{ username: profile.data.username }} className="block truncate text-sm font-semibold text-primary">@{profile.data.username}</Link> : null}
-            <p className="truncate text-sm text-mute">{user.email}</p>
+            <p className="truncate text-sm text-mute">{user.email}{profile.data?.location ? ` · ${profile.data.location}` : ""}</p>
           </div>
         </div>
-        <Button type="button" variant="outline" className="mt-4 border border-line" onClick={() => { setDisplayName(profile.data?.display_name ?? ""); setUsername(profile.data?.username ?? ""); setEditing(!editing); setProfileError(null); }}>Edit profile</Button>
+        <Button type="button" variant="outline" className="mt-4 border border-line" onClick={() => { setDisplayName(profile.data?.display_name ?? ""); setUsername(profile.data?.username ?? ""); setLocation(profile.data?.location ?? ""); setEditing(!editing); setProfileError(null); }}>Edit profile</Button>
         {editing ? <form onSubmit={saveProfile} className="mt-4 max-w-md space-y-3 border-t-2 border-ink pt-4">
           <label className="block text-sm font-semibold">Display name<input required minLength={2} maxLength={80} value={displayName} onChange={(e) => setDisplayName(e.target.value)} className="mt-1 w-full rounded-lg border-2 border-ink bg-card px-4 py-3" /></label>
           <label className="block text-sm font-semibold">Username<div className="mt-1 flex rounded-lg border border-line bg-card focus-within:ring-2 focus-within:ring-primary"><span className="px-3 py-3 text-mute">@</span><input required minLength={3} maxLength={24} pattern="[a-z0-9_]+" value={username} onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ""))} className="min-w-0 flex-1 bg-transparent py-3 pr-4 outline-none" /></div></label>
+          <label className="block text-sm font-semibold">City / State (optional)<input maxLength={80} value={location} onChange={(e) => setLocation(e.target.value)} placeholder="e.g. Ikeja, Lagos" className="mt-1 w-full rounded-lg border-2 border-ink bg-card px-4 py-3" /></label>
           <label className="block text-sm font-semibold">Profile picture (optional)<input type="file" accept="image/png,image/jpeg,image/webp" onChange={(e) => setPhoto(e.target.files?.[0] ?? null)} className="mt-1 block w-full text-sm" /></label>
           <p className="text-xs text-mute">JPEG, PNG or WebP, up to 5MB.</p>
           <div className="flex gap-2"><Button type="submit" disabled={saving}>Save profile</Button><Button type="button" variant="outline" onClick={() => setEditing(false)}>Cancel</Button></div>

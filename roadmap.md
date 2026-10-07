@@ -13,3 +13,4 @@
 - [x] Add wish/giveaway reporting, in-kind offers with private chat, expanded footer and info pages.
 - [x] Add giveaway details, entries, recipient flows, and giver dashboard.
 - [ ] Add share images and dynamic wish social metadata.
+- [x] Batch: live member/online count, Team management with capped moderators, location field, username claim onboarding + bold search, 1-on-1 messaging

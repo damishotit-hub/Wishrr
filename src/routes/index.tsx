@@ -9,6 +9,8 @@ import { ImpactCard } from "@/components/wishr/ImpactCard";
 import { ActiveWisherCard } from "@/components/wishr/ActiveWisherCard";
 import { naira } from "@/lib/format";
 import { useAuth } from "@/lib/auth";
+import { MemberSearch } from "@/components/wishr/MemberSearch";
+import { CommunityPulse } from "@/lib/community";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -56,6 +58,8 @@ function Home() {
           bus ticket home - and let people who care help you get there.
         </p>
 
+        <div style={{ animationDelay: "200ms" }} className="reveal mt-5"><CommunityPulse size="lg" /></div>
+        {user ? <div style={{ animationDelay: "220ms" }} className="reveal mt-6"><MemberSearch variant="hero" /></div> : null}
         <div style={{ animationDelay: "240ms" }} className="reveal mt-7 flex flex-col gap-3 sm:flex-row">
           <Link
             to="/new"

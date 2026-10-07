@@ -5,6 +5,8 @@ import { useAuth } from "@/lib/auth";
 import { OnboardingPrompt } from "@/components/wishr/OnboardingPrompt";
 import { initials } from "@/lib/format";
 import { MemberSearch } from "./MemberSearch";
+import { CommunityPulse } from "@/lib/community";
+import { MessagesLink } from "./MessagesLink";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -68,12 +70,13 @@ export function AppShell({ children }: { children: ReactNode }) {
           </nav>
 
           <div className="flex items-center gap-3">
-            {user ? <MemberSearch compact /> : null}
+            {user ? <MemberSearch variant="bold" /> : null}
             {loading ? (
               <span className="size-8 animate-pulse rounded-full bg-warm" />
             ) : user ? (
               <>
-                <Link to="/activity" className="text-sm font-semibold text-mute hover:text-ink">
+                <MessagesLink />
+                <Link to="/activity" className="hidden text-sm font-semibold text-mute hover:text-ink sm:inline">
                   Activity
                 </Link>
                 <Link
@@ -101,6 +104,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             )}
           </div>
         </div>
+        <div className="mt-3 flex justify-end"><CommunityPulse /></div>
       </header>
 
       <main className="mx-auto w-full max-w-[430px] px-5 pb-32 md:max-w-5xl md:pb-20">

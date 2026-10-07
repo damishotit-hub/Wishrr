@@ -85,6 +85,13 @@
       "when": 1791251384246,
       "tag": "0011_active_wishers_directory_function",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1791331470250,
+      "tag": "0012_community_team_location_messaging",
+      "breakpoints": true
     }
   ]
 }

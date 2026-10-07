@@ -27,6 +27,8 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as GiveawaysIndexRouteImport } from './routes/giveaways.index'
 import { Route as GiveawaysIdRouteImport } from './routes/giveaways.$id'
 import { Route as GiveawaysNewRouteImport } from './routes/giveaways.new'
+import { Route as MessagesIndexRouteImport } from './routes/messages.index'
+import { Route as MessagesIdRouteImport } from './routes/messages.$id'
 import { Route as UUsernameRouteImport } from './routes/u.$username'
 import { Route as WishIdRouteImport } from './routes/wish.$id'
 
@@ -120,6 +122,16 @@ const GiveawaysNewRoute = GiveawaysNewRouteImport.update({
   path: '/giveaways/new',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MessagesIndexRoute = MessagesIndexRouteImport.update({
+  id: '/messages/',
+  path: '/messages/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MessagesIdRoute = MessagesIdRouteImport.update({
+  id: '/messages/$id',
+  path: '/messages/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UUsernameRoute = UUsernameRouteImport.update({
   id: '/u/$username',
   path: '/u/$username',
@@ -149,9 +161,11 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/giveaways/$id': typeof GiveawaysIdRoute
   '/giveaways/new': typeof GiveawaysNewRoute
+  '/messages/$id': typeof MessagesIdRoute
   '/u/$username': typeof UUsernameRoute
   '/wish/$id': typeof WishIdRoute
   '/giveaways/': typeof GiveawaysIndexRoute
+  '/messages/': typeof MessagesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -171,9 +185,11 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/giveaways/$id': typeof GiveawaysIdRoute
   '/giveaways/new': typeof GiveawaysNewRoute
+  '/messages/$id': typeof MessagesIdRoute
   '/u/$username': typeof UUsernameRoute
   '/wish/$id': typeof WishIdRoute
   '/giveaways': typeof GiveawaysIndexRoute
+  '/messages': typeof MessagesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -194,9 +210,11 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/giveaways/$id': typeof GiveawaysIdRoute
   '/giveaways/new': typeof GiveawaysNewRoute
+  '/messages/$id': typeof MessagesIdRoute
   '/u/$username': typeof UUsernameRoute
   '/wish/$id': typeof WishIdRoute
   '/giveaways/': typeof GiveawaysIndexRoute
+  '/messages/': typeof MessagesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -218,9 +236,11 @@ export interface FileRouteTypes {
     | '/terms'
     | '/giveaways/$id'
     | '/giveaways/new'
+    | '/messages/$id'
     | '/u/$username'
     | '/wish/$id'
     | '/giveaways/'
+    | '/messages/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -240,9 +260,11 @@ export interface FileRouteTypes {
     | '/terms'
     | '/giveaways/$id'
     | '/giveaways/new'
+    | '/messages/$id'
     | '/u/$username'
     | '/wish/$id'
     | '/giveaways'
+    | '/messages'
   id:
     | '__root__'
     | '/'
@@ -262,9 +284,11 @@ export interface FileRouteTypes {
     | '/terms'
     | '/giveaways/$id'
     | '/giveaways/new'
+    | '/messages/$id'
     | '/u/$username'
     | '/wish/$id'
     | '/giveaways/'
+    | '/messages/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -285,9 +309,11 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   GiveawaysIdRoute: typeof GiveawaysIdRoute
   GiveawaysNewRoute: typeof GiveawaysNewRoute
+  MessagesIdRoute: typeof MessagesIdRoute
   UUsernameRoute: typeof UUsernameRoute
   WishIdRoute: typeof WishIdRoute
   GiveawaysIndexRoute: typeof GiveawaysIndexRoute
+  MessagesIndexRoute: typeof MessagesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -418,6 +444,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GiveawaysNewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/messages/': {
+      id: '/messages/'
+      path: '/messages'
+      fullPath: '/messages/'
+      preLoaderRoute: typeof MessagesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/messages/$id': {
+      id: '/messages/$id'
+      path: '/messages/$id'
+      fullPath: '/messages/$id'
+      preLoaderRoute: typeof MessagesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/u/$username': {
       id: '/u/$username'
       path: '/u/$username'
@@ -453,9 +493,11 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   GiveawaysIdRoute: GiveawaysIdRoute,
   GiveawaysNewRoute: GiveawaysNewRoute,
+  MessagesIdRoute: MessagesIdRoute,
   UUsernameRoute: UUsernameRoute,
   WishIdRoute: WishIdRoute,
   GiveawaysIndexRoute: GiveawaysIndexRoute,
+  MessagesIndexRoute: MessagesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

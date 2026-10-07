@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { memberSearchQuery } from "@/lib/queries";
 import { MemberAvatar } from "./MemberAvatar";
 
-export function MemberSearch({ compact = false }: { compact?: boolean }) {
+export function MemberSearch({ compact = false, variant = "plain" }: { compact?: boolean; variant?: "plain" | "bold" | "hero" }) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [query, setQuery] = useState("");
@@ -17,9 +17,19 @@ export function MemberSearch({ compact = false }: { compact?: boolean }) {
   const results = useQuery({ ...memberSearchQuery(query), enabled: open && query.length >= 2 });
 
   return <>
-    <Button type="button" variant="ghost" size={compact ? "icon" : "sm"} onClick={() => setOpen(true)} aria-label="Search members" className="text-mute hover:text-ink">
-      <Search />{compact ? null : <span>People</span>}
-    </Button>
+    {variant === "hero" ? (
+      <button type="button" onClick={() => setOpen(true)} aria-label="Search members" className="press flex w-full items-center gap-3 rounded-xl border-2 border-ink bg-card px-4 py-4 text-left hard-shadow-sm md:max-w-xl">
+        <Search className="size-5 text-primary" /><span className="flex-1 text-base font-bold text-ink">Find someone by @username or name</span><span className="hidden rounded-md bg-primary px-3 py-1.5 text-xs font-bold text-primary-foreground sm:inline">Search</span>
+      </button>
+    ) : variant === "bold" ? (
+      <button type="button" onClick={() => setOpen(true)} aria-label="Search members" className="press inline-flex items-center gap-2 rounded-lg border-2 border-ink bg-card px-3 py-1.5 text-sm font-bold text-ink">
+        <Search className="size-4 text-primary" /><span className="hidden sm:inline">Search people</span>
+      </button>
+    ) : (
+      <Button type="button" variant="ghost" size={compact ? "icon" : "sm"} onClick={() => setOpen(true)} aria-label="Search members" className="text-mute hover:text-ink">
+        <Search />{compact ? null : <span>People</span>}
+      </Button>
+    )}
     {open ? <div className="fixed inset-0 z-[100] bg-ink/45 p-4 pt-[10vh]" role="dialog" aria-modal="true" aria-label="Search Wishr members" onMouseDown={(e) => { if (e.target === e.currentTarget) setOpen(false); }}>
       <div className="mx-auto w-full max-w-lg rounded-lg border border-line bg-card p-4 soft-shadow">
         <div className="flex items-center gap-2">

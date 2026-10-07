@@ -14,3 +14,6 @@
 - Store profile photos in a private, user-folder-scoped bucket and show them with short-lived signed URLs, to limit public access.
 - In-kind wish offers and their chats live in owner/giver-only tables (party check via security-definer helpers), so handoff details never appear on public rows.
 - Admin-only data (user list, role changes) goes through security-definer functions that check has_role(admin) first.
+- Moderators act only through the moderate_content() security-definer function (reported items only) and content_reports policies; never grant them table policies on financial or role data, so moderation stays separated from money and access control.
+- Direct messages live in conversations/direct_messages with party-only RLS; conversations are created only via start_conversation() so pairs stay unique and ordered.
+- Live "online now" uses one shared Realtime presence channel per tab (src/lib/community.tsx); member count comes from get_member_count() so profile rows stay private.

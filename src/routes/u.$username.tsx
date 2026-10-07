@@ -8,6 +8,8 @@ import { WishCard, WishCardSkeleton } from "@/components/wishr/WishCard";
 import { GiveawayCard, GiveawayCardSkeleton } from "@/components/wishr/GiveawayCard";
 import { EmptyState } from "@/components/wishr/EmptyState";
 import { Button } from "@/components/ui/button";
+import { MessageButton } from "@/components/wishr/MessageButton";
+import { MapPin } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { profileGiveawaysQuery, profileWishesQuery, publicProfileQuery } from "@/lib/queries";
 
@@ -48,7 +50,8 @@ function PublicProfilePage() {
     <section className="mx-auto pt-8">
       <div className="flex flex-col gap-5 border-b border-line pb-8 sm:flex-row sm:items-center">
         <MemberAvatar path={profile.data.avatar_url} name={profile.data.display_name} className="size-24 text-2xl" />
-        <div className="min-w-0 flex-1"><div className="flex items-center gap-2"><h1 className="truncate font-display text-3xl">{profile.data.display_name}</h1>{profile.data.is_verified ? <Check className="size-5 rounded-full bg-primary p-1 text-primary-foreground" aria-label="Verified member" /> : null}</div><p className="mt-1 text-sm font-semibold text-primary">@{profile.data.username}</p>{profile.data.bio ? <p className="mt-3 max-w-xl text-sm leading-relaxed text-mute">{profile.data.bio}</p> : null}</div>
+        <div className="min-w-0 flex-1"><div className="flex items-center gap-2"><h1 className="truncate font-display text-3xl">{profile.data.display_name}</h1>{profile.data.is_verified ? <Check className="size-5 rounded-full bg-primary p-1 text-primary-foreground" aria-label="Verified member" /> : null}</div><p className="mt-1 text-sm font-semibold text-primary">@{profile.data.username}</p>{profile.data.location ? <p className="mt-1 inline-flex items-center gap-1 text-sm text-mute"><MapPin className="size-3.5" />{profile.data.location}</p> : null}{profile.data.bio ? <p className="mt-3 max-w-xl text-sm leading-relaxed text-mute">{profile.data.bio}</p> : null}</div>
+        <MessageButton otherId={profile.data.id} />
         <Button type="button" variant="outline" onClick={() => void share()} className="border border-line">{copied ? <Copy /> : <Share2 />}{copied ? "Copied" : "Share"}</Button>
       </div>
 
