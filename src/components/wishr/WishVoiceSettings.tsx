@@ -12,12 +12,14 @@ export function WishVoiceSettings({ wish }: { wish: Wish }) {
   const [notice, setNotice] = useState<string | null>(null);
   const client = useQueryClient();
   async function save(remove = false) {
+    const ownerId = wish.user_id;
+    if (!ownerId) return;
     setBusy(true); setNotice(null);
     let uploaded: string | null = null;
     try {
-      const fields = !remove && voice ? await uploadWishVoice(wish.user_id, voice) : { audio_path: null, audio_duration_seconds: null };
+      const fields = !remove && voice ? await uploadWishVoice(ownerId, voice) : { audio_path: null, audio_duration_seconds: null };
       uploaded = fields.audio_path;
-      const { data, error } = await supabase.from("wishes").update(fields).eq("id", wish.id).eq("user_id", wish.user_id).select("id").single();
+      const { data, error } = await supabase.from("wishes").update(fields).eq("id", wish.id).eq("user_id", ownerId).select("id").single();
       if (error || !data) throw error ?? new Error("Your voice message could not be saved.");
       if (wish.audio_path) await supabase.storage.from("wish-audio").remove([wish.audio_path]);
       await Promise.all([client.invalidateQueries({ queryKey: ["wish", wish.id] }), client.invalidateQueries({ queryKey: ["wishes"] }), client.invalidateQueries({ queryKey: ["my-wishes"] }), client.invalidateQueries({ queryKey: ["public-profile"] })]);
