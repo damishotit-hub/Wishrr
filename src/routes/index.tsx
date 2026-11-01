@@ -188,7 +188,7 @@ function Home() {
           )}
         </div>
 
-        <div className="card-frame mt-6 flex flex-col gap-4 p-5 md:flex-row md:items-center md:justify-between">
+        <div className="mt-6 flex flex-col gap-4 border-t border-line py-5 md:flex-row md:items-center md:justify-between">
           <Link
             to="/giveaways"
             className="press rounded-lg bg-card px-5 py-3 text-center text-sm font-semibold text-ink border-2 border-ink"
@@ -207,7 +207,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="reveal card-frame mt-14 p-6 md:p-10">
+      <section className="reveal mt-14 border-t border-line py-8 md:py-10">
         <h2 className="font-display text-2xl">How Wishr works</h2>
         <ol className="mt-6 grid gap-6 md:grid-cols-3">
           {[

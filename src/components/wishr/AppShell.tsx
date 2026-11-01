@@ -7,13 +7,15 @@ import { initials } from "@/lib/format";
 import { MemberSearch } from "./MemberSearch";
 import { CommunityPulse } from "@/lib/community";
 import { MessagesLink } from "./MessagesLink";
+import { Compass, Gift, House, Plus, UserRound } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const NAV = [
-  { to: "/", label: "Home" },
-  { to: "/explore", label: "Explore" },
-  { to: "/new", label: "Make a wish" },
-  { to: "/giveaways", label: "Giveaways" },
-  { to: "/dashboard", label: "Profile" },
+  { to: "/", label: "Home", icon: House },
+  { to: "/explore", label: "Explore", icon: Compass },
+  { to: "/new", label: "Wish", icon: Plus },
+  { to: "/giveaways", label: "Giveaways", icon: Gift },
+  { to: "/dashboard", label: "Profile", icon: UserRound },
 ] as const;
 
 const FOOTER = [
@@ -26,28 +28,14 @@ const FOOTER = [
   { title: "Legal", links: [{ to: "/privacy", label: "Privacy Policy" }, { to: "/terms", label: "Terms of Service" }] },
 ] as const;
 
-function Dot({ active, square }: { active: boolean; square?: boolean }) {
-  return (
-    <span className="grid size-6 place-items-center">
-      <span
-        className={[
-          "size-2.5",
-          square ? "rounded-[3px]" : "rounded-full",
-          active ? "bg-primary" : "ring-1 ring-mute",
-        ].join(" ")}
-      />
-    </span>
-  );
-}
-
 export function AppShell({ children }: { children: ReactNode }) {
   const { user, loading } = useAuth();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const name = (user?.user_metadata?.["display_name"] as string) ?? user?.email ?? "";
 
   return (
-    <div className="min-h-screen bg-canvas font-body text-ink antialiased">
-      <header className="mx-auto w-full max-w-[430px] px-5 pt-6 md:max-w-5xl">
+    <div className="wishr-shell min-h-screen font-body text-ink antialiased">
+      <header className="mx-auto w-full max-w-[430px] px-5 pt-6 md:max-w-5xl md:pt-8">
         <div className="flex items-center justify-between">
           <Logo />
 
@@ -107,7 +95,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="mt-3 flex justify-end"><CommunityPulse /></div>
       </header>
 
-      <main className="mx-auto w-full max-w-[430px] px-5 pb-32 md:max-w-5xl md:pb-20">
+      <main className="wishr-main mx-auto w-full max-w-[430px] px-5 md:max-w-5xl">
         {children}
       </main>
 
@@ -136,40 +124,27 @@ export function AppShell({ children }: { children: ReactNode }) {
 
       <nav
         aria-label="Main"
-        className="fixed bottom-0 left-1/2 z-50 w-full max-w-[430px] -translate-x-1/2 border-t border-line bg-card/95 px-2 py-2 backdrop-blur md:hidden"
+        className="mobile-dock fixed left-1/2 z-40 -translate-x-1/2 md:hidden"
       >
-        <div className="flex items-center justify-between">
+        <div className="grid grid-cols-5 items-center gap-1">
           {NAV.map((item) => {
             const active =
               item.to === "/" ? pathname === "/" : pathname.startsWith(item.to as string);
-            if (item.to === "/new") {
-              return (
-                <Link key={item.to} to="/new" className="-mt-6 flex flex-col items-center gap-1">
-                  <span className="grid size-12 place-items-center rounded-xl border-2 border-ink bg-primary text-primary-foreground hard-shadow-sm">
-                    <span className="font-display text-2xl leading-none">+</span>
-                  </span>
-                  <span className="text-[11px] font-semibold text-ink">Make a wish</span>
-                </Link>
-              );
-            }
-
+            const Icon = item.icon;
             return (
-              <Link
+              <Button
                 key={item.to}
-                to={item.to}
-                className="flex flex-1 flex-col items-center gap-1 py-1"
+                asChild
+                variant="ghost"
+                className="dock-item h-auto min-w-0 flex-col gap-1 rounded-full px-0 py-2 hover:bg-transparent"
               >
-                <Dot active={active} square={item.label === "Home" || item.label === "Giveaways"} />
-                <span
-                  className={
-                    active
-                      ? "text-[11px] font-semibold text-primary"
-                      : "text-[11px] font-medium text-mute"
-                  }
-                >
-                  {item.label}
-                </span>
-              </Link>
+                <Link to={item.to} aria-label={item.to === "/new" ? "Make a wish" : item.label} aria-current={active ? "page" : undefined}>
+                  <span className={item.to === "/new" ? "dock-create" : "dock-icon"}>
+                    <Icon aria-hidden="true" className="!size-5" strokeWidth={active ? 2.4 : 1.8} />
+                  </span>
+                  <span className="text-[10px] font-semibold leading-3">{item.label}</span>
+                </Link>
+              </Button>
             );
           })}
         </div>

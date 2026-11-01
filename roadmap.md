@@ -1,5 +1,8 @@
 # Roadmap
 
+- [x] Replace mobile navigation with a detached capsule, redesign story cards, and polish shared UI; verified 320/390px navigation, desktop layout, standalone PNG export, and clean runtime/build checks.
+- [ ] Verify redesigned sharing on a real signed-in wish (blocked: preview session minting could not match the requester; requires a signed-in preview).
+
 - [x] Add optional 60-second wish recording/upload, private storage, and card/detail playback; verified recording, upload rejection, saved playback, and phone-sized cards with a temporary private draft.
 
 - [x] Apply the approved Wishr color palette without changing neo-brutalist styling.
