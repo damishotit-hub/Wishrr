@@ -18,3 +18,4 @@
 - Direct messages live in conversations/direct_messages with party-only RLS; conversations are created only via start_conversation() so pairs stay unique and ordered.
 - Live "online now" uses one shared Realtime presence channel per tab (src/lib/community.tsx); member count comes from get_member_count() so profile rows stay private.
 - Wish audio uses private user-folder-scoped storage with short-lived playback URLs; storage reads follow wish-row visibility, and duration metadata has a database check while actual files are decoded before upload to enforce the voice limit.
+- Render downloadable wish stories in the browser through a dedicated canvas module using semantic theme tokens and QRCode for scannable active-origin links; no private transfer or coordination data enters exported artwork.
