@@ -672,6 +672,8 @@ export type Database = {
       wishes: {
         Row: {
           amount_raised: number
+          audio_duration_seconds: number | null
+          audio_path: string | null
           category: string
           created_at: string
           creator_display_name: string
@@ -691,6 +693,8 @@ export type Database = {
         }
         Insert: {
           amount_raised?: number
+          audio_duration_seconds?: number | null
+          audio_path?: string | null
           category: string
           created_at?: string
           creator_display_name?: string
@@ -710,6 +714,8 @@ export type Database = {
         }
         Update: {
           amount_raised?: number
+          audio_duration_seconds?: number | null
+          audio_path?: string | null
           category?: string
           created_at?: string
           creator_display_name?: string

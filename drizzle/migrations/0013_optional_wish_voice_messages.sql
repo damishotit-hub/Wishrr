@@ -1,0 +1,6 @@
+ALTER TABLE public.wishes ADD COLUMN audio_path text, ADD COLUMN audio_duration_seconds double precision;
+ALTER TABLE public.wishes ADD CONSTRAINT wish_audio_duration_limit CHECK ((audio_path IS NULL AND audio_duration_seconds IS NULL) OR (audio_path IS NOT NULL AND audio_duration_seconds > 0 AND audio_duration_seconds <= 60 AND audio_path LIKE user_id::text || '/%'));
+COMMENT ON COLUMN public.wishes.audio_path IS 'Optional voice message in private wish-audio storage; no verification claim.';
+CREATE POLICY "Owners upload wish audio" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'wish-audio' AND (storage.foldername(name))[1] = auth.uid()::text);
+CREATE POLICY "Members hear visible wish audio" ON storage.objects FOR SELECT TO authenticated USING (bucket_id = 'wish-audio' AND ((storage.foldername(name))[1] = auth.uid()::text OR EXISTS (SELECT 1 FROM public.wishes w WHERE w.audio_path = name)));
+CREATE POLICY "Owners delete wish audio" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'wish-audio' AND (storage.foldername(name))[1] = auth.uid()::text);
