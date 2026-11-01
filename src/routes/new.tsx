@@ -7,6 +7,8 @@ import { useAuth } from "@/lib/auth";
 import { categoriesQuery } from "@/lib/queries";
 import { bankDetailsSchema } from "@/lib/bank-details";
 import { Button } from "@/components/ui/button";
+import { WishVoiceInput } from "@/components/wishr/WishVoiceInput";
+import { uploadWishVoice, type WishVoice } from "@/lib/wish-audio";
 
 export const Route = createFileRoute("/new")({
   head: () => ({
@@ -48,6 +50,7 @@ function NewWish() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [caption, setCaption] = useState("");
+  const [voice, setVoice] = useState<WishVoice | null>(null);
   const [bankName, setBankName] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
   const [accountName, setAccountName] = useState("");
@@ -125,6 +128,8 @@ function NewWish() {
     if (!title.trim() || !description.trim()) { setError("Add a title and your story."); return; }
     setBusy(true);
     setError(null);
+    let uploadedAudio: string | null = null;
+    let wishSaved = false;
     try {
       if (!user) return;
       const displayName =
@@ -147,6 +152,8 @@ function NewWish() {
         imageUrl = signed.signedUrl;
       }
 
+      const audio = voice ? await uploadWishVoice(user.id, voice) : { audio_path: null, audio_duration_seconds: null };
+      uploadedAudio = audio.audio_path;
       const { data, error: insertError } = await supabase
         .from("wishes")
         .insert({
@@ -162,10 +169,12 @@ function NewWish() {
           image_url: imageUrl,
           image_caption: imageUrl && caption.trim() ? caption.trim() : null,
           status: "draft",
+          ...audio,
         })
         .select("id")
         .single();
       if (insertError) throw insertError;
+      wishSaved = true;
 
       const { error: bankError } = await supabase.from("wish_bank_details").insert({ wish_id: data.id, owner_id: user.id, ...bank.data });
       if (bankError) {
@@ -180,6 +189,7 @@ function NewWish() {
       await queryClient.invalidateQueries({ queryKey: ["my-wishes"] });
       await navigate({ to: "/wish/$id", params: { id: data.id } });
     } catch (err) {
+      if (uploadedAudio && !wishSaved) await supabase.storage.from("wish-audio").remove([uploadedAudio]);
       setError(err instanceof Error ? err.message : "We couldn't publish that wish.");
     } finally {
       setBusy(false);
@@ -296,6 +306,8 @@ function NewWish() {
               </label>
             ) : null}
           </div>
+
+          <WishVoiceInput value={voice} onChange={setVoice} disabled={busy} />
 
           <fieldset className="space-y-3 border-t-2 border-ink pt-4">
             <legend className="font-display text-lg font-bold">Where should givers transfer funds?</legend>

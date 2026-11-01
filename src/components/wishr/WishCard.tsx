@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { CATEGORY_LABELS, daysLeft, initials, naira, timeAgo } from "@/lib/format";
 import { ProgressMeter } from "./ProgressMeter";
+import { WishAudioPlayer } from "./WishAudioPlayer";
 import type { Wish } from "@/lib/queries";
 
 export function WishCard({ wish, index = 0 }: { wish: Wish; index?: number }) {
@@ -64,6 +65,7 @@ export function WishCard({ wish, index = 0 }: { wish: Wish; index?: number }) {
       <div className="mt-4">
         <ProgressMeter raised={raised} goal={goal} />
       </div>
+      <WishAudioPlayer path={wish.audio_path} />
 
       <div className="mt-4 flex items-center justify-between gap-3 border-t-2 border-ink pt-3">
         <span className="text-xs font-medium text-mute">
