@@ -18,13 +18,15 @@ function linesFor(ctx: CanvasRenderingContext2D, text: string, width: number, li
   const lines: string[] = [];
   let line = "";
   for (const word of words) {
-    // Split unusually long unbroken titles so they cannot escape the canvas.
-    for (const part of word.match(/.{1,22}/gu) ?? []) {
-      const next = line ? `${line} ${part}` : part;
-      if (ctx.measureText(next).width > width && line) {
-        lines.push(line);
-        line = part;
-      } else line = next;
+    const next = line ? `${line} ${word}` : word;
+    if (ctx.measureText(next).width <= width) { line = next; continue; }
+    if (line) { lines.push(line); line = ""; }
+    // Only split words that actually exceed the available width, preserving URLs.
+    for (const character of word) {
+      if (line && ctx.measureText(line + character).width > width) {
+        lines.push(line); line = "";
+      }
+      line += character;
     }
   }
   if (line) lines.push(line);
