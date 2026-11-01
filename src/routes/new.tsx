@@ -51,6 +51,7 @@ function NewWish() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [caption, setCaption] = useState("");
   const [voice, setVoice] = useState<WishVoice | null>(null);
+  const [voiceBusy, setVoiceBusy] = useState(false);
   const [bankName, setBankName] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
   const [accountName, setAccountName] = useState("");
@@ -307,7 +308,7 @@ function NewWish() {
             ) : null}
           </div>
 
-          <WishVoiceInput value={voice} onChange={setVoice} disabled={busy} />
+          <WishVoiceInput value={voice} onChange={setVoice} disabled={busy} onBusyChange={setVoiceBusy} />
 
           <fieldset className="space-y-3 border-t-2 border-ink pt-4">
             <legend className="font-display text-lg font-bold">Where should givers transfer funds?</legend>
@@ -374,7 +375,7 @@ function NewWish() {
 
           <Button
             type="submit"
-            disabled={busy}
+            disabled={busy || voiceBusy}
             className="w-full press rounded-lg bg-primary px-4 py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
           >
             {busy ? "Publishing…" : "Publish wish"}

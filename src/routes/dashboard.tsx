@@ -10,6 +10,7 @@ import { initials, naira, STATUS_LABELS, timeAgo } from "@/lib/format";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { MyGiveaways } from "@/components/wishr/MyGiveaways";
+import { WishAudioPlayer } from "@/components/wishr/WishAudioPlayer";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -182,6 +183,7 @@ function Dashboard() {
                     animate={false}
                   />
                 </div>
+                <WishAudioPlayer path={w.audio_path} />
               </li>
             ))}
           </ul>
