@@ -85,6 +85,10 @@
   --input: oklch(0.33635 0.05741 194.77);
   --ring: oklch(0.65409 0.12127 177.03);
   --hard: oklch(0.33635 0.05741 194.77);
+  --border-soft: color-mix(in oklch, var(--foreground) 16%, var(--card));
+  --shadow-card: 0 4px 20px color-mix(in oklch, var(--foreground) 5%, transparent);
+  --shadow-card-hover: 0 14px 32px color-mix(in oklch, var(--foreground) 12%, transparent);
+  --shadow-dock: 0 10px 36px color-mix(in oklch, var(--foreground) 18%, transparent), 0 2px 6px color-mix(in oklch, var(--foreground) 5%, transparent);
 }
 
 .dark {
@@ -154,17 +158,17 @@
   font-family: var(--font-display-family);
   font-size: 0.6875rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--foreground);
 }
 
-/* Neo-brutalist card: hard outline plus offset shadow */
+/* Crisp branded framing with restrained elevation. */
 @utility card-frame {
   border-radius: 0.75rem;
   background-color: var(--card);
   border: 1px solid var(--border);
-  box-shadow: 0 12px 34px color-mix(in oklch, var(--foreground) 10%, transparent);
+  box-shadow: var(--shadow-card);
 }
 
 @utility card-flat {
@@ -199,7 +203,7 @@
   font-family: var(--font-display-family);
   font-size: 0.6875rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   text-transform: uppercase;
   line-height: 1;
   background-color: var(--accent);
@@ -216,7 +220,7 @@
   font-family: var(--font-display-family);
   font-size: 0.6875rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   text-transform: uppercase;
   line-height: 1;
   background-color: var(--primary);
@@ -233,7 +237,7 @@
   font-family: var(--font-display-family);
   font-size: 0.6875rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   text-transform: uppercase;
   line-height: 1;
   background-color: transparent;
@@ -324,12 +328,12 @@
     transform 0.16s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.16s cubic-bezier(0.22, 1, 0.36, 1);
   &:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 8px 8px 0 0 var(--hard);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
   }
   &:active {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0 0 var(--hard);
+    transform: translateY(0);
+    box-shadow: var(--shadow-card);
   }
 }
 
@@ -361,6 +365,47 @@
   );
   background-size: 200% 100%;
   animation: wishr-shimmer 1.6s linear infinite;
+}
+
+.wishr-shell { background: transparent; }
+.wishr-main { padding-bottom: calc(8rem + env(safe-area-inset-bottom, 0px)); }
+.mobile-dock {
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  width: min(390px, calc(100% - 28px));
+  padding: 6px 10px;
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--card) 94%, transparent);
+  box-shadow: var(--shadow-dock);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+.dock-item { color: var(--muted-foreground); -webkit-tap-highlight-color: transparent; }
+.dock-icon, .dock-create {
+  display: grid;
+  place-items: center;
+  height: 32px;
+  width: 46px;
+  border-radius: 999px;
+  transition: background-color .18s ease, transform .18s ease;
+}
+.dock-item[aria-current="page"] { color: var(--card-foreground); }
+.dock-item[aria-current="page"] .dock-icon {
+  background: color-mix(in oklch, var(--secondary) 30%, var(--card));
+}
+.dock-create {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  box-shadow: 0 3px 8px color-mix(in oklch, var(--primary) 25%, transparent);
+}
+.dock-item:active .dock-icon, .dock-item:active .dock-create { transform: scale(.92); }
+.share-surface {
+  background: linear-gradient(120deg, var(--muted), var(--card) 70%);
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+}
+@media (min-width: 768px) {
+  .wishr-main { padding-bottom: 5rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
