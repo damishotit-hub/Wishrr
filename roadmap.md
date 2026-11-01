@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Add optional 60-second wish recording/upload, private storage, and card/detail playback; test the signed-in flow.
+- [x] Add optional 60-second wish recording/upload, private storage, and card/detail playback; verified recording, upload rejection, saved playback, and phone-sized cards with a temporary private draft.
 
 - [x] Apply the approved Wishr color palette without changing neo-brutalist styling.
 - [x] Add the official Wishr logo to the main header and footer.

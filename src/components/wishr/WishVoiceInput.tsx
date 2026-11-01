@@ -3,7 +3,7 @@ import { Mic, Square, Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { inspectVoice, MAX_VOICE_SECONDS, type WishVoice } from "@/lib/wish-audio";
 
-export function WishVoiceInput({ value, onChange, disabled = false }: { value: WishVoice | null; onChange: (voice: WishVoice | null) => void; disabled?: boolean }) {
+export function WishVoiceInput({ value, onChange, disabled = false, onBusyChange }: { value: WishVoice | null; onChange: (voice: WishVoice | null) => void; disabled?: boolean; onBusyChange?: (busy: boolean) => void }) {
   const [recording, setRecording] = useState(false);
   const [checking, setChecking] = useState(false);
   const [seconds, setSeconds] = useState(0);
@@ -15,6 +15,7 @@ export function WishVoiceInput({ value, onChange, disabled = false }: { value: W
   const limit = useRef<ReturnType<typeof setTimeout> | null>(null);
   const input = useRef<HTMLInputElement | null>(null);
   const mounted = useRef(true);
+  useEffect(() => { onBusyChange?.(recording || checking); }, [recording, checking, onBusyChange]);
 
   useEffect(() => {
     if (!value) { setPreview(null); return; }

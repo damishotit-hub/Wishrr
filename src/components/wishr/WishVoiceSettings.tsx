@@ -9,6 +9,7 @@ import type { Wish } from "@/lib/queries";
 export function WishVoiceSettings({ wish }: { wish: Wish }) {
   const [voice, setVoice] = useState<WishVoice | null>(null);
   const [busy, setBusy] = useState(false);
+  const [voiceBusy, setVoiceBusy] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
   const client = useQueryClient();
   async function save(remove = false) {
@@ -30,10 +31,10 @@ export function WishVoiceSettings({ wish }: { wish: Wish }) {
     } finally { setBusy(false); }
   }
   return <section className="mt-6 min-w-0" aria-label="Manage wish voice message">
-    <WishVoiceInput value={voice} onChange={setVoice} disabled={busy} />
+    <WishVoiceInput value={voice} onChange={setVoice} disabled={busy} onBusyChange={setVoiceBusy} />
     <div className="mt-3 flex flex-wrap gap-2">
-      {voice ? <Button disabled={busy} onClick={() => void save()}>{busy ? "Saving…" : "Save voice message"}</Button> : null}
-      {wish.audio_path ? <Button variant="outline" disabled={busy} onClick={() => void save(true)}>Remove saved audio</Button> : null}
+      {voice ? <Button disabled={busy || voiceBusy} onClick={() => void save()}>{busy ? "Saving…" : "Save voice message"}</Button> : null}
+      {wish.audio_path ? <Button variant="outline" disabled={busy || voiceBusy} onClick={() => void save(true)}>Remove saved audio</Button> : null}
     </div>
     {notice ? <p role="status" className="mt-2 text-sm text-mute">{notice}</p> : null}
   </section>;
