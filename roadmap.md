@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Sweep typography to Plus Jakarta Sans, replace interface green/lemon with professional neutrals, preserve logo, and polish motion; verify public pages and mobile navigation.
+- [x] Sweep typography to Plus Jakarta Sans throughout, replace interface green/lemon with graphite/white and restrained cool accents, preserve logo, and polish action/nav/scroll motion; verified public navigation, auth page, 320/390px layouts, reduced motion, and clean runtime/build checks.
 
 - [x] Replace mobile navigation with a detached capsule, redesign story cards, and polish shared UI; verified 320/390px navigation, desktop layout, standalone PNG export, and clean runtime/build checks.
 - [ ] Verify redesigned sharing on a real signed-in wish (blocked: preview session minting could not match the requester; requires a signed-in preview).
