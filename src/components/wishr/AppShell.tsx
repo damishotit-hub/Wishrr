@@ -7,7 +7,7 @@ import { initials } from "@/lib/format";
 import { MemberSearch } from "./MemberSearch";
 import { CommunityPulse } from "@/lib/community";
 import { MessagesLink } from "./MessagesLink";
-import { Compass, Gift, House, Plus, UserRound } from "lucide-react";
+import { Compass, Gift, House, MessageCircle, Plus, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const NAV = [
@@ -15,6 +15,7 @@ const NAV = [
   { to: "/explore", label: "Explore", icon: Compass },
   { to: "/new", label: "Wish", icon: Plus },
   { to: "/giveaways", label: "Giveaways", icon: Gift },
+  { to: "/messages", label: "Messages", icon: MessageCircle },
   { to: "/dashboard", label: "Profile", icon: UserRound },
 ] as const;
 
@@ -85,7 +86,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               <span className="size-8 animate-pulse rounded-full bg-warm" />
             ) : user ? (
               <>
-                <MessagesLink />
+                <div className="hidden xl:block"><MessagesLink /></div>
                 <Link to="/activity" className="hidden text-sm font-semibold text-mute hover:text-ink sm:inline">
                   Activity
                 </Link>
@@ -114,7 +115,10 @@ export function AppShell({ children }: { children: ReactNode }) {
             )}
           </div>
         </div>
-        <div className="mt-3 flex justify-end"><CommunityPulse /></div>
+        <div className="mt-3 flex flex-wrap items-center justify-end gap-3">
+          {user ? <div className="mr-auto xl:hidden"><MessagesLink /></div> : null}
+          <CommunityPulse />
+        </div>
       </header>
 
       <main ref={mainRef} className="wishr-main mx-auto w-full max-w-[430px] px-5 md:max-w-5xl">
@@ -148,8 +152,9 @@ export function AppShell({ children }: { children: ReactNode }) {
         aria-label="Main"
         className="mobile-dock fixed left-1/2 z-40 -translate-x-1/2 md:hidden"
       >
-        <div className="grid grid-cols-5 items-center gap-1">
+        <div className="grid grid-cols-6 items-center gap-0.5">
           {NAV.map((item) => {
+            if (item.to === "/messages") return <MessagesLink key={item.to} variant="dock" />;
             const active =
               item.to === "/" ? pathname === "/" : pathname.startsWith(item.to as string);
             const Icon = item.icon;
@@ -164,7 +169,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                   <span className={item.to === "/new" ? "dock-create" : "dock-icon"}>
                     <Icon aria-hidden="true" className="!size-5" strokeWidth={active ? 2.4 : 1.8} />
                   </span>
-                  <span className="text-[10px] font-semibold leading-3">{item.label}</span>
+                  <span className="text-[9px] font-semibold leading-3">{item.label}</span>
                 </Link>
               </Button>
             );
