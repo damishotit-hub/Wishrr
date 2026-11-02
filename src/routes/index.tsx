@@ -45,7 +45,7 @@ function Home() {
   return (
     <AppShell>
       <section className="pt-8 md:pt-16">
-        <p className="reveal text-xs font-semibold tracking-[0.18em] text-primary uppercase">
+        <p className="reveal text-xs font-semibold text-mute uppercase">
           Wishes, not campaigns
         </p>
         <h1 style={{ animationDelay: "80ms" }} className="reveal mt-3 font-display text-[34px] leading-[1.1] text-ink md:text-[56px]">
