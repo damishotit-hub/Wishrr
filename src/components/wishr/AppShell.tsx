@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { Logo } from "./Logo";
 import { useAuth } from "@/lib/auth";
 import { OnboardingPrompt } from "@/components/wishr/OnboardingPrompt";
@@ -32,6 +32,28 @@ export function AppShell({ children }: { children: ReactNode }) {
   const { user, loading } = useAuth();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const name = (user?.user_metadata?.["display_name"] as string) ?? user?.email ?? "";
+  const mainRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.08 });
+    const sections = mainRef.current?.querySelectorAll("section") ?? [];
+    sections.forEach((section) => {
+      if (section.getBoundingClientRect().top < window.innerHeight) return;
+      section.classList.add("scroll-reveal");
+      observer.observe(section);
+    });
+    return () => {
+      observer.disconnect();
+      sections.forEach((section) => section.classList.remove("scroll-reveal", "is-visible"));
+    };
+  }, [pathname]);
 
   return (
     <div className="wishr-shell min-h-screen font-body text-ink antialiased">
@@ -39,7 +61,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="flex items-center justify-between">
           <Logo />
 
-          <nav className="hidden items-center gap-6 text-sm font-semibold md:flex">
+          <nav className="desktop-nav hidden items-center gap-4 text-xs font-semibold lg:flex">
             <Link to="/explore" className="text-mute hover:text-ink">
               Explore
             </Link>
@@ -70,7 +92,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 <Link
                   to="/dashboard"
                   aria-label="Your dashboard"
-                  className="grid size-8 place-items-center rounded-lg border-2 border-ink bg-accent text-sm font-semibold text-ink"
+                  className="grid size-8 place-items-center rounded-lg border border-line bg-secondary text-sm font-semibold text-secondary-foreground"
                 >
                   {initials(name)}
                 </Link>
@@ -95,7 +117,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="mt-3 flex justify-end"><CommunityPulse /></div>
       </header>
 
-      <main className="wishr-main mx-auto w-full max-w-[430px] px-5 md:max-w-5xl">
+      <main ref={mainRef} className="wishr-main mx-auto w-full max-w-[430px] px-5 md:max-w-5xl">
         {children}
       </main>
 
