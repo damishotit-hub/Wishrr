@@ -50,7 +50,7 @@ export async function renderWishStory(wish: Wish, url: string): Promise<Blob> {
   const css = getComputedStyle(document.documentElement);
   const color = (name: string) => css.getPropertyValue(name).trim();
   const paper = color("--card"), ink = color("--card-foreground");
-  const teal = color("--primary"), mint = color("--secondary"), lime = color("--accent");
+  const primary = color("--primary"), secondary = color("--secondary"), accent = color("--accent");
   const soft = color("--muted"), muted = color("--muted-foreground");
   const box = (x: number, y: number, width: number, height: number, radius: number, fill: string) => {
     ctx.fillStyle = fill;
@@ -59,7 +59,7 @@ export async function renderWishStory(wish: Wish, url: string): Promise<Blob> {
   ctx.fillStyle = paper; ctx.fillRect(0, 0, 1080, 1920);
   const [brand, photo] = await Promise.all([loadImage(logo.url), wish.image_url ? loadImage(wish.image_url) : Promise.resolve(null)]);
   if (brand) ctx.drawImage(brand, 72, 72, 280, 280 * brand.height / brand.width);
-  box(768, 91, 240, 52, 26, lime);
+  box(768, 91, 240, 52, 26, accent);
   ctx.fillStyle = ink; ctx.textAlign = "center"; ctx.font = "700 23px 'Plus Jakarta Sans'";
   ctx.fillText(wish.status === "fulfilled" ? "WISH GRANTED" : "A LITTLE KINDNESS", 888, 125);
   ctx.save();
@@ -70,12 +70,12 @@ export async function renderWishStory(wish: Wish, url: string): Promise<Blob> {
     ctx.drawImage(photo, (photo.width - sw) / 2, (photo.height - sh) / 2, sw, sh, 48, 220, 984, 700);
   } else {
     ctx.fillStyle = soft; ctx.fillRect(48, 220, 984, 700);
-    box(128, 320, 824, 8, 4, mint);
+    box(128, 320, 824, 8, 4, secondary);
     ctx.fillStyle = ink; ctx.textAlign = "left"; ctx.font = "800 100px 'Plus Jakarta Sans'";
     ctx.fillText("One wish.", 128, 520); ctx.fillText("So much", 128, 640); ctx.fillText("possibility.", 128, 760);
   }
   ctx.restore();
-  ctx.textAlign = "left"; ctx.fillStyle = muted; ctx.font = "600 26px Inter";
+  ctx.textAlign = "left"; ctx.fillStyle = muted; ctx.font = "600 26px 'Plus Jakarta Sans'";
   const by = wish.is_anonymous ? "A wish from the community" : `A wish by ${wish.creator_display_name}`;
   ctx.fillText(linesFor(ctx, by, 936, 1)[0] ?? "", 72, 986);
   ctx.fillStyle = ink; ctx.font = "800 64px 'Plus Jakarta Sans'";
@@ -84,12 +84,12 @@ export async function renderWishStory(wish: Wish, url: string): Promise<Blob> {
   const percent = progressPercent(raised, goal);
   box(48, 1328, 984, 264, 24, soft);
   ctx.fillStyle = ink; ctx.font = "800 52px 'Plus Jakarta Sans'"; ctx.fillText(naira(raised), 88, 1408);
-  ctx.fillStyle = muted; ctx.font = "500 26px Inter"; ctx.fillText("raised with kindness", 88, 1452);
-  ctx.textAlign = "right"; ctx.fillStyle = ink; ctx.font = "700 30px Inter"; ctx.fillText(`${percent}%`, 992, 1408);
-  ctx.fillStyle = muted; ctx.font = "500 26px Inter"; ctx.fillText(`of ${naira(goal)}`, 992, 1452);
+  ctx.fillStyle = muted; ctx.font = "500 26px 'Plus Jakarta Sans'"; ctx.fillText("raised with kindness", 88, 1452);
+  ctx.textAlign = "right"; ctx.fillStyle = ink; ctx.font = "700 30px 'Plus Jakarta Sans'"; ctx.fillText(`${percent}%`, 992, 1408);
+  ctx.fillStyle = muted; ctx.font = "500 26px 'Plus Jakarta Sans'"; ctx.fillText(`of ${naira(goal)}`, 992, 1452);
   box(88, 1484, 904, 18, 9, paper);
-  if (percent > 0) box(88, 1484, Math.max(18, 904 * percent / 100), 18, 9, teal);
-  ctx.textAlign = "left"; ctx.fillStyle = ink; ctx.font = "600 24px Inter";
+  if (percent > 0) box(88, 1484, Math.max(18, 904 * percent / 100), 18, 9, primary);
+  ctx.textAlign = "left"; ctx.fillStyle = ink; ctx.font = "600 24px 'Plus Jakarta Sans'";
   ctx.fillText(wish.status === "fulfilled" ? "Proof that kindness makes things happen." : `${naira(Math.max(0, goal - raised))} to make this wish happen.`, 88, 1550);
   // Convert semantic colors to QR-compatible hex without duplicating palette values.
   const hex = (value: string) => {
@@ -104,8 +104,8 @@ export async function renderWishStory(wish: Wish, url: string): Promise<Blob> {
   ctx.drawImage(qr, 832, 1660, 176, 176);
   ctx.fillStyle = ink; ctx.font = "800 44px 'Plus Jakarta Sans'";
   ctx.fillText(wish.status === "fulfilled" ? "Kindness came through." : "Make it happen.", 72, 1716);
-  ctx.fillStyle = muted; ctx.font = "500 26px Inter"; ctx.fillText("Every little bit means a lot.", 72, 1762);
-  ctx.font = "600 24px Inter"; ctx.fillStyle = ink;
+  ctx.fillStyle = muted; ctx.font = "500 26px 'Plus Jakarta Sans'"; ctx.fillText("Every little bit means a lot.", 72, 1762);
+  ctx.font = "600 24px 'Plus Jakarta Sans'"; ctx.fillStyle = ink;
   linesFor(ctx, url.replace(/^https?:\/\//, ""), 710, 2).forEach((line, i) => ctx.fillText(line, 72, 1820 + i * 32));
   return new Promise((resolve, reject) => canvas.toBlob((blob) => blob ? resolve(blob) : reject(new Error("Couldn't save the card.")), "image/png"));
 }
