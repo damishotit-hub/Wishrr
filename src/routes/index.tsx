@@ -46,7 +46,7 @@ function Home() {
     <AppShell>
       <section className="pt-8 md:pt-16">
         <p className="reveal text-xs font-semibold text-mute uppercase">
-          Wishes, not campaigns
+          Ask for help. Give when you can.
         </p>
         <h1 style={{ animationDelay: "80ms" }} className="reveal mt-3 font-display text-[34px] leading-[1.1] text-ink md:text-[56px]">
           Make a wish.
@@ -54,8 +54,8 @@ function Home() {
           Someone might make it happen.
         </h1>
         <p style={{ animationDelay: "160ms" }} className="reveal mt-4 max-w-[52ch] text-[15px] leading-relaxed text-mute md:text-lg">
-          Wishr is a quiet, dignified place to say what you need - school fees, a sewing machine, a
-          bus ticket home - and let people who care help you get there.
+          Got something you need help with? Post it here. School fees, urgent bills, work tools, or
+          anything you need to move forward. Someone might be willing to help.
         </p>
 
         <div style={{ animationDelay: "200ms" }} className="reveal mt-5"><CommunityPulse size="lg" /></div>
@@ -135,7 +135,7 @@ function Home() {
         <div className="flex items-end justify-between gap-4">
           <div>
             <p className="eyebrow">Impact Wall</p>
-            <h2 className="mt-2 font-display text-2xl">Wishes granted</h2>
+            <h2 className="mt-2 font-display text-2xl">People are getting the help they need.</h2>
             <p className="mt-1.5 text-sm text-mute">Proof that kindness lands.</p>
           </div>
           <Link to="/impact" className="text-sm font-semibold text-primary">See all</Link>
@@ -151,7 +151,7 @@ function Home() {
         <div className="flex items-end justify-between gap-4">
           <div>
             <p className="eyebrow">Giveaways</p>
-            <h2 className="mt-2 font-display text-2xl">People are giving too</h2>
+            <h2 className="mt-2 font-display text-2xl">Got something to give? Support someone today.</h2>
             <p className="mt-1.5 text-sm text-mute">
               Sometimes you have something someone else needs.
             </p>
@@ -211,9 +211,9 @@ function Home() {
         <h2 className="font-display text-2xl">How Wishr works</h2>
         <ol className="mt-6 grid gap-6 md:grid-cols-3">
           {[
-            ["Say the wish", "Write it plainly, set a goal in Naira, add a deadline if it matters."],
-            ["People chip in", "Givers transfer directly, then wishers confirm the money arrived."],
-            ["Share the ending", "Post an update so the people who helped can see it landed."],
+            ["Post what you need", "Write it plainly, set a goal in Naira, add a deadline if it matters."],
+            ["People support you", "Givers transfer directly, then you confirm the money arrived."],
+            ["Come back and say thank you", "Post an update so the people who helped can see it landed."],
           ].map(([title, body], i) => (
             <li key={title}>
               <span
