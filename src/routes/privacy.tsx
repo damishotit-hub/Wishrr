@@ -2,22 +2,22 @@ import { createFileRoute } from "@tanstack/react-router";
 import { InfoPage, infoHead } from "@/components/wishr/InfoPage";
 
 export const Route = createFileRoute("/privacy")({
-  head: infoHead('Privacy Policy', 'This policy explains what information Wishr collects and how we use it.'),
+  head: infoHead("Privacy Policy", "What Wishr knows about you, why, and how we look after it."),
   component: PrivacyPage,
 });
 
 function PrivacyPage() {
   return (
     <InfoPage
-      eyebrow='Legal'
-      title='Privacy Policy'
-      intro='This policy explains what information Wishr collects and how we use it.'
+      eyebrow="Legal"
+      title="Privacy Policy"
+      intro="You trust us with personal things when you ask for help. Here's what we keep, why we keep it, and how we look after it."
       sections={[
-    { heading: "What we collect", body: <p>Your account details (name, email, optional profile photo), the wishes, giveaways, messages and reports you create, and basic usage information needed to run the service.</p> },
-    { heading: "Bank details", body: <p>Bank details you add to a wish are stored privately. They are shown only to signed-in givers who choose to transfer, never on public pages.</p> },
-    { heading: "Private chats", body: <p>Messages between wishers, givers and recipients are visible only to the two people in the conversation, and to our team when investigating a report.</p> },
-    { heading: "How we use information", body: <p>To run Wishr, keep the community safe, send you notifications about your activity, and improve the service. We do not sell your personal information.</p> },
-    { heading: "Your choices", body: <p>You can edit your profile, delete your wishes and giveaways, and ask us to delete your account.</p> },
+        { heading: "What we keep", body: <p>Your name, email, username and photo if you add one. The wishes, giveaways, messages and reports you create. A little usage information so the site works properly.</p> },
+        { heading: "Your bank details", body: <p>These are never shown on public pages. Only signed-in people who choose to send you money can see them, and only on your wish.</p> },
+        { heading: "Your messages", body: <p>Private chats are seen only by you and the person you're talking to. Our team looks only if someone reports a problem.</p> },
+        { heading: "How we use it", body: <p>To run Wishr, keep people safe, let you know when something happens on your wishes, and make the site better. We do not sell your information. Ever.</p> },
+        { heading: "You're in control", body: <p>Edit your profile, delete your wishes or giveaways, or ask us to delete your account at <a className="font-semibold text-primary" href="mailto:idowudaviddamilola@gmail.com">idowudaviddamilola@gmail.com</a>.</p> },
       ]}
     />
   );
