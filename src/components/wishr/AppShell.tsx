@@ -58,7 +58,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="wishr-shell min-h-screen font-body text-ink antialiased">
-      <header className="mx-auto w-full max-w-[430px] px-5 pt-6 md:max-w-5xl md:pt-8">
+      <header className="mx-auto w-full max-w-[430px] px-6 pt-7 md:max-w-5xl md:pt-10">
         <div className="flex items-center justify-between">
           <Logo />
 
@@ -116,7 +116,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         </div>
         <div className="mt-3 flex flex-wrap items-center justify-end gap-3">
-          {user ? <div className="mr-auto xl:hidden"><MessagesLink /></div> : null}
+          {user ? <div className="mr-auto hidden md:block xl:hidden"><MessagesLink /></div> : null}
           <CommunityPulse />
         </div>
       </header>
