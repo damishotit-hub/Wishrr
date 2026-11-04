@@ -56,7 +56,7 @@ function AdminPage() {
         {!isAdmin ? <p className="mt-2 text-sm text-mute">You're signed in as a moderator. You can review reports and act on reported wishes and giveaways.</p> : null}
         <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
           {(isAdmin ? TABS : (["Reports"] as const)).map((t) => (
-            <button key={t} onClick={() => setTab(t)} className={`press shrink-0 rounded-lg border-2 border-ink px-3 py-1.5 text-sm font-semibold ${tab === t ? "bg-primary text-primary-foreground" : "bg-card"}`}>{t}</button>
+            <button key={t} onClick={() => setTab(t)} className={`press shrink-0 rounded-lg border border-line px-3 py-1.5 text-sm font-semibold ${tab === t ? "bg-primary text-primary-foreground" : "bg-card"}`}>{t}</button>
           ))}
         </div>
         <div className="mt-6">
@@ -123,7 +123,7 @@ function Reports() {
   return (
     <div>
       <div className="mb-3 flex gap-2">
-        {(["open", "all"] as const).map((f) => <button key={f} onClick={() => setFilter(f)} className={`${small} border-2 border-ink ${filter === f ? "bg-secondary" : "bg-card"}`}>{f === "open" ? "Needs review" : "All reports"}</button>)}
+        {(["open", "all"] as const).map((f) => <button key={f} onClick={() => setFilter(f)} className={`${small} border border-line ${filter === f ? "bg-secondary" : "bg-card"}`}>{f === "open" ? "Needs review" : "All reports"}</button>)}
       </div>
       {!reports.data?.length ? <p className="text-sm text-mute">{reports.isPending ? "Loading..." : "No reports to review."}</p> : (
         <ul className="space-y-3">
@@ -146,8 +146,8 @@ function Reports() {
                 <div className="mt-3 flex flex-wrap gap-2">
                   {target ? <ModActions kind={r.target_type as "wish" | "giveaway"} id={target.id} /> : null}
                   {r.status === "open" || r.status === "reviewing" ? <>
-                    <button onClick={() => resolve(r.id, "resolved")} className={`${small} border-2 border-ink bg-accent text-ink`}>Mark resolved</button>
-                    <button onClick={() => resolve(r.id, "dismissed")} className={`${small} border-2 border-ink bg-card`}>Dismiss</button>
+                    <button onClick={() => resolve(r.id, "resolved")} className={`${small} border border-line bg-accent text-ink`}>Mark resolved</button>
+                    <button onClick={() => resolve(r.id, "dismissed")} className={`${small} border border-line bg-card`}>Dismiss</button>
                   </> : null}
                 </div>
               </li>
@@ -172,8 +172,8 @@ function ModActions({ kind, id }: { kind: "wish" | "giveaway"; id: string }) {
   }
   return <>
     <button disabled={busy} onClick={() => run("approve")} className={`${small} bg-primary text-primary-foreground`}>Approve</button>
-    <button disabled={busy} onClick={() => run("hide")} className={`${small} border-2 border-ink bg-card`}>Hide</button>
-    <button disabled={busy} onClick={() => run("remove")} className={`${small} border-2 border-ink bg-destructive text-destructive-foreground`}>Remove</button>
+    <button disabled={busy} onClick={() => run("hide")} className={`${small} border border-line bg-card`}>Hide</button>
+    <button disabled={busy} onClick={() => run("remove")} className={`${small} border border-line bg-destructive text-destructive-foreground`}>Remove</button>
   </>;
 }
 
@@ -289,7 +289,7 @@ function Team() {
   const row = (m: (typeof mods)[number]) => (
     <li key={m.user_id + m.role} className="flex flex-wrap items-center justify-between gap-2 p-4">
       <div className="min-w-0"><p className="truncate text-sm font-semibold">{m.display_name ?? "Unnamed"}{m.username ? <span className="ml-2 font-normal text-primary">@{m.username}</span> : null}</p><p className="truncate text-xs text-mute">{m.email}</p></div>
-      <button onClick={() => void remove(m.user_id, m.role as "admin" | "moderator")} className={`${small} border-2 border-ink bg-card`}>Remove</button>
+      <button onClick={() => void remove(m.user_id, m.role as "admin" | "moderator")} className={`${small} border border-line bg-card`}>Remove</button>
     </li>
   );
   return (
@@ -299,8 +299,8 @@ function Team() {
         <p className="mt-1">Moderators can only view and resolve content reports and hide, approve or remove reported wishes and giveaways. They cannot see payments, bank details, the member list, or manage roles. Up to {MOD_CAP} moderators.</p>
       </div>
       <form onSubmit={add} className="flex flex-col gap-2 sm:flex-row">
-        <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Member email" className="min-w-0 flex-1 rounded-lg border-2 border-ink bg-card px-3 py-2 text-sm" />
-        <select value={role} onChange={(e) => setRole(e.target.value as "moderator" | "admin")} className="rounded-lg border-2 border-ink bg-card px-3 py-2 text-sm"><option value="moderator">Moderator</option><option value="admin">Admin</option></select>
+        <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Member email" className="min-w-0 flex-1 rounded-lg border border-line bg-card px-3 py-2 text-sm" />
+        <select value={role} onChange={(e) => setRole(e.target.value as "moderator" | "admin")} className="rounded-lg border border-line bg-card px-3 py-2 text-sm"><option value="moderator">Moderator</option><option value="admin">Admin</option></select>
         <button disabled={busy} className="press rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground disabled:opacity-60">Add to team</button>
       </form>
       {msg ? <p className="text-sm font-semibold">{msg}</p> : null}

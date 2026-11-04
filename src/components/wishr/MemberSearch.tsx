@@ -18,11 +18,11 @@ export function MemberSearch({ compact = false, variant = "plain" }: { compact?:
 
   return <>
     {variant === "hero" ? (
-      <button type="button" onClick={() => setOpen(true)} aria-label="Search members" className="press flex w-full items-center gap-3 rounded-xl border-2 border-ink bg-card px-4 py-4 text-left hard-shadow-sm md:max-w-xl">
+      <button type="button" onClick={() => setOpen(true)} aria-label="Search members" className="press flex w-full items-center gap-3 rounded-xl border border-line bg-card px-4 py-4 text-left hard-shadow-sm md:max-w-xl">
         <Search className="size-5 text-primary" /><span className="flex-1 text-base font-bold text-ink">Find someone by @username or name</span><span className="hidden rounded-md bg-primary px-3 py-1.5 text-xs font-bold text-primary-foreground sm:inline">Search</span>
       </button>
     ) : variant === "bold" ? (
-      <button type="button" onClick={() => setOpen(true)} aria-label="Search members" className="press inline-flex items-center gap-2 rounded-lg border-2 border-ink bg-card px-3 py-1.5 text-sm font-bold text-ink">
+      <button type="button" onClick={() => setOpen(true)} aria-label="Search members" className="press inline-flex items-center gap-2 rounded-lg border border-line bg-card px-3 py-1.5 text-sm font-bold text-ink">
         <Search className="size-4 text-primary" /><span className="hidden sm:inline">Search people</span>
       </button>
     ) : (

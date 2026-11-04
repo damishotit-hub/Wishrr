@@ -19,7 +19,7 @@ export function ProgressMeter({
         <span className="text-mute">of {naira(goal)}</span>
       </div>
       <div
-        className="mt-2 h-3 w-full overflow-hidden rounded-full border-2 border-ink bg-warm"
+        className="mt-2 h-3 w-full overflow-hidden rounded-full border border-line bg-warm"
         role="progressbar"
         aria-valuenow={percent}
         aria-valuemin={0}

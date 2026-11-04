@@ -17,7 +17,7 @@ export function WishCard({ wish, index = 0 }: { wish: Wish; index?: number }) {
       style={{ animationDelay: `${Math.min(index, 8) * 70}ms` }}
     >
       {wish.image_url ? (
-        <figure className="border-b-2 border-ink">
+        <figure className="border-b-2 border-line">
           <Link to="/wish/$id" params={{ id: wish.id }} className="block">
             <img
               src={wish.image_url}
@@ -27,7 +27,7 @@ export function WishCard({ wish, index = 0 }: { wish: Wish; index?: number }) {
             />
           </Link>
           {wish.image_caption ? (
-            <figcaption className="border-t-2 border-ink bg-accent px-4 py-2 text-[12px] font-semibold text-ink">
+            <figcaption className="border-t-2 border-line bg-accent px-4 py-2 text-[12px] font-semibold text-ink">
               {wish.image_caption}
             </figcaption>
           ) : null}
@@ -67,7 +67,7 @@ export function WishCard({ wish, index = 0 }: { wish: Wish; index?: number }) {
       </div>
       <WishAudioPlayer path={wish.audio_path} />
 
-      <div className="mt-4 flex items-center justify-between gap-3 border-t-2 border-ink pt-3">
+      <div className="mt-4 flex items-center justify-between gap-3 border-t-2 border-line pt-3">
         <span className="text-xs font-medium text-mute">
           {fulfilled ? "Fulfilled" : `${naira(remaining)} to go`}
           {left ? ` · ${left}` : ` · ${timeAgo(wish.created_at)}`}

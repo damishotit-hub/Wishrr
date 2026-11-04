@@ -60,16 +60,16 @@ export function ReportButton({ target, id }: { target: "wish" | "giveaway"; id: 
                 <p className="mt-1 text-sm text-mute">What's wrong with this {target}?</p>
                 <div className="mt-4 grid gap-2">
                   {REPORT_REASONS.map((r) => (
-                    <label key={r.value} className={`flex cursor-pointer items-center gap-2 rounded-lg border-2 border-ink px-3 py-2 text-sm ${reason === r.value ? "bg-secondary font-semibold" : "bg-card"}`}>
+                    <label key={r.value} className={`flex cursor-pointer items-center gap-2 rounded-lg border border-line px-3 py-2 text-sm ${reason === r.value ? "bg-secondary font-semibold" : "bg-card"}`}>
                       <input type="radio" name="reason" value={r.value} checked={reason === r.value} onChange={() => setReason(r.value)} />
                       {r.label}
                     </label>
                   ))}
                 </div>
-                <textarea value={details} onChange={(e) => setDetails(e.target.value)} rows={3} maxLength={1000} placeholder="Anything else we should know? (optional)" className="mt-3 w-full rounded-lg border-2 border-ink bg-canvas px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary" />
+                <textarea value={details} onChange={(e) => setDetails(e.target.value)} rows={3} maxLength={1000} placeholder="Anything else we should know? (optional)" className="mt-3 w-full rounded-lg border border-line bg-canvas px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary" />
                 {error ? <p className="mt-2 text-sm text-destructive">{error}</p> : null}
                 <div className="mt-4 grid grid-cols-2 gap-2">
-                  <button type="button" onClick={() => setOpen(false)} className="press rounded-lg border-2 border-ink bg-card px-4 py-3 text-sm font-semibold">Cancel</button>
+                  <button type="button" onClick={() => setOpen(false)} className="press rounded-lg border border-line bg-card px-4 py-3 text-sm font-semibold">Cancel</button>
                   <button disabled={busy} className="press rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60">{busy ? "Sending..." : "Send report"}</button>
                 </div>
               </form>

@@ -59,13 +59,13 @@ export function OnboardingPrompt() {
 
   return (
     <div className="fixed inset-0 z-[80] flex items-center justify-center bg-ink/40 px-5">
-      <div role="dialog" aria-modal="true" aria-labelledby="onboarding-title" className="pop-in card-frame w-full max-w-sm border-2 border-ink bg-card p-6">
+      <div role="dialog" aria-modal="true" aria-labelledby="onboarding-title" className="pop-in card-frame w-full max-w-sm border border-line bg-card p-6">
         <p className="eyebrow">Welcome to Wishr · Step {needsHandle ? 1 : 2} of 2</p>
         {needsHandle ? (
           <form onSubmit={(e) => { e.preventDefault(); claim.mutate(); }}>
             <h2 id="onboarding-title" className="mt-2 font-display text-2xl">Claim your username</h2>
             <p className="mt-2 text-sm text-mute">This is how people find you and share your profile. You can change it later.</p>
-            <div className="mt-4 flex rounded-lg border-2 border-ink bg-canvas focus-within:ring-2 focus-within:ring-primary">
+            <div className="mt-4 flex rounded-lg border border-line bg-canvas focus-within:ring-2 focus-within:ring-primary">
               <span className="px-3 py-3 font-bold text-mute">@</span>
               <input autoFocus required minLength={3} maxLength={24} value={handle} onChange={(e) => setHandle(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ""))} aria-label="Username" className="min-w-0 flex-1 bg-transparent py-3 pr-3 font-semibold outline-none" />
             </div>
@@ -80,14 +80,14 @@ export function OnboardingPrompt() {
             <div className="mt-5 space-y-3">
               {OPTIONS.map((opt) => (
                 <button key={opt.value} type="button" onClick={() => setIntent(opt.value)} aria-pressed={intent === opt.value}
-                  className={`press w-full rounded-lg border-2 border-ink px-4 py-3 text-left ${intent === opt.value ? "bg-secondary" : "bg-canvas"}`}>
+                  className={`press w-full rounded-lg border border-line px-4 py-3 text-left ${intent === opt.value ? "bg-secondary" : "bg-canvas"}`}>
                   <span className="block text-sm font-bold text-ink">{opt.label}</span>
                   <span className="block text-xs text-mute">{opt.hint}</span>
                 </button>
               ))}
             </div>
             <label className="mt-4 block text-sm font-semibold">City / State <span className="font-normal text-mute">(optional)</span>
-              <input value={location} maxLength={80} onChange={(e) => setLocation(e.target.value)} placeholder="e.g. Ikeja, Lagos" className="mt-1 w-full rounded-lg border-2 border-ink bg-canvas px-3 py-2.5 text-sm" />
+              <input value={location} maxLength={80} onChange={(e) => setLocation(e.target.value)} placeholder="e.g. Ikeja, Lagos" className="mt-1 w-full rounded-lg border border-line bg-canvas px-3 py-2.5 text-sm" />
             </label>
             {error ? <p role="alert" className="mt-2 text-sm text-destructive">{error}</p> : null}
             <button type="button" disabled={!intent || finish.isPending} onClick={() => finish.mutate()} className="press mt-5 w-full rounded-lg bg-primary px-4 py-3 text-sm font-bold text-primary-foreground disabled:opacity-60">Enter Wishr</button>

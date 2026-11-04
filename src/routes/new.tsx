@@ -31,7 +31,7 @@ export const Route = createFileRoute("/new")({
 });
 
 const inputClass =
-  "w-full rounded-lg border-2 border-ink bg-canvas px-4 py-3 text-sm text-ink outline-none focus:ring-2 focus:ring-primary";
+  "w-full rounded-lg border border-line bg-canvas px-4 py-3 text-sm text-ink outline-none focus:ring-2 focus:ring-primary";
 
 
 function NewWish() {
@@ -205,7 +205,7 @@ function NewWish() {
           Be specific and honest. People give to wishes they can picture.
         </p>
 
-        <form onSubmit={submit} className="mt-6 space-y-4 card-frame p-5 border-2 border-ink">
+        <form onSubmit={submit} className="mt-6 space-y-4 card-frame p-5 border border-line">
           <label className="block">
             <span className="mb-1.5 block text-xs font-semibold text-mute">Wish title</span>
             <input
@@ -249,10 +249,10 @@ function NewWish() {
             </p>
 
             {imagePreview ? (
-              <figure className="mt-3 overflow-hidden rounded-lg border-2 border-ink">
+              <figure className="mt-3 overflow-hidden rounded-lg border border-line">
                 <img src={imagePreview} alt="Selected wish" className="aspect-[16/10] w-full object-cover" />
                 {caption.trim() ? (
-                  <figcaption className="border-t-2 border-ink bg-accent px-3 py-2 text-xs font-semibold">
+                  <figcaption className="border-t-2 border-line bg-accent px-3 py-2 text-xs font-semibold">
                     {caption}
                   </figcaption>
                 ) : null}
@@ -310,7 +310,7 @@ function NewWish() {
 
           <WishVoiceInput value={voice} onChange={setVoice} disabled={busy} onBusyChange={setVoiceBusy} />
 
-          <fieldset className="space-y-3 border-t-2 border-ink pt-4">
+          <fieldset className="space-y-3 border-t-2 border-line pt-4">
             <legend className="font-display text-lg font-bold">Where should givers transfer funds?</legend>
             <p className="text-xs text-mute">Only signed-in givers see these details when they choose to give. Wishr does not collect the money.</p>
             <label className="block"><span className="mb-1 block text-xs font-semibold">Bank name</span><input required maxLength={100} autoComplete="organization" value={bankName} onChange={(e) => setBankName(e.target.value)} className={inputClass} /></label>

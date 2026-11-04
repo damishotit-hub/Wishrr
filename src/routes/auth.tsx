@@ -90,7 +90,7 @@ function AuthPage() {
             : "It takes a minute. Your name is only shown if you want it to be."}
         </p>
 
-        <form onSubmit={submit} className="mt-6 space-y-4 card-frame p-5 border-2 border-ink">
+        <form onSubmit={submit} className="mt-6 space-y-4 card-frame p-5 border border-line">
           {mode === "signup" ? (
             <Field label="Display name">
               <input
@@ -144,7 +144,7 @@ function AuthPage() {
             type="button"
             onClick={googleSignIn}
             disabled={busy}
-            className="press flex w-full items-center justify-center gap-2 rounded-lg border-2 border-ink bg-canvas px-4 py-3.5 text-sm font-semibold text-ink disabled:opacity-60"
+            className="press flex w-full items-center justify-center gap-2 rounded-lg border border-line bg-canvas px-4 py-3.5 text-sm font-semibold text-ink disabled:opacity-60"
           >
             <GoogleMark />
             Continue with Google
@@ -198,7 +198,7 @@ function GoogleMark() {
 }
 
 const inputClass =
-  "w-full rounded-xl bg-canvas px-4 py-3 text-sm text-ink border-2 border-ink outline-none focus:ring-2 focus:ring-primary";
+  "w-full rounded-xl bg-canvas px-4 py-3 text-sm text-ink border border-line outline-none focus:ring-2 focus:ring-primary";
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (

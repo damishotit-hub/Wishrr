@@ -19,7 +19,7 @@ export function MessageButton({ otherId, label = "Message" }: { otherId: string 
   }
   return (
     <span className="inline-flex flex-col">
-      <button type="button" disabled={busy} onClick={() => void go()} className="press inline-flex items-center justify-center gap-2 rounded-lg border-2 border-ink bg-card px-4 py-2 text-sm font-semibold text-ink disabled:opacity-60">
+      <button type="button" disabled={busy} onClick={() => void go()} className="press inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-card px-4 py-2 text-sm font-semibold text-ink disabled:opacity-60">
         <MessageCircle className="size-4" />{busy ? "Opening..." : label}
       </button>
       {error ? <span role="alert" className="mt-1 text-xs text-destructive">{error}</span> : null}

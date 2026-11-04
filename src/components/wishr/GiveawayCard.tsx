@@ -22,7 +22,7 @@ export function GiveawayCard({ giveaway, index = 0 }: { giveaway: Giveaway; inde
       className="card-frame reveal lift overflow-hidden"
       style={{ animationDelay: `${Math.min(index, 8) * 70}ms` }}
     >
-      <Link to="/giveaways/$id" params={{ id: giveaway.id }} className="block border-b-2 border-ink">
+      <Link to="/giveaways/$id" params={{ id: giveaway.id }} className="block border-b-2 border-line">
         {giveaway.image_url ? (
           <img
             src={giveaway.image_url}
@@ -38,7 +38,7 @@ export function GiveawayCard({ giveaway, index = 0 }: { giveaway: Giveaway; inde
       </Link>
 
       {giveaway.image_caption ? (
-        <p className="border-b-2 border-ink bg-accent px-4 py-2 text-[12px] font-semibold text-ink">
+        <p className="border-b-2 border-line bg-accent px-4 py-2 text-[12px] font-semibold text-ink">
           {giveaway.image_caption}
         </p>
       ) : null}
@@ -64,12 +64,12 @@ export function GiveawayCard({ giveaway, index = 0 }: { giveaway: Giveaway; inde
           {giveaway.location ? <span className="truncate">· {giveaway.location}</span> : null}
         </div>
 
-        <div className="mt-4 flex items-center justify-between gap-3 border-t-2 border-ink pt-3">
+        <div className="mt-4 flex items-center justify-between gap-3 border-t-2 border-line pt-3">
           <span className="text-xs font-medium text-mute">
             {giveaway.entry_count} {giveaway.entry_count === 1 ? "entry" : "entries"}
             {left ? ` · ${left}` : ` · ${timeAgo(giveaway.created_at)}`}
           </span>
-          <span className="shrink-0 rounded-lg bg-card px-4 py-2 text-xs font-semibold text-ink border-2 border-ink">
+          <span className="shrink-0 rounded-lg bg-card px-4 py-2 text-xs font-semibold text-ink border border-line">
             {giveaway.recipient_count} {giveaway.recipient_count === 1 ? "recipient" : "recipients"}
           </span>
         </div>

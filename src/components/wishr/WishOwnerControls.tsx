@@ -112,7 +112,7 @@ export function WishOwnerControls({
               setPending(key);
             }}
             className={[
-              "press rounded-lg border-2 border-ink px-4 py-2.5 text-xs font-semibold",
+              "press rounded-lg border border-line px-4 py-2.5 text-xs font-semibold",
               key === "delete" ? "bg-destructive text-destructive-foreground" : "bg-card text-ink",
             ].join(" ")}
           >
@@ -139,7 +139,7 @@ export function WishOwnerControls({
                 type="button"
                 disabled={busy}
                 onClick={() => setPending(null)}
-                className="rounded-lg border-2 border-ink px-4 py-2.5 text-xs font-semibold"
+                className="rounded-lg border border-line px-4 py-2.5 text-xs font-semibold"
               >
                 Cancel
               </button>
@@ -148,7 +148,7 @@ export function WishOwnerControls({
                 disabled={busy}
                 onClick={() => void run(pending)}
                 className={[
-                  "press rounded-lg border-2 border-ink px-4 py-2.5 text-xs font-semibold disabled:opacity-60",
+                  "press rounded-lg border border-line px-4 py-2.5 text-xs font-semibold disabled:opacity-60",
                   pending === "delete"
                     ? "bg-destructive text-destructive-foreground"
                     : "bg-primary text-primary-foreground",

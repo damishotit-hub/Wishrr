@@ -76,7 +76,7 @@ function Thread() {
     <AppShell>
       <section className="mx-auto max-w-2xl pt-6">
         <Link to="/messages" className="text-sm font-semibold text-primary">← All messages</Link>
-        <div className="mt-3 flex items-center gap-3 border-b-2 border-ink pb-3">
+        <div className="mt-3 flex items-center gap-3 border-b-2 border-line pb-3">
           {other ? <MemberAvatar path={other.other_avatar_url} name={other.other_display_name} /> : null}
           <div className="min-w-0">
             <h1 className="truncate font-display text-xl">{other?.other_display_name ?? "Conversation"}</h1>
@@ -89,7 +89,7 @@ function Thread() {
             const mine = m.sender_id === uid;
             return (
               <div key={m.id} className={`flex ${mine ? "justify-end" : "justify-start"}`}>
-                <div className={`max-w-[80%] rounded-xl border-2 border-ink px-3 py-2 ${mine ? "bg-primary text-primary-foreground" : "bg-card"}`}>
+                <div className={`max-w-[80%] rounded-xl border border-line px-3 py-2 ${mine ? "bg-primary text-primary-foreground" : "bg-card"}`}>
                   <p className="whitespace-pre-wrap break-words text-sm">{m.body}</p>
                   <p className={`mt-1 text-[10px] ${mine ? "opacity-80" : "text-mute"}`}>{timeAgo(m.created_at)}{mine && m.read_at ? " · Seen" : ""}</p>
                 </div>
@@ -99,7 +99,7 @@ function Thread() {
           <div ref={endRef} />
         </div>
         <form onSubmit={send} className="sticky bottom-24 mt-4 flex gap-2 bg-canvas py-2 md:bottom-4">
-          <textarea value={body} onChange={(e) => setBody(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void send(e); } }} rows={1} maxLength={2000} placeholder="Write a message" aria-label="Message" className="min-h-12 flex-1 resize-none rounded-lg border-2 border-ink bg-card px-3 py-3 text-sm" />
+          <textarea value={body} onChange={(e) => setBody(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void send(e); } }} rows={1} maxLength={2000} placeholder="Write a message" aria-label="Message" className="min-h-12 flex-1 resize-none rounded-lg border border-line bg-card px-3 py-3 text-sm" />
           <button type="submit" disabled={sending || !body.trim()} className="press rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground disabled:opacity-60">Send</button>
         </form>
         {error ? <p role="alert" className="text-sm text-destructive">{error}</p> : null}
