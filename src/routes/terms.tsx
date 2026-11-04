@@ -2,22 +2,23 @@ import { createFileRoute } from "@tanstack/react-router";
 import { InfoPage, infoHead } from "@/components/wishr/InfoPage";
 
 export const Route = createFileRoute("/terms")({
-  head: infoHead('Terms of Service', 'By using Wishr you agree to these terms.'),
+  head: infoHead("Terms of Service", "The simple ground rules for using Wishr, written in plain words."),
   component: TermsPage,
 });
 
 function TermsPage() {
   return (
     <InfoPage
-      eyebrow='Legal'
-      title='Terms of Service'
-      intro='By using Wishr you agree to these terms.'
+      eyebrow="Legal"
+      title="Terms of Service"
+      intro="These are the ground rules for using Wishr. We kept them short and plain so you know exactly where you stand."
       sections={[
-    { heading: "Using Wishr", body: <p>You must provide accurate information, keep your account secure, and follow our Community Guidelines.</p> },
-    { heading: "Giving and receiving", body: <p>Contributions and gifts are made directly between members. Wishr does not hold funds and cannot guarantee that any wish will be fulfilled or that any item matches its description.</p> },
-    { heading: "Your content", body: <p>You own what you post. You allow Wishr to display it on the service so others can see and respond to it.</p> },
-    { heading: "Moderation", body: <p>We may hide or remove content and suspend accounts that break these terms or put others at risk.</p> },
-    { heading: "Liability", body: <p>Wishr is provided as is. To the extent permitted by law, Wishr is not liable for losses arising from interactions between members.</p> },
+        { heading: "Be yourself, honestly", body: <p>Use your real details, keep your password to yourself, and only post things that are true. If something about your account changes, update it.</p> },
+        { heading: "Giving happens between people", body: <p>When you give, you send help straight to another member. Wishr never holds your money, so we can't promise every wish will be met or that every item will be exactly as described. Take a moment to read before you give.</p> },
+        { heading: "What you post stays yours", body: <p>Your photos, stories and voice notes belong to you. By posting them, you let us show them on Wishr so people can see and respond. Delete them any time.</p> },
+        { heading: "Keeping things safe", body: <p>If something breaks our Community Guidelines or puts someone at risk, we may hide it or pause the account behind it. We'd always rather talk first, where we can.</p> },
+        { heading: "The honest limits", body: <p>We work hard to keep Wishr running well, but we can't be responsible for what happens in arrangements made between members. Use good judgment and reach out if anything feels off.</p> },
+        { heading: "Questions?", body: <p>Email us at <a className="font-semibold text-primary" href="mailto:idowudaviddamilola@gmail.com">idowudaviddamilola@gmail.com</a>. A real person will reply.</p> },
       ]}
     />
   );

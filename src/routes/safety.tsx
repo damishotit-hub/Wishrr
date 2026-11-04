@@ -2,22 +2,22 @@ import { createFileRoute } from "@tanstack/react-router";
 import { InfoPage, infoHead } from "@/components/wishr/InfoPage";
 
 export const Route = createFileRoute("/safety")({
-  head: infoHead('Staying safe on Wishr', 'A few simple habits protect both wishers and givers.'),
+  head: infoHead("Staying safe on Wishr", "Simple habits that protect both people asking and people giving."),
   component: SafetyPage,
 });
 
 function SafetyPage() {
   return (
     <InfoPage
-      eyebrow='Trust'
-      title='Staying safe on Wishr'
-      intro='A few simple habits protect both wishers and givers.'
+      eyebrow="Trust"
+      title="Staying safe on Wishr"
+      intro="Most people here just want to help. These simple habits keep it that way for everyone."
       sections={[
-    { heading: "For givers", body: <p>Read the whole wish before giving. Transfer only to the account shown inside Wishr. A transfer only counts once the wisher confirms it arrived.</p> },
-    { heading: "For wishers", body: <p>Confirm transfers only after checking your bank. Post updates so givers can see their help landed.</p> },
-    { heading: "Meeting in person", body: <p>For item handoffs, meet in a busy public place during the day, bring a friend if you can, and tell someone where you are going.</p> },
-    { heading: "Spotting scams", body: <p>Be careful of anyone who asks you to pay a fee to receive a giveaway, moves you off Wishr quickly, or pressures you to act fast.</p> },
-    { heading: "Reporting", body: <p>Use Report Wish or Report Giveaway on any page. Reports are private and reviewed by our team.</p> },
+        { heading: "If you're giving", body: <p>Read the whole wish first. Only send money to the account shown inside Wishr. Your gift counts once the person confirms it arrived.</p> },
+        { heading: "If you're asking", body: <p>Check your bank before confirming a transfer. Share an update or a thank-you so givers know their help landed.</p> },
+        { heading: "Meeting in person", body: <p>Pick a busy public place in daylight. Bring a friend if you can, and let someone know where you're going.</p> },
+        { heading: "Signs something's not right", body: <p>Be careful if anyone asks you to pay a fee to receive a gift, rushes you, or wants to move the chat off Wishr quickly.</p> },
+        { heading: "Tell us", body: <p>Use Report on any wish or giveaway. Reports are private, and our team reviews every one.</p> },
       ]}
     />
   );
