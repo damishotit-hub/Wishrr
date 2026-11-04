@@ -80,13 +80,13 @@ export function AppShell({ children }: { children: ReactNode }) {
             </Link>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             {user ? <MemberSearch variant="bold" /> : null}
             {loading ? (
               <span className="size-8 animate-pulse rounded-full bg-warm" />
             ) : user ? (
               <>
-                <div className="hidden xl:block"><MessagesLink /></div>
+                <MessagesLink />
                 <Link to="/activity" className="hidden text-sm font-semibold text-mute hover:text-ink sm:inline">
                   Activity
                 </Link>
@@ -116,7 +116,6 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         </div>
         <div className="mt-3 flex flex-wrap items-center justify-end gap-3">
-          {user ? <div className="mr-auto hidden md:block xl:hidden"><MessagesLink /></div> : null}
           <CommunityPulse />
         </div>
       </header>
