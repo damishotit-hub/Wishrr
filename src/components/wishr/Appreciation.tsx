@@ -59,7 +59,7 @@ export function Appreciation({ wish }: { wish: Wish }) {
         <span className="pill-accent">Wish granted</span>
         <h2 className="mt-3 font-display text-xl">A thank-you from the wisher</h2>
         <figure className="mt-4 card-frame overflow-hidden">
-          {note.data.image_url ? <img src={note.data.image_url} alt="Thank-you photo" loading="lazy" className="aspect-[16/10] w-full border-b-2 border-ink object-cover" /> : null}
+          {note.data.image_url ? <img src={note.data.image_url} alt="Thank-you photo" loading="lazy" className="aspect-[16/10] w-full border-b-2 border-line object-cover" /> : null}
           <blockquote className="p-5 text-[15px] leading-relaxed whitespace-pre-line">{note.data.body}</blockquote>
           <figcaption className="px-5 pb-4 text-[11px] text-mute">{timeAgo(note.data.created_at)}</figcaption>
         </figure>
@@ -78,10 +78,10 @@ export function Appreciation({ wish }: { wish: Wish }) {
         {confirmGrant ? (
           <div className="mt-4 flex flex-wrap gap-2">
             <button onClick={markGranted} disabled={busy} className="press rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground">Yes, it's granted</button>
-            <button onClick={() => setConfirmGrant(false)} className="press rounded-lg border-2 border-ink bg-card px-4 py-2.5 text-sm font-semibold">Not yet</button>
+            <button onClick={() => setConfirmGrant(false)} className="press rounded-lg border border-line bg-card px-4 py-2.5 text-sm font-semibold">Not yet</button>
           </div>
         ) : (
-          <button onClick={() => setConfirmGrant(true)} className="press mt-4 rounded-lg border-2 border-ink bg-accent px-4 py-2.5 text-sm font-semibold text-ink">Mark as granted</button>
+          <button onClick={() => setConfirmGrant(true)} className="press mt-4 rounded-lg border border-line bg-accent px-4 py-2.5 text-sm font-semibold text-ink">Mark as granted</button>
         )}
         {error ? <p className="mt-3 text-sm text-destructive">{error}</p> : null}
       </section>
@@ -93,7 +93,7 @@ export function Appreciation({ wish }: { wish: Wish }) {
       <span className="pill-accent">Wish granted</span>
       <h2 className="mt-3 font-display text-xl">Say thank you</h2>
       <p className="mt-1 text-sm text-mute">Your note appears on the Impact Wall so givers can see their help landed.</p>
-      <textarea value={body} onChange={(e) => setBody(e.target.value)} maxLength={2000} rows={4} placeholder="Tell your givers what their help made possible." className="mt-4 w-full rounded-xl border-2 border-ink bg-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-primary" />
+      <textarea value={body} onChange={(e) => setBody(e.target.value)} maxLength={2000} rows={4} placeholder="Tell your givers what their help made possible." className="mt-4 w-full rounded-xl border border-line bg-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-primary" />
       <label className="mt-3 block text-sm font-semibold">Photo (optional)
         <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] ?? null)} className="mt-2 block w-full text-sm" />
       </label>

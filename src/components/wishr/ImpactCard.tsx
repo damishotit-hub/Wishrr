@@ -7,7 +7,7 @@ export function ImpactCard({ wish }: { wish: ImpactWish }) {
   const img = note?.image_url ?? wish.image_url;
   return (
     <Link to="/wish/$id" params={{ id: wish.id }} className="lift card-frame block overflow-hidden">
-      {img ? <img src={img} alt={wish.title} loading="lazy" className="aspect-[16/10] w-full border-b-2 border-ink object-cover" /> : null}
+      {img ? <img src={img} alt={wish.title} loading="lazy" className="aspect-[16/10] w-full border-b-2 border-line object-cover" /> : null}
       <div className="p-4">
         <span className="pill-accent">Wish granted</span>
         <h3 className="mt-2 font-display text-lg leading-snug">{wish.title}</h3>

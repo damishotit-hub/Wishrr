@@ -116,7 +116,7 @@ function WishDetail() {
           </div>
 
           {w.image_url ? (
-            <figure className="mt-5 overflow-hidden rounded-[14px] border-2 border-ink hard-shadow">
+            <figure className="mt-5 overflow-hidden rounded-[14px] border border-line hard-shadow">
               <img
                 src={w.image_url}
                 alt={w.image_caption ?? w.title}
@@ -124,7 +124,7 @@ function WishDetail() {
                 className="aspect-[16/10] w-full object-cover"
               />
               {w.image_caption ? (
-                <figcaption className="border-t-2 border-ink bg-accent px-4 py-3 text-sm font-semibold text-ink">
+                <figcaption className="border-t-2 border-line bg-accent px-4 py-3 text-sm font-semibold text-ink">
                   {w.image_caption}
                 </figcaption>
               ) : null}
@@ -152,7 +152,7 @@ function WishDetail() {
             {updates.data?.length ? (
               <ul className="mt-4 space-y-3">
                 {updates.data.map((u) => (
-                  <li key={u.id} className="card-frame p-4 border-2 border-ink">
+                  <li key={u.id} className="card-frame p-4 border border-line">
                     <p className="text-sm leading-relaxed whitespace-pre-line">{u.body}</p>
                     <p className="mt-2 text-[11px] text-mute">{timeAgo(u.created_at)}</p>
                   </li>
@@ -194,7 +194,7 @@ function WishDetail() {
         </div>
 
         <aside className="mt-8 space-y-4 md:sticky md:top-8 md:mt-14 md:self-start">
-          <div className="hidden card-frame p-5 border-2 border-ink md:block">
+          <div className="hidden card-frame p-5 border border-line md:block">
             <ProgressMeter raised={Number(w.amount_raised)} goal={Number(w.goal_amount)} />
             <div className="mt-4">
               <FundingBreakdown raised={Number(w.amount_raised)} goal={Number(w.goal_amount)} />

@@ -48,7 +48,7 @@ function Giveaways() {
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search giveaways"
             aria-label="Search giveaways"
-            className="w-full rounded-xl bg-card px-4 py-3 text-sm text-ink border-2 border-ink outline-none placeholder:text-mute focus:ring-2 focus:ring-primary"
+            className="w-full rounded-xl bg-card px-4 py-3 text-sm text-ink border border-line outline-none placeholder:text-mute focus:ring-2 focus:ring-primary"
           />
           <Link
             to="/giveaways/new"
@@ -67,7 +67,7 @@ function Giveaways() {
                 "press shrink-0 rounded-full px-3.5 py-2 text-xs font-semibold transition-colors",
                 category === c.slug
                   ? "bg-primary text-primary-foreground"
-                  : "bg-card text-mute border-2 border-ink",
+                  : "bg-card text-mute border border-line",
               ].join(" ")}
             >
               {c.name}

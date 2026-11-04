@@ -69,7 +69,7 @@ function Home() {
           </Link>
           <Link
             to="/explore"
-            className="press rounded-xl bg-card px-5 py-3.5 text-center text-sm font-semibold text-ink border-2 border-ink"
+            className="press rounded-xl bg-card px-5 py-3.5 text-center text-sm font-semibold text-ink border border-line"
           >
             Grant someone's wish
           </Link>
@@ -87,7 +87,7 @@ function Home() {
         </dl> : null}
       </section>
 
-       {!loading && !user ? <section className="mt-12 border-t-2 border-ink pt-8"><p className="eyebrow">Wishes</p><h2 className="mt-2 font-display text-2xl">A little help can change everything.</h2><p className="mt-2 max-w-lg text-sm text-mute">Sign in to browse active wishes and see how you can help.</p><Link to="/auth" className="press mt-5 inline-block rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">Sign in or register</Link></section> : null}
+       {!loading && !user ? <section className="mt-12 border-t-2 border-line pt-8"><p className="eyebrow">Wishes</p><h2 className="mt-2 font-display text-2xl">A little help can change everything.</h2><p className="mt-2 max-w-lg text-sm text-mute">Sign in to browse active wishes and see how you can help.</p><Link to="/auth" className="press mt-5 inline-block rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">Sign in or register</Link></section> : null}
        {user ? <section className="mt-12">
         <div className="flex items-end justify-between gap-4">
           <h2 className="font-display text-2xl">Almost there</h2>
@@ -191,7 +191,7 @@ function Home() {
         <div className="mt-6 flex flex-col gap-4 border-t border-line py-5 md:flex-row md:items-center md:justify-between">
           <Link
             to="/giveaways"
-            className="press rounded-lg bg-card px-5 py-3 text-center text-sm font-semibold text-ink border-2 border-ink"
+            className="press rounded-lg bg-card px-5 py-3 text-center text-sm font-semibold text-ink border border-line"
           >
             Explore Giveaways
           </Link>

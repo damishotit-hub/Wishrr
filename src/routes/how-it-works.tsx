@@ -61,7 +61,7 @@ function HowItWorks() {
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {SECTIONS.map((section) => (
-            <div key={section.title} className="card-frame p-5 border-2 border-ink">
+            <div key={section.title} className="card-frame p-5 border border-line">
               <h2 className="font-display text-xl">{section.title}</h2>
               <ul className="mt-3 space-y-2.5">
                 {section.items.map((item) => (
@@ -75,7 +75,7 @@ function HowItWorks() {
           ))}
         </div>
 
-        <div className="mt-8 rounded-[20px] border-2 border-dashed border-ink p-5 text-sm text-mute">
+        <div className="mt-8 rounded-[20px] border border-dashed border-line p-5 text-sm text-mute">
           Wishr does not process or verify bank payments. Transfer directly using the details shown when you choose to give. The wisher must confirm receipt before your contribution counts toward the goal.
         </div>
 
@@ -88,7 +88,7 @@ function HowItWorks() {
           </Link>
           <Link
             to="/explore"
-            className="rounded-xl bg-card px-5 py-3.5 text-center text-sm font-semibold text-ink border-2 border-ink"
+            className="rounded-xl bg-card px-5 py-3.5 text-center text-sm font-semibold text-ink border border-line"
           >
             Explore wishes
           </Link>

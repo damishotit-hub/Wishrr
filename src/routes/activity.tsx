@@ -62,7 +62,7 @@ function Activity() {
         {notifications.data?.length ? (
           <ul className="mt-5 space-y-3">
             {notifications.data.map((n) => (
-              <li key={n.id} className="card-frame p-4 border-2 border-ink">
+              <li key={n.id} className="card-frame p-4 border border-line">
                 <p className="text-sm font-semibold">{n.title}</p>
                 {n.body ? <p className="mt-1 text-sm text-mute">{n.body}</p> : null}
                 {n.link?.startsWith("/wish/") ? <Link to="/wish/$id" params={{ id: n.link.slice(6) }} onClick={() => { void supabase.from("notifications").update({ is_read: true }).eq("id", n.id).eq("user_id", userId).then(() => queryClient.invalidateQueries({ queryKey: ["notifications", userId] })); }} className="mt-2 inline-block text-sm font-semibold text-primary">View wish →</Link> : null}

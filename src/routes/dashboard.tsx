@@ -119,7 +119,7 @@ function Dashboard() {
     <AppShell>
       <section className="pt-8">
         <div className="flex items-center gap-4">
-          <span className="grid size-14 shrink-0 place-items-center overflow-hidden rounded-full border-2 border-ink bg-warm font-display text-lg">
+          <span className="grid size-14 shrink-0 place-items-center overflow-hidden rounded-full border border-line bg-warm font-display text-lg">
             {photoUrl ? <img src={photoUrl} alt="Your profile" className="size-full object-cover" /> : initials(name)}
           </span>
           <div className="min-w-0">
@@ -129,10 +129,10 @@ function Dashboard() {
           </div>
         </div>
         <Button type="button" variant="outline" className="mt-4 border border-line" onClick={() => { setDisplayName(profile.data?.display_name ?? ""); setUsername(profile.data?.username ?? ""); setLocation(profile.data?.location ?? ""); setEditing(!editing); setProfileError(null); }}>Edit profile</Button>
-        {editing ? <form onSubmit={saveProfile} className="mt-4 max-w-md space-y-3 border-t-2 border-ink pt-4">
-          <label className="block text-sm font-semibold">Display name<input required minLength={2} maxLength={80} value={displayName} onChange={(e) => setDisplayName(e.target.value)} className="mt-1 w-full rounded-lg border-2 border-ink bg-card px-4 py-3" /></label>
+        {editing ? <form onSubmit={saveProfile} className="mt-4 max-w-md space-y-3 border-t-2 border-line pt-4">
+          <label className="block text-sm font-semibold">Display name<input required minLength={2} maxLength={80} value={displayName} onChange={(e) => setDisplayName(e.target.value)} className="mt-1 w-full rounded-lg border border-line bg-card px-4 py-3" /></label>
           <label className="block text-sm font-semibold">Username<div className="mt-1 flex rounded-lg border border-line bg-card focus-within:ring-2 focus-within:ring-primary"><span className="px-3 py-3 text-mute">@</span><input required minLength={3} maxLength={24} pattern="[a-z0-9_]+" value={username} onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ""))} className="min-w-0 flex-1 bg-transparent py-3 pr-4 outline-none" /></div></label>
-          <label className="block text-sm font-semibold">City / State (optional)<input maxLength={80} value={location} onChange={(e) => setLocation(e.target.value)} placeholder="e.g. Ikeja, Lagos" className="mt-1 w-full rounded-lg border-2 border-ink bg-card px-4 py-3" /></label>
+          <label className="block text-sm font-semibold">City / State (optional)<input maxLength={80} value={location} onChange={(e) => setLocation(e.target.value)} placeholder="e.g. Ikeja, Lagos" className="mt-1 w-full rounded-lg border border-line bg-card px-4 py-3" /></label>
           <label className="block text-sm font-semibold">Profile picture (optional)<input type="file" accept="image/png,image/jpeg,image/webp" onChange={(e) => setPhoto(e.target.files?.[0] ?? null)} className="mt-1 block w-full text-sm" /></label>
           <p className="text-xs text-mute">JPEG, PNG or WebP, up to 5MB.</p>
           <div className="flex gap-2"><Button type="submit" disabled={saving}>Save profile</Button><Button type="button" variant="outline" onClick={() => setEditing(false)}>Cancel</Button></div>
@@ -141,11 +141,11 @@ function Dashboard() {
         {profileNotice ? <p role="status" className="mt-3 text-sm text-success">{profileNotice}</p> : null}
 
         <dl className="mt-6 grid grid-cols-2 gap-3">
-          <div className="card-frame p-4 border-2 border-ink">
+          <div className="card-frame p-4 border border-line">
             <dt className="text-xs font-medium text-mute">You've given</dt>
             <dd className="mt-1 font-display text-2xl">{naira(given)}</dd>
           </div>
-          <div className="card-frame p-4 border-2 border-ink">
+          <div className="card-frame p-4 border border-line">
             <dt className="text-xs font-medium text-mute">Your wishes</dt>
             <dd className="mt-1 font-display text-2xl">{wishes.data?.length ?? 0}</dd>
           </div>
@@ -163,7 +163,7 @@ function Dashboard() {
         {wishes.data?.length ? (
           <ul className="mt-4 space-y-3">
             {wishes.data.map((w) => (
-              <li key={w.id} className="card-frame p-5 border-2 border-ink">
+              <li key={w.id} className="card-frame p-5 border border-line">
                 <div className="flex items-start justify-between gap-3">
                   <Link
                     to="/wish/$id"
@@ -210,7 +210,7 @@ function Dashboard() {
       <section className="mt-10">
         <h2 className="font-display text-xl">Wishes you've supported</h2>
         {contributions.data?.length ? (
-          <ul className="mt-4 divide-y-2 divide-ink card-frame border-2 border-ink">
+          <ul className="mt-4 divide-y-2 divide-ink card-frame border border-line">
             {contributions.data.map((c) => {
               const wish = (c as { wishes?: { id: string; title: string } | null }).wishes;
               return (
@@ -257,7 +257,7 @@ function Dashboard() {
       <div className="mt-10">
         <button
           onClick={() => void signOut()}
-          className="rounded-xl px-4 py-2.5 text-sm font-semibold text-ink border-2 border-ink"
+          className="rounded-xl px-4 py-2.5 text-sm font-semibold text-ink border border-line"
         >
           Sign out
         </button>

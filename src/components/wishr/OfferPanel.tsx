@@ -71,12 +71,12 @@ function GiverOffer({ wish, offer }: { wish: Wish; offer: Offer | null }) {
       <p className="mt-1 text-sm text-mute">Offer an item or service instead of money. You'll get a private chat with the wisher to arrange the handoff.</p>
       {open ? (
         <form onSubmit={submit} className="mt-3">
-          <textarea value={text} onChange={(e) => setText(e.target.value)} rows={3} maxLength={1000} placeholder="I have a sewing machine in good condition I can drop off in Ikeja." className="w-full rounded-lg border-2 border-ink bg-canvas px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary" />
+          <textarea value={text} onChange={(e) => setText(e.target.value)} rows={3} maxLength={1000} placeholder="I have a sewing machine in good condition I can drop off in Ikeja." className="w-full rounded-lg border border-line bg-canvas px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary" />
           {error ? <p className="mt-2 text-sm text-destructive">{error}</p> : null}
           <button disabled={busy} className="press mt-2 w-full rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60">{busy ? "Sending..." : "Send offer"}</button>
         </form>
       ) : (
-        <button onClick={() => setOpen(true)} className="press mt-3 w-full rounded-lg border-2 border-ink bg-accent px-4 py-3 text-sm font-semibold text-ink">Offer Item or Service</button>
+        <button onClick={() => setOpen(true)} className="press mt-3 w-full rounded-lg border border-line bg-accent px-4 py-3 text-sm font-semibold text-ink">Offer Item or Service</button>
       )}
     </section>
   );
@@ -100,16 +100,16 @@ function OwnerOffers({ wish, offers }: { wish: Wish; offers: Offer[] }) {
       <p className="eyebrow">Item and service offers</p>
       <ul className="mt-3 space-y-3">
         {offers.map((o) => (
-          <li key={o.id} className="rounded-lg border-2 border-ink p-3">
+          <li key={o.id} className="rounded-lg border border-line p-3">
             <p className="text-sm font-semibold">{o.giver_display_name}</p>
             <p className="mt-1 text-sm">{o.description}</p>
             <p className="mt-1 text-[11px] text-mute">{timeAgo(o.created_at)} · {STATUS[o.status] ?? o.status}</p>
             <div className="mt-2 flex flex-wrap gap-2">
               {o.status === "pending" ? <>
                 <button disabled={busy} onClick={() => setStatus(o.id, "accepted")} className={`${btn} bg-primary text-primary-foreground`}>Accept</button>
-                <button disabled={busy} onClick={() => setStatus(o.id, "declined")} className={`${btn} border-2 border-ink bg-card`}>Decline</button>
+                <button disabled={busy} onClick={() => setStatus(o.id, "declined")} className={`${btn} border border-line bg-card`}>Decline</button>
               </> : null}
-              {o.status === "accepted" ? <button disabled={busy} onClick={() => setStatus(o.id, "completed")} className={`${btn} border-2 border-ink bg-accent text-ink`}>I received it</button> : null}
+              {o.status === "accepted" ? <button disabled={busy} onClick={() => setStatus(o.id, "completed")} className={`${btn} border border-line bg-accent text-ink`}>I received it</button> : null}
               {o.status !== "declined" && o.status !== "withdrawn" ? <button onClick={() => setChat(chat === o.id ? null : o.id)} className="text-xs font-semibold text-primary underline">Private chat</button> : null}
             </div>
             {chat === o.id ? <OfferChat offer={o} title={`Private chat with ${o.giver_display_name}`} /> : null}
@@ -141,19 +141,19 @@ function OfferChat({ offer, title }: { offer: Offer; title: string }) {
     if (!error) { setBody(""); await qc.invalidateQueries({ queryKey: ["offer-messages", offer.id] }); }
   }
   return (
-    <div className="mt-3 rounded-lg border-2 border-ink bg-canvas p-3">
+    <div className="mt-3 rounded-lg border border-line bg-canvas p-3">
       <p className="text-sm font-semibold">{title}</p>
       <p className="text-[11px] text-mute">Only you two can see this. Share addresses and numbers here, never publicly.</p>
       <ul className="mt-2 max-h-60 space-y-2 overflow-y-auto">
         {msgs.data?.length ? msgs.data.map((m) => (
-          <li key={m.id} className={`max-w-[85%] rounded-lg border-2 border-ink px-3 py-2 text-sm ${m.sender_id === user?.id ? "ml-auto bg-secondary" : "bg-card"}`}>
+          <li key={m.id} className={`max-w-[85%] rounded-lg border border-line px-3 py-2 text-sm ${m.sender_id === user?.id ? "ml-auto bg-secondary" : "bg-card"}`}>
             <p className="whitespace-pre-line">{m.body}</p>
             <p className="mt-1 text-[10px] text-mute">{timeAgo(m.created_at)}</p>
           </li>
         )) : <li className="text-sm text-mute">No messages yet.</li>}
       </ul>
       <form onSubmit={send} className="mt-2 flex gap-2">
-        <input value={body} onChange={(e) => setBody(e.target.value)} maxLength={1000} placeholder="Write a message" className="w-full rounded-lg border-2 border-ink bg-card px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary" />
+        <input value={body} onChange={(e) => setBody(e.target.value)} maxLength={1000} placeholder="Write a message" className="w-full rounded-lg border border-line bg-card px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-primary" />
         <button className="press shrink-0 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground">Send</button>
       </form>
     </div>

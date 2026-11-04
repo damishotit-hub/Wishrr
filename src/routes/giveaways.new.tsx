@@ -21,7 +21,7 @@ export const Route = createFileRoute("/giveaways/new")({
 });
 
 const inputClass =
-  "w-full rounded-lg border-2 border-ink bg-canvas px-4 py-3 text-sm text-ink outline-none focus:ring-2 focus:ring-primary";
+  "w-full rounded-lg border border-line bg-canvas px-4 py-3 text-sm text-ink outline-none focus:ring-2 focus:ring-primary";
 const MAX = 10 * 1024 * 1024;
 
 function NewGiveaway() {
@@ -116,7 +116,7 @@ function NewGiveaway() {
           <p className="eyebrow">Preview</p>
           <h1 className="mt-1 font-display text-3xl">This is how it will look</h1>
           <article className="mt-5 card-frame overflow-hidden">
-            {mainPreview ? <img src={mainPreview} alt="" className="aspect-[16/10] w-full border-b-2 border-ink object-cover" /> : null}
+            {mainPreview ? <img src={mainPreview} alt="" className="aspect-[16/10] w-full border-b-2 border-line object-cover" /> : null}
             <div className="p-5">
               <div className="flex flex-wrap gap-2">
                 <span className="pill">{GIVEAWAY_CATEGORY_LABELS[category]}</span>
@@ -131,8 +131,8 @@ function NewGiveaway() {
           </article>
           {error ? <p className="mt-3 text-sm text-destructive">{error}</p> : null}
           <div className="mt-5 grid gap-2 sm:grid-cols-3">
-            <button onClick={() => setPreviewing(false)} disabled={busy} className="press rounded-lg border-2 border-ink bg-card px-4 py-3 text-sm font-semibold">Edit</button>
-            <button onClick={() => publish(true)} disabled={busy} className="press rounded-lg border-2 border-ink bg-accent px-4 py-3 text-sm font-semibold text-ink">Save as draft</button>
+            <button onClick={() => setPreviewing(false)} disabled={busy} className="press rounded-lg border border-line bg-card px-4 py-3 text-sm font-semibold">Edit</button>
+            <button onClick={() => publish(true)} disabled={busy} className="press rounded-lg border border-line bg-accent px-4 py-3 text-sm font-semibold text-ink">Save as draft</button>
             <button onClick={() => publish(false)} disabled={busy} className="press rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60">{busy ? "Publishing..." : "Publish giveaway"}</button>
           </div>
         </section>
@@ -162,8 +162,8 @@ function NewGiveaway() {
           <div className="card-flat p-4">
             <span className="eyebrow">Photos</span>
             <p className="mt-1 text-xs text-mute">Main photo required. Up to 4 extra photos (optional). Max 10MB each.</p>
-            {mainPreview ? <img src={mainPreview} alt="Main" className="mt-3 aspect-[16/10] w-full rounded-lg border-2 border-ink object-cover" /> : null}
-            <label className="mt-3 inline-block cursor-pointer rounded-lg border-2 border-ink bg-card px-4 py-2 text-xs font-semibold press">
+            {mainPreview ? <img src={mainPreview} alt="Main" className="mt-3 aspect-[16/10] w-full rounded-lg border border-line object-cover" /> : null}
+            <label className="mt-3 inline-block cursor-pointer rounded-lg border border-line bg-card px-4 py-2 text-xs font-semibold press">
               {mainFile ? "Change main photo" : "Choose main photo"}
               <input type="file" accept="image/*" className="hidden" onChange={(e) => {
                 const f = e.target.files?.[0]; if (!f) return;
@@ -191,7 +191,7 @@ function NewGiveaway() {
             <div className="grid gap-2 sm:grid-cols-3">
               {SELECTION_MODES.map((m) => (
                 <button type="button" key={m.value} onClick={() => setMode(m.value)}
-                  className={`press rounded-lg border-2 border-ink p-3 text-left ${mode === m.value ? "bg-primary text-primary-foreground" : "bg-card"}`}>
+                  className={`press rounded-lg border border-line p-3 text-left ${mode === m.value ? "bg-primary text-primary-foreground" : "bg-card"}`}>
                   <span className="block text-sm font-semibold">{m.label}</span>
                   <span className="mt-1 block text-xs opacity-80">{m.help}</span>
                 </button>

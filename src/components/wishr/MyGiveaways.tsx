@@ -22,7 +22,7 @@ export function MyGiveaways({ userId }: { userId: string }) {
       </div>
 
       {wins.data?.length ? (
-        <div className="mt-4 card-frame border-2 border-ink bg-accent p-4">
+        <div className="mt-4 card-frame border border-line bg-accent p-4">
           <p className="font-display text-base">Congratulations! You were selected for a giveaway.</p>
           <ul className="mt-2 space-y-1">
             {wins.data.map((w) => (
