@@ -1,6 +1,7 @@
 # Roadmap
 
-- [ ] Record lightweight browser fingerprints at registration, show shared-device accounts to admins only, and verify signup remains non-blocking.
+- [x] Record lightweight browser fingerprints at registration and show shared-device accounts to admins only; four tests passed, signup request and failure fallback checked, authenticated capture persisted, admin mobile review and private access verified.
+- [ ] Verify two real registrations appear together in admin review (not exercised: no duplicate test accounts created; signup requests were intercepted).
 
 - [x] Sweep typography to Plus Jakarta Sans throughout, replace interface green/lemon with graphite/white and restrained cool accents, preserve logo, and polish action/nav/scroll motion; verified public navigation, auth page, 320/390px layouts, reduced motion, and clean runtime/build checks.
 
@@ -18,7 +19,7 @@
 - [x] Add profile name and photo editing.
 - [x] Auto-save wish text drafts and mark the photo optional. Bank details and image files are not stored in localStorage.
 - [x] Add the admin page and role assignment.
-- [ ] Grant the first admin account (waiting on the user to name it).
+- [x] Grant the first admin account; authenticated admin access verified.
 - [x] Add wish/giveaway reporting, in-kind offers with private chat, expanded footer and info pages.
 - [x] Add giveaway details, entries, recipient flows, and giver dashboard.
 - [ ] Add share images and dynamic wish social metadata.
