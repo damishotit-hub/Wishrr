@@ -99,6 +99,13 @@
       "when": 1793545486288,
       "tag": "0013_optional_wish_voice_messages",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1793836951288,
+      "tag": "0014_device_fingerprints",
+      "breakpoints": true
     }
   ]
 }

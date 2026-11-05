@@ -136,6 +136,30 @@ export type Database = {
         }
         Relationships: []
       }
+      device_fingerprints: {
+        Row: {
+          device_hash: string
+          first_seen_at: string
+          id: string
+          last_seen_at: string
+          user_id: string
+        }
+        Insert: {
+          device_hash: string
+          first_seen_at?: string
+          id?: string
+          last_seen_at?: string
+          user_id: string
+        }
+        Update: {
+          device_hash?: string
+          first_seen_at?: string
+          id?: string
+          last_seen_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       direct_messages: {
         Row: {
           body: string
@@ -769,6 +793,18 @@ export type Database = {
         }
         Returns: boolean
       }
+      admin_shared_devices: {
+        Args: never
+        Returns: {
+          created_at: string
+          device_hash: string
+          display_name: string
+          email: string
+          first_seen_at: string
+          user_id: string
+          username: string
+        }[]
+      }
       admin_team: {
         Args: never
         Returns: {
@@ -861,6 +897,7 @@ export type Database = {
           unread: number
         }[]
       }
+      record_device: { Args: { _hash: string }; Returns: undefined }
       search_public_profiles: {
         Args: { _limit?: number; _query: string }
         Returns: {
