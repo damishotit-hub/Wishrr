@@ -4,6 +4,7 @@ import { AppShell } from "@/components/wishr/AppShell";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { useAuth } from "@/lib/auth";
+import { getDeviceFingerprint } from "@/lib/device-fingerprint";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -57,12 +58,16 @@ function AuthPage() {
     setMessage(null);
     try {
       if (mode === "signup") {
+        const deviceHash = await getDeviceFingerprint();
         const { error: signUpError } = await supabase.auth.signUp({
           email,
           password,
           options: {
             emailRedirectTo: window.location.origin,
-            data: { display_name: displayName.trim() || email.split("@")[0] },
+            data: {
+              display_name: displayName.trim() || email.split("@")[0],
+              ...(deviceHash ? { signup_device_hash: deviceHash } : {}),
+            },
           },
         });
         if (signUpError) throw signUpError;

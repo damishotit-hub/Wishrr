@@ -7,6 +7,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 import { myRolesQuery } from "@/lib/queries";
 import { naira, timeAgo, STATUS_LABELS } from "@/lib/format";
+import { SharedDeviceReview } from "@/components/wishr/SharedDeviceReview";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -23,7 +25,7 @@ export const Route = createFileRoute("/admin")({
   component: AdminPage,
 });
 
-const TABS = ["Overview", "Reports", "Wishes", "Giveaways", "Users", "Team"] as const;
+const TABS = ["Overview", "Reports", "Wishes", "Giveaways", "Users", "Shared devices", "Team"] as const;
 type Tab = (typeof TABS)[number];
 const small = "press rounded-lg px-2.5 py-1.5 text-xs font-semibold";
 
@@ -56,11 +58,11 @@ function AdminPage() {
         {!isAdmin ? <p className="mt-2 text-sm text-mute">You're signed in as a moderator. You can review reports and act on reported wishes and giveaways.</p> : null}
         <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
           {(isAdmin ? TABS : (["Reports"] as const)).map((t) => (
-            <button key={t} onClick={() => setTab(t)} className={`press shrink-0 rounded-lg border border-line px-3 py-1.5 text-sm font-semibold ${tab === t ? "bg-primary text-primary-foreground" : "bg-card"}`}>{t}</button>
+            <Button key={t} variant={tab === t ? "default" : "outline"} onClick={() => setTab(t)} className="shrink-0" aria-pressed={tab === t}>{t}</Button>
           ))}
         </div>
         <div className="mt-6">
-          {!isAdmin ? <Reports /> : tab === "Team" ? <Team /> : tab === "Overview" ? <Overview /> : tab === "Reports" ? <Reports /> : tab === "Wishes" ? <Wishes /> : tab === "Giveaways" ? <Giveaways /> : <Users />}
+          {!isAdmin ? <Reports /> : tab === "Shared devices" ? <SharedDeviceReview /> : tab === "Team" ? <Team /> : tab === "Overview" ? <Overview /> : tab === "Reports" ? <Reports /> : tab === "Wishes" ? <Wishes /> : tab === "Giveaways" ? <Giveaways /> : <Users />}
         </div>
       </div>
     </AppShell>

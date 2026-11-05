@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import { getDeviceFingerprint } from "@/lib/device-fingerprint";
 
 type AuthState = {
   user: User | null;
@@ -33,6 +34,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     return () => data.subscription.unsubscribe();
   }, []);
+
+  const userId = session?.user.id;
+  useEffect(() => {
+    if (!userId) return;
+    let cancelled = false;
+    // Covers OAuth registration and first sign-in; stored once per account.
+    void getDeviceFingerprint().then(async (hash) => {
+      if (!hash || cancelled) return;
+      await supabase.rpc("record_device", { _hash: hash });
+    }).catch(() => { /* Safety telemetry must never interrupt sign-in. */ });
+    return () => { cancelled = true; };
+  }, [userId]);
 
   const value: AuthState = {
     user: session?.user ?? null,
