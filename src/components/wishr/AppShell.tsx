@@ -7,6 +7,7 @@ import { initials } from "@/lib/format";
 import { MemberSearch } from "./MemberSearch";
 import { CommunityPulse } from "@/lib/community";
 import { MessagesLink } from "./MessagesLink";
+import { NotificationCenter } from "./NotificationCenter";
 import { Compass, Gift, House, MessageCircle, Plus, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -80,16 +81,14 @@ export function AppShell({ children }: { children: ReactNode }) {
             </Link>
           </nav>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3">
             {user ? <MemberSearch variant="bold" /> : null}
             {loading ? (
               <span className="size-8 animate-pulse rounded-full bg-warm" />
             ) : user ? (
               <>
                 <MessagesLink />
-                <Link to="/activity" className="hidden text-sm font-semibold text-mute hover:text-ink sm:inline">
-                  Activity
-                </Link>
+                <NotificationCenter />
                 <Link
                   to="/dashboard"
                   aria-label="Your dashboard"

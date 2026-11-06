@@ -1,5 +1,8 @@
 # Roadmap
 
+- [ ] Add live header notification center, unread badge, mark-all-read, and direct activity links.
+- [ ] Complete missing giveaway/funding alerts and verify private access, live updates, and phone layout.
+
 - [x] Replace story-card URL text with a clean QR label; browser-generated PNG verified with no UUID text, active-origin QR retained, and mobile preview checked.
 - [x] Complete manifest-only iOS/Android home-screen support; manifest, mobile head tags, official icons, and absence of service workers verified. Physical-device installation remains unverified.
 
