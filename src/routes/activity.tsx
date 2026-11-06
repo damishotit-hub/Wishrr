@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
 import { AppShell } from "@/components/wishr/AppShell";
 import { EmptyState } from "@/components/wishr/EmptyState";
 import { useAuth } from "@/lib/auth";
-import { notificationsQuery } from "@/lib/queries";
+import { useNotifications } from "@/lib/notifications";
+import { notificationTarget } from "@/lib/notification-target";
+import { Button } from "@/components/ui/button";
+import { CheckCheck } from "lucide-react";
 import { timeAgo } from "@/lib/format";
-import { supabase } from "@/integrations/supabase/client";
-import { useQueryClient } from "@tanstack/react-query";
 
 export const Route = createFileRoute("/activity")({
   head: () => ({
@@ -23,10 +23,9 @@ export const Route = createFileRoute("/activity")({
 });
 
 function Activity() {
-  const queryClient = useQueryClient();
   const { user, loading } = useAuth();
   const userId = user?.id ?? "";
-  const notifications = useQuery({ ...notificationsQuery(userId), enabled: !!userId });
+  const { feed: notifications, unread, markRead } = useNotifications(userId);
 
   if (loading) {
     return (
@@ -58,20 +57,26 @@ function Activity() {
   return (
     <AppShell>
       <section className="pt-8">
-        <h1 className="font-display text-3xl">Activity</h1>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h1 className="font-display text-3xl">Activity</h1>
+          <Button variant="outline" size="sm" disabled={!unread || markRead.isPending} onClick={() => markRead.mutate(undefined)}><CheckCheck />Mark all as read</Button>
+        </div>
+        {markRead.isError ? <p className="mt-3 text-sm text-destructive" role="status">Couldn't mark your alerts as read. Please try again.</p> : null}
+        {notifications.isPending ? <p className="mt-5 text-sm text-mute">Loading your activity...</p> : notifications.isError ? <div className="mt-5"><p className="text-sm text-mute">Couldn't load your activity.</p><Button variant="ghost" onClick={() => { void notifications.refetch(); }}>Try again</Button></div> : null}
         {notifications.data?.length ? (
           <ul className="mt-5 space-y-3">
-            {notifications.data.map((n) => (
+            {notifications.data.map((n) => {
+              const target = notificationTarget(n.link);
+              return (
               <li key={n.id} className="card-frame p-4 border border-line">
-                <p className="text-sm font-semibold">{n.title}</p>
+                <p className="flex items-center gap-2 text-sm font-semibold">{!n.is_read ? <span className="size-2 shrink-0 rounded-full bg-primary" aria-label="Unread" /> : null}{n.title}</p>
                 {n.body ? <p className="mt-1 text-sm text-mute">{n.body}</p> : null}
-                {n.link?.startsWith("/wish/") ? <Link to="/wish/$id" params={{ id: n.link.slice(6) }} onClick={() => { void supabase.from("notifications").update({ is_read: true }).eq("id", n.id).eq("user_id", userId).then(() => queryClient.invalidateQueries({ queryKey: ["notifications", userId] })); }} className="mt-2 inline-block text-sm font-semibold text-primary">View wish →</Link> : null}
-                {n.link?.startsWith("/messages/") ? <Link to="/messages/$id" params={{ id: n.link.slice(10) }} onClick={() => { void supabase.from("notifications").update({ is_read: true }).eq("id", n.id).eq("user_id", userId).then(() => queryClient.invalidateQueries({ queryKey: ["notifications", userId] })); }} className="mt-2 inline-block text-sm font-semibold text-primary">Open chat →</Link> : null}
+                {target ? <Link to={target.to} params={target.params} onClick={() => { if (!n.is_read) markRead.mutate(n.id); }} className="mt-2 inline-block text-sm font-semibold text-primary">{target.kind === "message" ? "Open chat" : target.kind === "giveaway" ? "View giveaway" : "View wish"} →</Link> : null}
                 <p className="mt-2 text-[11px] text-mute">{timeAgo(n.created_at)}</p>
               </li>
-            ))}
+            ); })}
           </ul>
-        ) : (
+        ) : !notifications.isPending && !notifications.isError ? (
           <div className="mt-5">
             <EmptyState
               title="Nothing yet"
@@ -86,7 +91,7 @@ function Activity() {
               }
             />
           </div>
-        )}
+        ) : null}
       </section>
     </AppShell>
   );

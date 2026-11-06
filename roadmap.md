@@ -1,7 +1,7 @@
 # Roadmap
 
-- [ ] Add live header notification center, unread badge, mark-all-read, and direct activity links.
-- [ ] Complete missing giveaway/funding alerts and verify private access, live updates, and phone layout.
+- [x] Add live header notification center, exact unread badge, mark-all-read, and wish/chat/giveaway links; four destination tests pass.
+- [x] Complete missing delivery/funding alerts; owner-only policy, grants and Realtime verified. Signed-in bell, mark-all-read, wish/chat navigation, cross-tab live updates, and 320/390px layouts verified using temporary alerts, then removed.
 
 - [x] Replace story-card URL text with a clean QR label; browser-generated PNG verified with no UUID text, active-origin QR retained, and mobile preview checked.
 - [x] Complete manifest-only iOS/Android home-screen support; manifest, mobile head tags, official icons, and absence of service workers verified. Physical-device installation remains unverified.
