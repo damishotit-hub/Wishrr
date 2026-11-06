@@ -1,5 +1,8 @@
 # Roadmap
 
+- [x] Replace story-card URL text with a clean QR label; browser-generated PNG verified with no UUID text, active-origin QR retained, and mobile preview checked.
+- [x] Complete manifest-only iOS/Android home-screen support; manifest, mobile head tags, official icons, and absence of service workers verified. Physical-device installation remains unverified.
+
 - [x] Record lightweight browser fingerprints at registration and show shared-device accounts to admins only; four tests passed, signup request and failure fallback checked, authenticated capture persisted, admin mobile review and private access verified.
 - [ ] Verify two real registrations appear together in admin review (not exercised: no duplicate test accounts created; signup requests were intercepted).
 

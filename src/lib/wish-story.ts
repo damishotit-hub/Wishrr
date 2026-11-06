@@ -106,6 +106,6 @@ export async function renderWishStory(wish: Wish, url: string): Promise<Blob> {
   ctx.fillText(wish.status === "fulfilled" ? "Kindness came through." : "Make it happen.", 72, 1716);
   ctx.fillStyle = muted; ctx.font = "500 26px 'Plus Jakarta Sans'"; ctx.fillText("Every little bit means a lot.", 72, 1762);
   ctx.font = "600 24px 'Plus Jakarta Sans'"; ctx.fillStyle = ink;
-  linesFor(ctx, url.replace(/^https?:\/\//, ""), 710, 2).forEach((line, i) => ctx.fillText(line, 72, 1820 + i * 32));
+  ctx.fillText("Scan QR code to support", 72, 1820);
   return new Promise((resolve, reject) => canvas.toBlob((blob) => blob ? resolve(blob) : reject(new Error("Couldn't save the card.")), "image/png"));
 }
