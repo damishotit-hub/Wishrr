@@ -12,8 +12,8 @@ import { Appreciation } from "@/components/wishr/Appreciation";
 import { OfferPanel } from "@/components/wishr/OfferPanel";
 import { ReportButton } from "@/components/wishr/ReportButton";
 import { MessageButton } from "@/components/wishr/MessageButton";
-import { WishAudioPlayer } from "@/components/wishr/WishAudioPlayer";
-import { WishVoiceSettings } from "@/components/wishr/WishVoiceSettings";
+import { WishVideoPlayer } from "@/components/wishr/WishVideoPlayer";
+import { WishVideoSettings } from "@/components/wishr/WishVideoSettings";
 import { useAuth } from "@/lib/auth";
 import { wishQuery, wishContributionsQuery, wishUpdatesQuery } from "@/lib/queries";
 import { CATEGORY_LABELS, daysLeft, initials, naira, STATUS_LABELS, timeAgo } from "@/lib/format";
@@ -144,8 +144,8 @@ function WishDetail() {
           </p>
 
           <Appreciation wish={w} />
-          <WishAudioPlayer path={w.audio_path} />
-          {isOwner ? <WishVoiceSettings wish={w} /> : null}
+          <WishVideoPlayer path={w.video_path} />
+          {isOwner ? <WishVideoSettings wish={w} /> : null}
 
           <section className="mt-10">
             <h2 className="font-display text-xl">Updates</h2>

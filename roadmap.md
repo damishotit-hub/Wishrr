@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Replace wish audio with optional camera recording/video uploads capped at 60 seconds, private storage, owner editing, and playback; verify upload boundaries and saved playback.
+
 - [x] Add live header notification center, exact unread badge, mark-all-read, and wish/chat/giveaway links; four destination tests pass.
 - [x] Complete missing delivery/funding alerts; owner-only policy, grants and Realtime verified. Signed-in bell, mark-all-read, wish/chat navigation, cross-tab live updates, and 320/390px layouts verified using temporary alerts, then removed.
 

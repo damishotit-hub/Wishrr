@@ -714,6 +714,8 @@ export type Database = {
           updated_at: string
           user_id: string | null
           verification_status: Database["public"]["Enums"]["verification_status"]
+          video_duration_seconds: number | null
+          video_path: string | null
         }
         Insert: {
           amount_raised?: number
@@ -735,6 +737,8 @@ export type Database = {
           updated_at?: string
           user_id?: string | null
           verification_status?: Database["public"]["Enums"]["verification_status"]
+          video_duration_seconds?: number | null
+          video_path?: string | null
         }
         Update: {
           amount_raised?: number
@@ -756,6 +760,8 @@ export type Database = {
           updated_at?: string
           user_id?: string | null
           verification_status?: Database["public"]["Enums"]["verification_status"]
+          video_duration_seconds?: number | null
+          video_path?: string | null
         }
         Relationships: [
           {

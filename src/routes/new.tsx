@@ -7,8 +7,8 @@ import { useAuth } from "@/lib/auth";
 import { categoriesQuery } from "@/lib/queries";
 import { bankDetailsSchema } from "@/lib/bank-details";
 import { Button } from "@/components/ui/button";
-import { WishVoiceInput } from "@/components/wishr/WishVoiceInput";
-import { uploadWishVoice, type WishVoice } from "@/lib/wish-audio";
+import { WishVideoInput } from "@/components/wishr/WishVideoInput";
+import { uploadWishVideo, type WishVideo } from "@/lib/wish-video";
 
 export const Route = createFileRoute("/new")({
   head: () => ({
@@ -50,8 +50,8 @@ function NewWish() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [caption, setCaption] = useState("");
-  const [voice, setVoice] = useState<WishVoice | null>(null);
-  const [voiceBusy, setVoiceBusy] = useState(false);
+  const [video, setVideo] = useState<WishVideo | null>(null);
+  const [videoBusy, setVideoBusy] = useState(false);
   const [bankName, setBankName] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
   const [accountName, setAccountName] = useState("");
@@ -119,6 +119,7 @@ function NewWish() {
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (busy || videoBusy) return;
     const goalValue = Math.round(Number(goal));
     if (!Number.isFinite(goalValue) || goalValue < 1000) {
       setError("Set a goal of at least ₦1,000.");
@@ -129,7 +130,7 @@ function NewWish() {
     if (!title.trim() || !description.trim()) { setError("Add a title and your story."); return; }
     setBusy(true);
     setError(null);
-    let uploadedAudio: string | null = null;
+    let uploadedVideo: string | null = null;
     let wishSaved = false;
     try {
       if (!user) return;
@@ -153,8 +154,8 @@ function NewWish() {
         imageUrl = signed.signedUrl;
       }
 
-      const audio = voice ? await uploadWishVoice(user.id, voice) : { audio_path: null, audio_duration_seconds: null };
-      uploadedAudio = audio.audio_path;
+      const videoFields = video ? await uploadWishVideo(user.id, video) : { video_path: null, video_duration_seconds: null };
+      uploadedVideo = videoFields.video_path;
       const { data, error: insertError } = await supabase
         .from("wishes")
         .insert({
@@ -170,7 +171,7 @@ function NewWish() {
           image_url: imageUrl,
           image_caption: imageUrl && caption.trim() ? caption.trim() : null,
           status: "draft",
-          ...audio,
+          ...videoFields,
         })
         .select("id")
         .single();
@@ -190,7 +191,7 @@ function NewWish() {
       await queryClient.invalidateQueries({ queryKey: ["my-wishes"] });
       await navigate({ to: "/wish/$id", params: { id: data.id } });
     } catch (err) {
-      if (uploadedAudio && !wishSaved) await supabase.storage.from("wish-audio").remove([uploadedAudio]);
+      if (uploadedVideo && !wishSaved) await supabase.storage.from("wish-video").remove([uploadedVideo]);
       setError(err instanceof Error ? err.message : "We couldn't publish that wish.");
     } finally {
       setBusy(false);
@@ -308,7 +309,7 @@ function NewWish() {
             ) : null}
           </div>
 
-          <WishVoiceInput value={voice} onChange={setVoice} disabled={busy} onBusyChange={setVoiceBusy} />
+          <WishVideoInput value={video} onChange={setVideo} disabled={busy} onBusyChange={setVideoBusy} />
 
           <fieldset className="space-y-3 border-t-2 border-line pt-4">
             <legend className="font-display text-lg font-bold">Where should givers transfer funds?</legend>
@@ -375,7 +376,7 @@ function NewWish() {
 
           <Button
             type="submit"
-            disabled={busy || voiceBusy}
+            disabled={busy || videoBusy}
             className="w-full press rounded-lg bg-primary px-4 py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-60"
           >
             {busy ? "Publishing…" : "Publish wish"}

@@ -120,6 +120,13 @@
       "when": 1793984469381,
       "tag": "0016_live_notification_center",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1794043270747,
+      "tag": "0017_wish_video_messages",
+      "breakpoints": true
     }
   ]
 }
