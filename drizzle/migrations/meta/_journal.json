@@ -127,6 +127,13 @@
       "when": 1794043270747,
       "tag": "0017_wish_video_messages",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1794043454136,
+      "tag": "0018_wish_video_paired_metadata",
+      "breakpoints": true
     }
   ]
 }

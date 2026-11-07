@@ -1,0 +1,1 @@
+ALTER TABLE public.wishes ADD CONSTRAINT wish_video_paired_metadata CHECK ((video_path IS NULL) = (video_duration_seconds IS NULL));
