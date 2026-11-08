@@ -14,6 +14,7 @@ import { ReportButton } from "@/components/wishr/ReportButton";
 import { MessageButton } from "@/components/wishr/MessageButton";
 import { WishVideoPlayer } from "@/components/wishr/WishVideoPlayer";
 import { WishVideoSettings } from "@/components/wishr/WishVideoSettings";
+import { MemberBadge } from "@/components/wishr/MemberBadge";
 import { useAuth } from "@/lib/auth";
 import { wishQuery, wishContributionsQuery, wishUpdatesQuery } from "@/lib/queries";
 import { CATEGORY_LABELS, daysLeft, initials, naira, STATUS_LABELS, timeAgo } from "@/lib/format";
@@ -106,11 +107,12 @@ function WishDetail() {
 
           <h1 className="mt-3 font-display text-3xl leading-tight md:text-4xl">{w.title}</h1>
 
-          <div className="mt-3 flex items-center gap-2 text-sm text-mute">
+          <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-mute">
             <span className="grid size-7 place-items-center rounded-full bg-warm text-[11px] font-semibold text-ink">
               {w.is_anonymous ? "?" : initials(w.creator_display_name)}
             </span>
             <span>{w.is_anonymous ? "Anonymous wisher" : w.creator_display_name}</span>
+            <MemberBadge kind="receiver" />
             <span aria-hidden>·</span>
             <span>{timeAgo(w.created_at)}</span>
           </div>
@@ -173,8 +175,9 @@ function WishDetail() {
                 {contributions.data.map((c) => (
                   <li key={c.id} className="flex items-start justify-between gap-4 p-4">
                     <div className="min-w-0">
-                      <p className="text-sm font-semibold">
+                      <p className="flex flex-wrap items-center gap-2 text-sm font-semibold">
                         {c.is_anonymous ? "Anonymous" : (c.contributor_display_name ?? "A friend")}
+                        <MemberBadge kind="giver" />
                       </p>
                       {c.message ? (
                         <p className="mt-1 text-sm text-mute">{c.message}</p>

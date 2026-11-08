@@ -3,6 +3,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { AppShell } from "@/components/wishr/AppShell";
 import { ReportButton } from "@/components/wishr/ReportButton";
+import { MemberBadge } from "@/components/wishr/MemberBadge";
 import { EmptyState, ErrorState } from "@/components/wishr/EmptyState";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
@@ -88,9 +89,9 @@ function GiveawayDetail() {
             <span className="pill-outline">{GIVEAWAY_STATUS_LABELS[x.status] ?? x.status}</span>
           </div>
           <h1 className="mt-3 font-display text-3xl leading-tight md:text-4xl">{x.title}</h1>
-          <div className="mt-3 flex items-center gap-2 text-sm text-mute">
+          <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-mute">
             <span className="grid size-7 place-items-center rounded-full bg-warm text-[11px] font-semibold text-ink">{initials(x.giver_display_name)}</span>
-            <span>{x.giver_display_name}</span><span aria-hidden>·</span><span>{timeAgo(x.created_at)}</span>
+            <span>{x.giver_display_name}</span><MemberBadge kind="giver" /><span aria-hidden>·</span><span>{timeAgo(x.created_at)}</span>
             {!isGiver ? <span className="ml-auto"><ReportButton target="giveaway" id={x.id} /></span> : null}
           </div>
           <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
@@ -231,7 +232,7 @@ function GiverPanel({ giveaway, recipients }: { giveaway: Giveaway; recipients: 
               <li key={en.id} className="p-4">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="text-sm font-semibold">{en.entrant_display_name}</p>
+                    <p className="flex flex-wrap items-center gap-2 text-sm font-semibold">{en.entrant_display_name}{rec && rec.status !== "cancelled" ? <MemberBadge kind="receiver" /> : null}</p>
                     {en.message ? <p className="mt-1 text-sm text-mute">{en.message}</p> : null}
                     <p className="mt-1 text-[11px] text-mute">{timeAgo(en.created_at)}</p>
                   </div>

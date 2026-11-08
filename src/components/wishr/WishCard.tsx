@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { CATEGORY_LABELS, daysLeft, initials, naira, timeAgo } from "@/lib/format";
 import { ProgressMeter } from "./ProgressMeter";
 import { WishVideoPlayer } from "./WishVideoPlayer";
+import { MemberBadge } from "./MemberBadge";
 import type { Wish } from "@/lib/queries";
 
 export function WishCard({ wish, index = 0 }: { wish: Wish; index?: number }) {
@@ -35,7 +36,7 @@ export function WishCard({ wish, index = 0 }: { wish: Wish; index?: number }) {
       ) : null}
 
       <div className="p-5">
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <span className="pill">{CATEGORY_LABELS[wish.category] ?? wish.category}</span>
         <span className="flex min-w-0 items-center gap-1 text-[11px] font-medium text-mute">
           {wish.is_anonymous ? (
@@ -48,6 +49,7 @@ export function WishCard({ wish, index = 0 }: { wish: Wish; index?: number }) {
           <span className="truncate">
             {wish.is_anonymous ? "Anonymous" : wish.creator_display_name}
           </span>
+          <MemberBadge kind="receiver" />
         </span>
       </div>
 

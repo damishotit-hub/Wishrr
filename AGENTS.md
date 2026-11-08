@@ -24,3 +24,4 @@
 - AppShell owns progressive scroll-reveal effects for below-fold sections using IntersectionObserver with cleanup and reduced-motion support, so route content stays visible without JavaScript.
 - Signup browser hashes are captured best-effort via the auth signup trigger (email) and first authenticated session (OAuth/legacy accounts), immutable per account and readable only through an admin-checked review RPC; matching signals never gate signup and raw browser settings are not persisted.
 - Notification feeds use owner-scoped queries and unique cleanup-managed Realtime subscriptions; unread totals are counted separately from the bounded feed, and only validated internal wish, chat, or giveaway links may be followed.
+- Member recognition uses a shared contextual badge; profile labels derive only from wishes/giveaways already visible to the viewer, never private financial activity or access roles.

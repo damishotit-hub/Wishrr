@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ContributeForm } from "./ContributeForm";
 import { MemberAvatar } from "./MemberAvatar";
+import { MemberBadge } from "./MemberBadge";
 import { ProgressMeter } from "./ProgressMeter";
 import type { ActiveWisher, Wish } from "@/lib/queries";
 
@@ -25,6 +26,7 @@ export function ActiveWisherCard({ item }: { item: ActiveWisher }) {
         <MemberAvatar path={item.avatar_url} name={item.display_name} className="size-12" />
         <div className="min-w-0"><Link to="/u/$username" params={{ username: item.username }} className="block truncate font-display font-bold hover:text-primary">{item.display_name}</Link><p className="truncate text-xs text-mute">@{item.username}</p></div>
       </div>
+      <div className="mt-2"><MemberBadge kind="receiver" /></div>
       <Link to="/wish/$id" params={{ id: item.wish_id }} className="mt-4 block line-clamp-2 text-sm font-semibold hover:text-primary">{item.wish_title}</Link>
       <div className="mt-3"><ProgressMeter raised={Number(item.amount_raised)} goal={Number(item.goal_amount)} animate={false} /></div>
       <Button type="button" onClick={() => setOpen(true)} className="mt-4 w-full">Drop a Blessing</Button>

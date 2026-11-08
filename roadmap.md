@@ -1,5 +1,8 @@
 # Roadmap
 
+- [x] Add contextual Giver and Receiver badges to wishers, supporters, offers, giveaway hosts/selected recipients, and profiles; both labels supported, four recognition tests pass and public desktop/mobile checks pass.
+- [ ] Verify badges on signed-in member activity (blocked: requester preview session could not be minted; requires signing in to the preview).
+
 - [x] Replace wish audio with optional camera recording/video uploads capped at 60 seconds, private storage, owner editing, and playback; five tests pass, signed-in recording/upload/saved playback/reload/removal and 390px layout verified with a temporary private wish then removed. Physical iOS/Android camera recording remains unverified.
 
 - [x] Add live header notification center, exact unread badge, mark-all-read, and wish/chat/giveaway links; four destination tests pass.

@@ -4,6 +4,8 @@ import { Check, Copy, Share2 } from "lucide-react";
 import { useState } from "react";
 import { AppShell } from "@/components/wishr/AppShell";
 import { MemberAvatar } from "@/components/wishr/MemberAvatar";
+import { MemberBadge } from "@/components/wishr/MemberBadge";
+import { memberRecognitions } from "@/lib/member-recognition";
 import { WishCard, WishCardSkeleton } from "@/components/wishr/WishCard";
 import { GiveawayCard, GiveawayCardSkeleton } from "@/components/wishr/GiveawayCard";
 import { EmptyState } from "@/components/wishr/EmptyState";
@@ -53,6 +55,10 @@ function PublicProfilePage() {
         <div className="min-w-0 flex-1"><div className="flex items-center gap-2"><h1 className="truncate font-display text-3xl">{profile.data.display_name}</h1>{profile.data.is_verified ? <Check className="size-5 rounded-full bg-primary p-1 text-primary-foreground" aria-label="Verified member" /> : null}</div><p className="mt-1 text-sm font-semibold text-primary">@{profile.data.username}</p>{profile.data.location ? <p className="mt-1 inline-flex items-center gap-1 text-sm text-mute"><MapPin className="size-3.5" />{profile.data.location}</p> : null}{profile.data.bio ? <p className="mt-3 max-w-xl text-sm leading-relaxed text-mute">{profile.data.bio}</p> : null}</div>
         <MessageButton otherId={profile.data.id} />
         <Button type="button" variant="outline" onClick={() => void share()} className="border border-line">{copied ? <Copy /> : <Share2 />}{copied ? "Copied" : "Share"}</Button>
+      </div>
+
+      <div className="mt-4 flex flex-wrap gap-2">
+        {memberRecognitions(!!wishes.data?.length, !!giveaways.data?.length).map((kind) => <MemberBadge key={kind} kind={kind} />)}
       </div>
 
       <ProfileSection title="Active wishes" count={active.length}>{wishes.isPending ? <CardLoading /> : active.length ? <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{active.map((wish, index) => <WishCard key={wish.id} wish={wish} index={index} />)}</div> : <p className="text-sm text-mute">No active wishes right now.</p>}</ProfileSection>

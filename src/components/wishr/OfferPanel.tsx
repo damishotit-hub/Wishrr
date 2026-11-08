@@ -5,6 +5,7 @@ import { useAuth } from "@/lib/auth";
 import { timeAgo } from "@/lib/format";
 import type { Wish } from "@/lib/queries";
 import type { Database } from "@/integrations/supabase/types";
+import { MemberBadge } from "./MemberBadge";
 
 type Offer = Database["public"]["Tables"]["wish_offers"]["Row"];
 
@@ -101,7 +102,7 @@ function OwnerOffers({ wish, offers }: { wish: Wish; offers: Offer[] }) {
       <ul className="mt-3 space-y-3">
         {offers.map((o) => (
           <li key={o.id} className="rounded-lg border border-line p-3">
-            <p className="text-sm font-semibold">{o.giver_display_name}</p>
+            <p className="flex flex-wrap items-center gap-2 text-sm font-semibold">{o.giver_display_name}<MemberBadge kind="giver" /></p>
             <p className="mt-1 text-sm">{o.description}</p>
             <p className="mt-1 text-[11px] text-mute">{timeAgo(o.created_at)} · {STATUS[o.status] ?? o.status}</p>
             <div className="mt-2 flex flex-wrap gap-2">

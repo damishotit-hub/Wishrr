@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { daysLeft, initials, timeAgo } from "@/lib/format";
 import { GIVEAWAY_CATEGORY_LABELS } from "@/lib/giveaways";
 import type { Giveaway } from "@/lib/queries";
+import { MemberBadge } from "./MemberBadge";
 
 const GIVEAWAY_STATUS_LABELS: Record<string, string> = {
   draft: "Draft",
@@ -56,11 +57,12 @@ export function GiveawayCard({ giveaway, index = 0 }: { giveaway: Giveaway; inde
           {giveaway.description}
         </p>
 
-        <div className="mt-4 flex items-center gap-2 text-[11px] font-medium text-mute">
+        <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px] font-medium text-mute">
           <span className="grid size-4 place-items-center rounded-full bg-ink text-[8px] font-semibold text-card">
             {initials(giveaway.giver_display_name)}
           </span>
           <span className="truncate">{giveaway.giver_display_name}</span>
+          <MemberBadge kind="giver" />
           {giveaway.location ? <span className="truncate">· {giveaway.location}</span> : null}
         </div>
 
